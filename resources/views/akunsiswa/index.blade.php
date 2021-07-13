@@ -31,7 +31,7 @@ active
 @endsection
 
 @section('sub_tittle')
-Akun Siswa
+{{$nama_menu_2}}
 @endsection
 
 @section('print')
@@ -75,46 +75,48 @@ Akun Siswa
     <!-- Main content -->
     <section class="content">
         <!-- Default box -->
-        <div class="card">
-            <div class="card-header">
-                <!-- <h3 class="card-title">Title</h3> -->
+        <div class="card" style="margin:10px">
+            <!-- <div class="card-header">
+                <h3 class="card-title">Title</h3>
                 
                 <div class="card-tools">
-                    <!-- minimize button card -->
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                         <i class="fas fa-minus"></i>
                     </button>
-                    <!-- close button card -->
-                    <!-- <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
                         <i class="fas fa-times"></i>
-                    </button> -->
+                    </button>
                 </div>
-            </div>
+            </div> -->
             <!-- /.card-header -->
             <div class="card-body table-responsive p-0">
                 <table class="table table-hover text-nowrap">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Foto</th>
+                            <th style="width:10px">ID</th>
+                            <th style="width:100px">Foto</th>
                             <th>Nama Lengkap</th>
-                            <th>Kelas</th>
-                            <th>Email</th>
-                            <th>Opsi</th>
+                            <th style="width:10px">Opsi</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>1</td>
-                            <td>
+                            <td style="width:10px">1</td>
+                            <td style="width:100px">
                                 <a href="../../dist/img/user2-160x160.jpg" target="_blank" alt="nama_siswa">
                                     <img src="../../dist/img/user2-160x160.jpg" width="70px" alt="nama_siswa">
                                 </a>
                             </td>
-                            <td>Muhammad Nafi' Maula Hakim</td>
-                            <td>XI Multimedia</td>
-                            <td>nafimaulahakim123@gmail.com</td>
                             <td>
+                                Muhammad Nafi' Maula Hakim
+                                <small>
+                                    <br>
+                                    XI Multimedia
+                                    <br>
+                                    nafimaulahakim123@gmail.com
+                                </small>
+                            </td>
+                            <td style="width:10px">
                                 <a href="/admin/akun-siswa/nama-siswa" title="Lihat Siswa" class="btn btn-primary btn-sm">
                                     <i class="fas fa-eye"></i>
                                 </a>

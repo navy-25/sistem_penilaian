@@ -10,4 +10,12 @@ class KelasController extends Controller
     {
         return view('kelas.index');
     }
+    public function update()
+    {
+        return view('kelas.update');
+    }
+    public function kelolaKelas()
+    {
+        return view('kelas.kelolaKelas');
+    }
 }

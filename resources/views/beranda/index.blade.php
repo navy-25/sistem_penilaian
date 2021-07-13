@@ -32,7 +32,7 @@ active
 @endsection
 
 @section('sub_tittle')
-Beranda
+{{$nama_menu_1}}
 @endsection
 
 @section('content')

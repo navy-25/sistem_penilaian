@@ -26,13 +26,32 @@
     $link_menu_5 = "/admin/nilai";
     $link_menu_6 = "/admin/nilai";
 ?>
-
-@section('menu_2')
+@section('menu_3')
 active
 @endsection
 
 @section('sub_tittle')
-{{$nama_menu_2}} - Nama Siswa
+{{$nama_menu_3}}
+@endsection
+
+@section('print')
+
+<a class="nav-link" title="Cetak data siswa">
+    <i class="fas fa-file-archive"></i>
+</a>
+@endsection
+
+@section('search')
+<form class="form-inline ml-3">
+    <div class="input-group input-group-sm">
+        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+        <div class="input-group-append">
+        <button class="btn btn-navbar" type="submit">
+            <i class="fas fa-search"></i>
+        </button>
+        </div>
+    </div>
+</form>
 @endsection
 
 @section('content')
@@ -48,8 +67,8 @@ active
         <div class="col-sm-12">
             <ol class="breadcrumb float-sm-left">
             <li class="breadcrumb-item"><a href="{{$link_menu_1}}">Dashboard</a></li>
-            <li class="breadcrumb-item"><a href="{{$link_menu_2}}">Akun Siswa</a></li>
-            <li class="breadcrumb-item active">Muhammad Nafi' Maula Hakim</li>
+            <li class="breadcrumb-item"><a href="{{$link_menu_3}}">{{$nama_menu_3}}</a></li>
+            <li class="breadcrumb-item active">Multimedia</li>
             </ol>
         </div>
     </div>
@@ -66,17 +85,15 @@ active
         <div class="card card-primary card-outline">
         <div class="card-body box-profile">
             <div class="text-center">
-                <a href="../../dist/img/user2-160x160.jpg" target="_blank" title="Foto Profil">
+                <a href="{{asset('../../dist/img/user2-160x160.jpg')}}" target="_blank" title="Foto Profil">
                     <img class="profile-user-img img-fluid img-circle"
-                    src="../../dist/img/user2-160x160.jpg" alt="User profile picture">
+                    src="{{asset('../../dist/img/user2-160x160.jpg')}}" alt="User profile picture">
                 </a>
             </div>
 
-            <h3 class="profile-username text-center">Muhammad Nafi' Maula Hakim</h3>
-            <p class="text-muted text-center">XI Multimedia</p>
-            <!-- <br> -->
-            <p class="text-muted text-center">"Bio"</p>
-            <a href="#" class="btn btn-primary btn-block"><b>Upload</b></a>
+            <h3 class="profile-username text-center">Multimedia</h3>
+            <p class="text-muted text-center"><b>Oleh : </b> Prof. Dr. Muhammad Nafi' Maula Hakim, S.Kom, M.Kom</p>
+            <!-- <a href="#" class="btn btn-primary btn-block"><b>Upload</b></a> -->
         </div>
         <!-- /.card-body -->
         </div>
