@@ -54,7 +54,7 @@ active
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <div class="row" style="margin-left:10px">
-                        <button type="button"  class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        <button type="button"  class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                             <i class="fas fa-chalkboard-teacher mr-1"></i>Buat Kelas
                         </button>
                     </div>

@@ -40,11 +40,11 @@ active
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-6">
+                <!-- <div class="col-sm-6">
                     <h1>{{$nama_menu_1}}</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
+                </div> -->
+                <div class="col-sm-12">
+                    <ol class="breadcrumb float-sm-left">
                     <li class="breadcrumb-item"><a href="{{$link_menu_1}}">Dashboard</a></li>
                     <li class="breadcrumb-item active">{{$nama_menu_1}}</li>
                     </ol>

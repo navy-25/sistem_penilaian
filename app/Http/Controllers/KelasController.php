@@ -18,4 +18,8 @@ class KelasController extends Controller
     {
         return view('kelas.kelolaKelas');
     }
+    public function kelolaNilai()
+    {
+        return view('kelas.kelolaNilai');
+    }
 }

@@ -26,16 +26,15 @@
     $link_menu_5 = "/admin/nilai";
     $link_menu_6 = "/admin/nilai";
 ?>
-@section('menu_2')
+@section('menu_3')
 active
 @endsection
 
 @section('sub_tittle')
-{{$nama_menu_2}}
+{{$nama_menu_3}}
 @endsection
 
 @section('print')
-
 <a class="nav-link" title="Cetak data siswa">
     <i class="fas fa-file-archive"></i>
 </a>
@@ -46,9 +45,9 @@ active
     <div class="input-group input-group-sm">
         <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
         <div class="input-group-append">
-        <button class="btn btn-navbar" type="submit">
-            <i class="fas fa-search"></i>
-        </button>
+            <button class="btn btn-navbar" type="submit">
+                <i class="fas fa-search"></i>
+            </button>
         </div>
     </div>
 </form>
@@ -64,8 +63,10 @@ active
                 </div> -->
                 <div class="col-sm-12">
                     <ol class="breadcrumb float-sm-left">
-                    <li class="breadcrumb-item"><a href="{{$link_menu_1}}">Dashboard</a></li>
-                    <li class="breadcrumb-item active">{{$nama_menu_2}}</li>
+                        <li class="breadcrumb-item"><a href="{{$link_menu_1}}">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{{$link_menu_3}}">{{$nama_menu_3}}</a></li>
+                        <li class="breadcrumb-item"><a href="{{$link_menu_3}}">Multimedia</a></li>
+                        <li class="breadcrumb-item active">Nilai Tugas Review Materi</li>
                     </ol>
                 </div>
             </div>
@@ -93,38 +94,56 @@ active
                 <table class="table table-hover text-nowrap">
                     <thead>
                         <tr>
-                            <th style="width:10px">ID</th>
-                            <th style="width:100px">Foto</th>
+                            <th>ID</th>
                             <th>Nama Lengkap</th>
-                            <th style="width:10px">Opsi</th>
+                            <th>Kelas</th>
+                            <th>Tugas</th>
+                            <th>Nilai</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td style="width:10px">1</td>
-                            <td style="width:100px">
-                                <a href="../../dist/img/user2-160x160.jpg" target="_blank" alt="nama_siswa">
-                                    <img src="../../dist/img/user2-160x160.jpg" width="70px" alt="nama_siswa">
+                            <td>1</td>
+                            <td>Muhammad Nafi' Maula Hakim</td>
+                            <td>XI Multimedia</td>
+                            <td>
+                                <a href=""> 
+                                    tugas-multimedia-nafi.pdf
                                 </a>
                             </td>
                             <td>
-                                Muhammad Nafi' Maula Hakim
-                                <small>
-                                    <br>
-                                    XI Multimedia
-                                    <br>
-                                    nafimaulahakim123@gmail.com
-                                </small>
-                            </td>
-                            <td style="width:10px">
-                                <a href="/admin/akun-siswa/nama-siswa" title="Lihat Siswa" class="btn btn-primary btn-sm">
-                                    <i class="fas fa-eye"></i>
+                                <a href="" title="Beri Nilai" class="btn btn-success btn-sm">
+                                    <i class="fas fa-award"></i>
                                 </a>
-                                <!-- <a href="" title="Ubah Data Siswa" class="btn btn-secondary btn-sm">
-                                    <i class="fas fa-user-edit"></i>
-                                </a> -->
-                                <a href="" title="Hapus Akun Siswa" class="btn btn-danger btn-sm delete-confirm">
-                                    <i class="fas fa-trash"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Widya Rizka Ulul Fadilah</td>
+                            <td>XI Multimedia</td>
+                            <td>
+                                <a href=""> 
+                                    tugas-multimedia-riska.pdf
+                                </a>
+                            </td>
+                            <td>
+                                <a href="" title="Beri Nilai" class="btn btn-success btn-sm">
+                                    <i class="fas fa-award"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Rizky Arifiyantini</td>
+                            <td>XI Multimedia</td>
+                            <td>
+                                <a href=""> 
+                                    tugas-multimedia-arin.pdf
+                                </a>
+                            </td>
+                            <td>
+                                <a href="" title="Beri Nilai" class="btn btn-success btn-sm">
+                                    <i class="fas fa-award"></i>
                                 </a>
                             </td>
                         </tr>
@@ -145,25 +164,4 @@ active
         <!-- /.card -->
     </section>
     <!-- /.content -->
-@endsection
-
-@section('script')
-<!-- Modal feedback -->
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script>
-    $('.delete-confirm').on('click', function (event) {
-        event.preventDefault();
-        const url = $(this).attr('href');
-        swal({
-            title: 'Hapus akun siswa ?',
-            text: 'Akun yang sudah dihapus tidak bisa di onlinekan kembali',
-            icon: 'warning',
-            buttons: ["Batalkan", "Hapus"],
-        }).then(function(value) {
-            if (value) {
-                window.location.href = url;
-            }
-        });
-    });
-</script>
 @endsection

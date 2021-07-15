@@ -7,16 +7,16 @@
     $nama_menu_1 = "Beranda";
     $nama_menu_2 = "Akun Siswa";
     $nama_menu_3 = "Kelas";
-    $nama_menu_4 = "Soal";
-    $nama_menu_5 = "SOP Nilai";
+    $nama_menu_4 = "Input Nilai";
+    $nama_menu_5 = "SOP Nilai Praktik";
     $nama_menu_6 = "Rekab Nilai";
 
     // icon menu
     $icon_menu_1 = "home";
     $icon_menu_2 = "user";
     $icon_menu_3 = "graduation-cap";
-    $icon_menu_4 = "question";
-    $icon_menu_5 = "book";
+    $icon_menu_4 = "award";
+    $icon_menu_5 = "award";
     $icon_menu_6 = "file-alt";
 
     //link routes
@@ -225,15 +225,14 @@
                             </p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a href="{{$link_menu_4}}" class="nav-link  @yield('menu_4')">
                             <i class="nav-icon fas fa-{{$icon_menu_4}}"></i>
                             <p>
                                 {{$nama_menu_4}}
-                                <!-- <span class="right badge badge-danger">New</span> -->
                             </p>
                             </a>
-                        </li>
+                        </li> -->
                         <li class="nav-item">
                             <a href="{{$link_menu_5}}" class="nav-link  @yield('menu_5')">
                             <i class="nav-icon fas fa-{{$icon_menu_5}}"></i>
