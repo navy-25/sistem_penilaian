@@ -39,18 +39,13 @@ active
 <!-- Content Header (Page header) -->
 <section class="content-header">
 <div class="container-fluid">
-    <div class="row mb-2">
-        <!-- <div class="col-sm-6"> -->
-            <!-- <a href="{{$link_menu_2}}" class="btn btn-outline-secondary" >
-                <i class="fas fa-arrow-left mr-1"></i>Kembali
-            </a> -->
-        <!-- </div> -->
+    <div class="row">
         <div class="col-sm-12">
-            <ol class="breadcrumb float-sm-left">
-            <li class="breadcrumb-item"><a href="{{$link_menu_1}}">Dashboard</a></li>
-            <li class="breadcrumb-item"><a href="{{$link_menu_2}}">Akun Siswa</a></li>
-            <li class="breadcrumb-item active">Muhammad Nafi' Maula Hakim</li>
-            </ol>
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h5><i class="icon fas fa-exclamation-triangle"></i> Hati - hati !</h5>
+                Akun yang sudah dihapus tidak bisa di onlinekan kembali.
+            </div>
         </div>
     </div>
 </div><!-- /.container-fluid -->
@@ -183,8 +178,8 @@ active
                                 <select class="form-control" id="inputGroupSelect01">
                                     <option selected>Pilih Kelas</option>
                                     <option value="1">XII</option>
-                                    <option value="2">XIII</option>
-                                    <option value="3">IX</option>
+                                    <option value="2">XI</option>
+                                    <option value="3">X</option>
                                 </select>
                             </div>
                         </div>
@@ -257,20 +252,23 @@ active
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="offset-sm-2 col-md-2 col-sm-2" style="margin-bottom:20px">
+                            <div class="col-md-12 col-sm-12">
                                 <button type="submit" class="btn btn-primary update-confirm" style="width:100%;margin-bottom:10px">
                                     <i class="fas fa-edit mr-1"></i>Update
                                 </button>
                             </div>
-                            <div class="col-md-1 col-sm-2">
-                            </div>
-                            <div class="col-md-3 col-sm-3">
+                        </div>
+                        <div class="col-md-12 col-sm-12" >
+                            <hr>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-6 col-sm-6">
                                 <a href="" class="btn btn-outline-secondary delete-confirm" style="width:100%;margin-bottom:10px">
                                     <i class="fas fa-trash mr-1"></i>
                                     Hapus Akun
                                 </a>
                             </div>
-                            <div class="col-md-4 col-sm-3">
+                            <div class="col-md-6 col-sm-6">
                                 <!-- Button trigger modal -->
                                 <button type="button" class="btn btn-danger" style="width:100%;margin-bottom:10px" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                     <i class="fas fa-key mr-1"></i>
@@ -296,7 +294,7 @@ active
 
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-<div class="modal-dialog">
+<div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
     <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel">Ganti Password</h5>

@@ -55,19 +55,15 @@ active
 
 @section('content')
     <!-- Content Header (Page header) -->
-    <section class="content-header">
+    <section class="content-header" style="padding-bottom:0px">
         <div class="container-fluid">
-            <div class="row mb-2">
-                <!-- <div class="col-sm-6">
-                    <h1>{{$nama_menu_2}}</h1>
-                </div> -->
+            <div class="row">
                 <div class="col-sm-12">
-                    <ol class="breadcrumb float-sm-left">
-                        <li class="breadcrumb-item"><a href="{{$link_menu_1}}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{$link_menu_3}}">{{$nama_menu_3}}</a></li>
-                        <li class="breadcrumb-item"><a href="{{$link_menu_3}}">Multimedia</a></li>
-                        <li class="breadcrumb-item active">Nilai Tugas Review Materi</li>
-                    </ol>
+                    <div class="alert alert-info alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h5><i class="icon fas fa-info"></i> Informasi !</h5>
+                        Masukkan nilai setiap siswa sesuai standar penilaian yang telah disusun oleh guru/pembimbing.
+                    </div>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -75,93 +71,169 @@ active
 
     <!-- Main content -->
     <section class="content">
-        <!-- Default box -->
-        <div class="card" style="margin:10px">
-            <!-- <div class="card-header">
-                <h3 class="card-title">Title</h3>
-                
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
-                        <i class="fas fa-times"></i>
-                    </button>
+        <div class="row">
+            <div class="col-md-9">
+                <div class="card" style="margin:10px">                   
+                    <div class="card-body table-responsive p-0">
+                        <table class="table table-hover text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nama Lengkap</th>
+                                    <th>Tugas</th>
+                                    <th>Nilai</th>
+                                    <th>Opsi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td data-bs-toggle="modal" data-bs-target="#soal_add">Muhammad Nafi' Maula Hakim</td>
+                                    <td>
+                                        <a href=""> 
+                                            tugas-multimedia-nafi.pdf
+                                        </a>
+                                    </td>
+                                    <td>-</td>
+                                    <td>
+                                        <button title="Beri Nilai" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#soal_add">
+                                            <i class="fas fa-award"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td data-bs-toggle="modal" data-bs-target="#soal_add">Widya Rizka Ulul Fadilah</td>
+                                    <td>
+                                        <a href=""> 
+                                            tugas-multimedia-riska.pdf
+                                        </a>
+                                    </td>
+                                    <td>-</td>
+                                    <td>
+                                        <button title="Beri Nilai" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#soal_add">
+                                            <i class="fas fa-award"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td data-bs-toggle="modal" data-bs-target="#soal_add">Rizky Arifiyantini</td>
+                                    <td>
+                                        <a href=""> 
+                                            tugas-multimedia-arin.pdf
+                                        </a>
+                                    </td>
+                                    <td>A</td>
+                                    <td>
+                                        <button title="Update Nilai" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#soal_add">
+                                            <i class="fas fa-award"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer clearfix">
+                        <ul class="pagination pagination-sm m-0 float-left">
+                        <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">«</a></li>
+                        <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">»</a></li>
+                        </ul>
+                    </div>
+                    <!-- /.card-footer-->
                 </div>
-            </div> -->
-            <!-- /.card-header -->
-            <div class="card-body table-responsive p-0">
-                <table class="table table-hover text-nowrap">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nama Lengkap</th>
-                            <th>Kelas</th>
-                            <th>Tugas</th>
-                            <th>Nilai</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Muhammad Nafi' Maula Hakim</td>
-                            <td>XI Multimedia</td>
-                            <td>
-                                <a href=""> 
-                                    tugas-multimedia-nafi.pdf
-                                </a>
-                            </td>
-                            <td>
-                                <a href="" title="Beri Nilai" class="btn btn-success btn-sm">
-                                    <i class="fas fa-award"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Widya Rizka Ulul Fadilah</td>
-                            <td>XI Multimedia</td>
-                            <td>
-                                <a href=""> 
-                                    tugas-multimedia-riska.pdf
-                                </a>
-                            </td>
-                            <td>
-                                <a href="" title="Beri Nilai" class="btn btn-success btn-sm">
-                                    <i class="fas fa-award"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Rizky Arifiyantini</td>
-                            <td>XI Multimedia</td>
-                            <td>
-                                <a href=""> 
-                                    tugas-multimedia-arin.pdf
-                                </a>
-                            </td>
-                            <td>
-                                <a href="" title="Beri Nilai" class="btn btn-success btn-sm">
-                                    <i class="fas fa-award"></i>
-                                </a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
             </div>
-            <div class="card-footer clearfix">
-                <ul class="pagination pagination-sm m-0 float-left">
-                <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">«</a></li>
-                <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">»</a></li>
-                </ul>
+            <div class="col-md-3">
+                <div class="card" style="margin:10px">
+                    <div class="card-header" style="padding:10px">
+                        Keterangan Nilai :
+                    </div>
+                    <div class="card-body" style="padding:10px">
+                        <table class="table table-bordered text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th style="width:10px">No</th>
+                                    <th style="width:20px">Nilai</th>
+                                    <th>Angka</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>A</td>
+                                    <td>80 - 100</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>B</td>
+                                    <td>60 - 69</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>C</td>
+                                    <td>50 - 59</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>D</td>
+                                    <td>70 - 79</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>E</td>
+                                    <td>< 49</td>
+                                </tr>
+                            </tbody>
+                        </table>                    
+                    </div>
+                </div>
             </div>
-            <!-- /.card-footer-->
         </div>
-        <!-- /.card -->
     </section>
     <!-- /.content -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="soal_add" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Berikan Nilai</h5>
+                <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal" aria-label="Close">X</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <a class="btn btn-danger" style="width:100%;margin-bottom:10px" href="">
+                            E
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a class="btn btn-danger" style="width:100%;margin-bottom:10px;background:#dc7335" href="">
+                            D
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a class="btn btn-warning" style="width:100%;margin-bottom:10px;color:white" href="">
+                            C
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a class="btn btn-success" style="width:100%;margin-bottom:10px;background:#5fa728" href="">
+                            B
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a class="btn btn-success" style="width:100%;margin-bottom:10px" href="">
+                            A
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection

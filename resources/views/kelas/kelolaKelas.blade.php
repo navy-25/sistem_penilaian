@@ -67,13 +67,6 @@ active
                 <i class="fas fa-tasks mr-1"></i>Tugas
             </button>
         </div>
-        <!-- <div class="col-sm-12">
-            <ol class="breadcrumb float-sm-left">
-            <li class="breadcrumb-item"><a href="{{$link_menu_1}}">Dashboard</a></li>
-            <li class="breadcrumb-item"><a href="{{$link_menu_3}}">{{$nama_menu_3}}</a></li>
-            <li class="breadcrumb-item active">Multimedia</li>
-            </ol>
-        </div> -->
     </div>
 </div><!-- /.container-fluid -->
 </section>
@@ -283,7 +276,7 @@ active
 
 <!-- Modal -->
 <div class="modal fade" id="modul_add" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="staticBackdropLabel">Tambahkan Modul Pembelajaran</h5>
@@ -316,7 +309,7 @@ active
 
 <!-- Modal -->
 <div class="modal fade" id="soal_add" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="staticBackdropLabel">Tambahkan Tugas</h5>

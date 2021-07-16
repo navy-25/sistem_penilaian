@@ -35,7 +35,6 @@ active
 @endsection
 
 @section('print')
-
 <a class="nav-link" title="Cetak data siswa">
     <i class="fas fa-file-archive"></i>
 </a>
@@ -56,18 +55,16 @@ active
 
 @section('content')
     <!-- Content Header (Page header) -->
-    <section class="content-header">
+    <section class="content-header" style="padding-bottom: 0px;">
         <div class="container-fluid">
-            <div class="row mb-2">
-                <!-- <div class="col-sm-6">
-                    <h1>{{$nama_menu_2}}</h1>
-                </div> -->
-                <div class="col-sm-12">
-                    <ol class="breadcrumb float-sm-left">
-                    <li class="breadcrumb-item"><a href="{{$link_menu_1}}">Dashboard</a></li>
-                    <li class="breadcrumb-item active">{{$nama_menu_2}}</li>
-                    </ol>
-                </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="row" style="margin-left:5px">
+                        <button type="button"  class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            <i class="fas fa-user mr-1"></i>Tambah Siswa
+                        </button>
+                    </div>
+                </div>               
             </div>
         </div><!-- /.container-fluid -->
     </section>
@@ -76,18 +73,6 @@ active
     <section class="content">
         <!-- Default box -->
         <div class="card" style="margin:10px">
-            <!-- <div class="card-header">
-                <h3 class="card-title">Title</h3>
-                
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-            </div> -->
             <!-- /.card-header -->
             <div class="card-body table-responsive p-0">
                 <table class="table table-hover text-nowrap">
@@ -103,23 +88,25 @@ active
                         <tr>
                             <td style="width:10px">1</td>
                             <td style="width:100px">
-                                <a href="../../dist/img/user2-160x160.jpg" target="_blank" alt="nama_siswa">
+                                <a href="/admin/akun-siswa/nama-siswa">
                                     <img src="../../dist/img/user2-160x160.jpg" width="70px" alt="nama_siswa">
                                 </a>
                             </td>
                             <td>
-                                Muhammad Nafi' Maula Hakim
-                                <small>
-                                    <br>
-                                    XI Multimedia
-                                    <br>
-                                    nafimaulahakim123@gmail.com
-                                </small>
+                                <a href="/admin/akun-siswa/nama-siswa" style="text-decoration:none;color:black">
+                                    Muhammad Nafi' Maula Hakim
+                                    <small>
+                                        <br>
+                                        XI Multimedia
+                                        <br>
+                                        nafimaulahakim123@gmail.com
+                                    </small>
+                                </a>
                             </td>
                             <td style="width:10px">
-                                <a href="/admin/akun-siswa/nama-siswa" title="Lihat Siswa" class="btn btn-primary btn-sm">
+                                <!-- <a href="/admin/akun-siswa/nama-siswa" title="Lihat Siswa" class="btn btn-primary btn-sm">
                                     <i class="fas fa-eye"></i>
-                                </a>
+                                </a> -->
                                 <!-- <a href="" title="Ubah Data Siswa" class="btn btn-secondary btn-sm">
                                     <i class="fas fa-user-edit"></i>
                                 </a> -->
