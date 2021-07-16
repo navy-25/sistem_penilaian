@@ -10,4 +10,8 @@ class NilaiController extends Controller
     {
         return view('nilai.index');
     }
+    public function variabelNilai()
+    {
+        return view('nilai.kelolaPenilaian');
+    }
 }

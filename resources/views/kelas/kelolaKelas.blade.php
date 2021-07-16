@@ -77,7 +77,7 @@ active
     <div class="row">
         <!-- /.col -->
         <div class="col-md-9">
-            <div class="card">
+            <div class="card card-primary card-outline">
             <div class="card-header p-2">
                 <ul class="nav nav-pills">
                     <li class="nav-item"><a class="nav-link active" href="#modul" data-toggle="tab">Modul</a></li>
@@ -260,7 +260,8 @@ active
                 </ul>
                 <hr>
                 <small>
-                    <a href="" class="btn btn-success btn-sm" style="width:100%"> <i class="fas fa-sms mr-2"></i>Join Grup Whatsapp</a>
+                    <a href="" class="btn btn-success btn-sm" style="width:100%;margin-bottom:10px"> <i class="fas fa-video mr-2"></i>Join Meet</a>
+                    <a href="" class="btn btn-outline-success btn-sm" style="width:100%"> <i class="fas fa-sms mr-2"></i>Join Grup Whatsapp</a>
                 </small>
             </div>
             <!-- /.card-body -->

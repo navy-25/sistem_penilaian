@@ -79,7 +79,7 @@ active
             <div class="card-body pb-0">
                 <div class="row d-flex align-items-stretch">
                     <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
-                        <div class="card bg-light">
+                        <div class="card bg-light card-primary card-outline">
                             <div class="card-header text-muted border-bottom-0">
                                 <!-- 2 Hari lagi -->
                             </div>
@@ -124,7 +124,7 @@ active
                         </div>
                     </div>
                     <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
-                        <div class="card bg-light">
+                        <div class="card bg-light card-danger card-outline">
                             <div class="card-header text-muted border-bottom-0">
                                 <!-- 2 Hari lagi -->
                             </div>

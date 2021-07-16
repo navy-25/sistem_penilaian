@@ -38,7 +38,7 @@ active
                 <div class="col-sm-6">
                     <div class="row" style="margin-left:5px">
                         <button type="button"  class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                            <i class="fas fa-award mr-1"></i> Tambah Variabel Praktik
+                            <i class="fas fa-plus mr-1"></i> Variabel Praktik
                         </button>
                     </div>
                 </div>               
@@ -65,17 +65,14 @@ active
                         <tr>
                             <td style="width:10px">1</td>
                             <td>
-                                <a href="/admin/akun-siswa/nama-siswa" style="text-decoration:none;color:black">
+                                <a href="/admin/nilai/variabel-nilai" style="text-decoration:none;color:black">
                                     Foto & Sinematografi
                                 </a>
                             </td>
-                            <td>Fotografi</td>
+                            <td>Praktik Angle Foto</td>
                             <td style="width:10px">
-                                <a href="" title="Tambah Variabel Nilai" class="btn btn-success btn-sm">
+                                <a href="/admin/nilai/variabel-nilai" title="Variabel Penilaian" class="btn btn-success btn-sm">
                                     <i class="fas fa-th-list"></i>
-                                </a>
-                                <a href="" title="Ubah Data Modul" class="btn btn-secondary btn-sm">
-                                    <i class="fas fa-pen"></i>
                                 </a>
                                 <a href="" title="Hapus Akun Siswa" class="btn btn-danger btn-sm delete-confirm">
                                     <i class="fas fa-trash"></i>
@@ -99,6 +96,59 @@ active
         <!-- /.card -->
     </section>
     <!-- /.content -->
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form role="form">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label >Kelas*</label>
+                                <select class="form-control" id="inputGroupSelect01">
+                                    <option selected>Pilih Kelas</option>
+                                    <option value="1">X</option>
+                                    <option value="2">XI</option>
+                                    <option value="2">XII</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label >Jurusan*</label>
+                                <select class="form-control" id="inputGroupSelect01">
+                                    <option selected>Pilih Jurusan</option>
+                                    <option value="1">Multimedia</option>
+                                    <option value="2">Teknik Sepeda Motor</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label >Nama Modul*</label>
+                                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Modul Pembelajaran">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label >Modul Praktik*</label>
+                                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Kategori praktik">
+                            </div>
+                        </div>
+                    </div>                   
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-success">Tambahkan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 @endsection
 
 @section('script')

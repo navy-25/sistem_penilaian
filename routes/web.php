@@ -27,4 +27,5 @@ Route::get('/admin/kelas/nama-kelas/kelola', [App\Http\Controllers\KelasControll
 Route::get('/admin/kelas/nama-kelas/kelola/nilai', [App\Http\Controllers\KelasController::class, 'kelolaNilai']);
 Route::get('/admin/rekab', [App\Http\Controllers\RekabController::class, 'index']);
 Route::get('/admin/nilai', [App\Http\Controllers\NilaiController::class, 'index']);
+Route::get('/admin/nilai/variabel-nilai', [App\Http\Controllers\NilaiController::class, 'variabelNilai']);
 Route::get('/admin/pengaturan', [App\Http\Controllers\PengaturanController::class, 'index']);
