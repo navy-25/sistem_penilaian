@@ -22,4 +22,8 @@ class KelasController extends Controller
     {
         return view('kelas.kelolaNilai');
     }
+    public function kelolaPraktik()
+    {
+        return view('kelas.kelolaPraktik');
+    }
 }

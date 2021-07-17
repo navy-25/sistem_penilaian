@@ -161,12 +161,16 @@ active
                             <table class="table table-hover text-nowrap">
                                 <tbody>
                                     <tr>
-                                        <td align="left">001. Praktik Angle Foto</td>
+                                        <td align="left">
+                                            <a style="text-decoration:none;color:black" href="/admin/kelas/nama-kelas/kelola/praktik">
+                                                001. Praktik Angle Foto
+                                            </a>
+                                        </td>
                                         <td align="right">
                                             <!-- <a href="" title="Hapus Akun Siswa" class="btn btn-secondary btn-sm stop-confirm">
                                                 <i class="fas fa-stop mr-1"></i>Stop
                                             </a> -->
-                                            <a href="" title="Hapus Akun Siswa" class="btn btn-success btn-sm">
+                                            <a href="/admin/kelas/nama-kelas/kelola/praktik" title="Hapus Akun Siswa" class="btn btn-success btn-sm">
                                                 <i class="fas fa-play mr-1"></i>Mulai penilaian
                                             </a>
                                         </td>
@@ -185,52 +189,54 @@ active
                     </div>
                     <!-- /.tab-pane -->
                     <div class="tab-pane" id="kontributor">
-                        <table class="table table-hover text-nowrap">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Nama Lengkap</th>
-                                    <th>Kelas</th>
-                                    <th>Status</th>
-                                    <th>Opsi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Muhammad Nafi' Maula Hakim</td>
-                                    <td>XI Multimedia</td>
-                                    <td>Siswa</td>
-                                    <td>
-                                        <a href="" title="Hapus Akun Siswa" class="btn btn-danger btn-sm delete-confirm">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Widya Rizka Ulul Fadilah</td>
-                                    <td>XI Multimedia</td>
-                                    <td>Siswa</td>
-                                    <td>
-                                        <a href="" title="Hapus Akun Siswa" class="btn btn-danger btn-sm delete-confirm">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Rizky Arifiyantini</td>
-                                    <td>XI Multimedia</td>
-                                    <td>Siswa</td>
-                                    <td>
-                                        <a href="" title="Hapus Akun Siswa" class="btn btn-danger btn-sm delete-confirm">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="card-body table-responsive p-0">
+                            <table class="table table-hover text-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nama Lengkap</th>
+                                        <th>Kelas</th>
+                                        <th>Status</th>
+                                        <th>Opsi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Muhammad Nafi' Maula Hakim</td>
+                                        <td>XI Multimedia</td>
+                                        <td>Siswa</td>
+                                        <td>
+                                            <a href="" title="Hapus Akun Siswa" class="btn btn-danger btn-sm delete-confirm">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Widya Rizka Ulul Fadilah</td>
+                                        <td>XI Multimedia</td>
+                                        <td>Siswa</td>
+                                        <td>
+                                            <a href="" title="Hapus Akun Siswa" class="btn btn-danger btn-sm delete-confirm">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Rizky Arifiyantini</td>
+                                        <td>XI Multimedia</td>
+                                        <td>Siswa</td>
+                                        <td>
+                                            <a href="" title="Hapus Akun Siswa" class="btn btn-danger btn-sm delete-confirm">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                     <!-- /.tab-pane -->
                     </div>

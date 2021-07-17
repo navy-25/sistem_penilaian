@@ -35,51 +35,100 @@ active
 {{$nama_menu_1}}
 @endsection
 
-@section('content')
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <!-- <div class="col-sm-6">
-                    <h1>{{$nama_menu_1}}</h1>
-                </div> -->
-                <div class="col-sm-12">
-                    <ol class="breadcrumb float-sm-left">
-                    <li class="breadcrumb-item"><a href="{{$link_menu_1}}">Dashboard</a></li>
-                    <li class="breadcrumb-item active">{{$nama_menu_1}}</li>
-                    </ol>
-                </div>
-            </div>
-        </div><!-- /.container-fluid -->
-    </section>
+@section('boostrap')
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+@endsection
 
+@section('content')
     <!-- Main content -->
-    <section class="content">
+    <section class="content" style="padding:5px">
         <!-- Default box -->
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Title</h3>
-                <div class="card-tools">
-                    <!-- minimize button card -->
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                    <!-- close button card -->
-                    <!-- <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
-                        <i class="fas fa-times"></i>
-                    </button> -->
+        <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="10000">
+                    <img src="{{asset('../banner/001.jpg')}}" style="border-radius:20px" width="100%" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <!-- <h5>First slide label</h5> -->
+                        <!-- <p>Some representative placeholder content for the first slide.</p> -->
+                    </div>
+                </div>
+                <div class="carousel-item" data-bs-interval="2000">
+                    <img src="{{asset('../banner/002.jpg')}}" style="border-radius:20px" width="100%" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <!-- <h5>Second slide label</h5> -->
+                        <!-- <p>Some representative placeholder content for the second slide.</p> -->
+                    </div>
+                </div>
+                <div class="carousel-item" data-bs-interval="2000">
+                    <img src="{{asset('../banner/003.jpg')}}" style="border-radius:20px" width="100%" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <!-- <h5>Second slide label</h5> -->
+                        <!-- <p>Some representative placeholder content for the second slide.</p> -->
+                    </div>
                 </div>
             </div>
-            <div class="card-body">
-                Start creating your amazing application!
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
             </div>
-            <!-- /.card-body -->
-            <div class="card-footer">
-                Footer
-            </div>
-            <!-- /.card-footer-->
-        </div>
         <!-- /.card -->
     </section>
+    <!-- <div class="card-body pb-0">
+        <div class="row d-flex align-items-stretch">
+            <div class="col-12 col-sm-6 col-md-6 d-flex align-items-stretch">
+                <div class="card bg-light card-primary card-outline" style="width:100%">
+                    <div class="card-header text-muted border-bottom-0">
+                    </div>
+                    <div class="card-body pt-0">
+                        <div class="row">
+                            <div class="col-7">
+                                <h2 class="lead"><b>PHP Programming</b></h2>
+                                <p class="text-muted text-sm">Prof. Dr. Muhammad Nafi' Maula Hakim, S.Kom, M.Kom</p>
+                                <ul class="ml-4 mb-0 fa-ul text-muted">
+                                    <li class="small"><span class="fa-li"><i class="fas fa-sm fa-calendar-alt mr-1"></i></span> Hari &nbsp;&nbsp;&nbsp;&nbsp; : Selasa</li>
+                                    <li class="small"><span class="fa-li"><i class="fas fa-sm fa-clock mr-1"></i></span> Pukul &nbsp;&nbsp;: 10.00 - 11.00</li>
+                                </ul>
+                            </div>
+                            <div class="col-5 text-center">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-2">
+                                <a href="#" class="btn btn-sm bg-danger delete-confirm">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </div>
+                            <div class="col-4">
+
+                            </div>
+                            <div class="col-2" style="padding:2px">
+                                <a href="/admin/kelas/nama-kelas" class="btn btn-sm btn-secondary" style="width:100%">
+                                    <i class="fas fa-cog"></i>
+                                </a>
+                            </div>
+                            <div class="col-4" style="padding:2px">
+                                <a href="/admin/kelas/nama-kelas/kelola" class="btn btn-sm btn-success" style="width:100%">
+                                    <i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp; Masuk
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- /.card-body -->
     <!-- /.content -->
 @endsection
