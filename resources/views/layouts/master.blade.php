@@ -26,7 +26,7 @@
     $link_menu_2 = "/akun-siswa";
     $link_menu_3 = "/kelas";
     $link_menu_4 = "/admin/soal";
-    $link_menu_5 = "/admin/nilai";
+    $link_menu_5 = "/nilai";
     $link_menu_6 = "/admin/rekab";
     $link_menu_7 = "/pengaturan";
 ?>

@@ -75,41 +75,28 @@ active
                                 <tr>
                                     <th>No</th>
                                     <th>Variabel Penilaian</th>
-                                    <th>Aspek</th>
+                                    <!-- <th>Aspek</th> -->
                                     <th>Opsi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td data-bs-toggle="modal" data-bs-target="#soal_add">Cara pengambilan gambar</td>
-                                    <td>Koqnitif</td>
-                                    <td>
-                                        <a href="" title="Hapus Akun Siswa" class="btn btn-danger btn-sm delete-confirm">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td data-bs-toggle="modal" data-bs-target="#soal_add">Penguasaan kamera</td>
-                                    <td>Afektif</td>
-                                    <td>
-                                        <a href="" title="Hapus Akun Siswa" class="btn btn-danger btn-sm delete-confirm">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td data-bs-toggle="modal" data-bs-target="#soal_add">Penguasaan Lokasi</td>
-                                    <td>Psikomotorik</td>
-                                    <td>
-                                        <a href="" title="Hapus Akun Siswa" class="btn btn-danger btn-sm delete-confirm">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
+                                <?php
+                                    // dd($sub_variabel_praktik);
+                                ?>
+                                @foreach($sub_variabel_praktik as $s)
+                                    @if($s->id_variabel_praktik == $variabel_praktik->id)
+                                    <tr>
+                                        <td>1</td>
+                                        <td>{{$s->name}}</td>
+                                        <!-- <td>Koqnitif</td> -->
+                                        <td>
+                                            <a href="" title="Hapus Akun Siswa" class="btn btn-danger btn-sm delete-confirm">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    @endif
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -185,16 +172,18 @@ active
             <!-- <div class="modal-header">
                 <h5 class="modal-title" id="staticBackdropLabel">Variabel Praktik</h5>
             </div> -->
-            <form role="form">
+
+            <form role="form" method="POST" action="/nilai/{{$variabel_praktik->id}}/{{$variabel_praktik->name}}/store">
+                @csrf
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label >Variabel Penilaian*</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nama Variabel Penilaian">
+                                <input type="text" name="name" class="form-control" id="exampleInputEmail1" placeholder="Nama Variabel Penilaian">
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <!-- <div class="col-md-4">
                             <div class="form-group">
                                 <label >Aspek Penilaian*</label>
                                 <select class="form-control" id="inputGroupSelect01">
@@ -204,7 +193,7 @@ active
                                     <option value="2">Psikomotorik</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="form-group">
                         <label >Deskripsi praktik</label>
@@ -213,7 +202,7 @@ active
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                    <button type="button" class="btn btn-success">Tambahkan</button>
+                    <button type="submit" class="btn btn-success">Tambahkan</button>
                 </div>
             </form>
         </div>

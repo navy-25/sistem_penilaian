@@ -62,16 +62,24 @@ active
                         </tr>
                     </thead>
                     <tbody>
+                        <?php
+                            $no = 1;
+                        ?>
+                        @foreach($variabel_praktik as $v)
                         <tr>
-                            <td style="width:10px">1</td>
+                            <td style="width:10px">{{$no++}}</td>
                             <td>
-                                <a href="/admin/nilai/variabel-nilai" style="text-decoration:none;color:black">
-                                    Foto & Sinematografi
+                                <a href="/nilai/{{$v->id}}/{{$v->name}}i" style="text-decoration:none;color:black">
+                                    <?php
+                                        $kelas_name = \App\Models\Kelas::find($v->id_kelas);
+                                        $kelas_name = $kelas_name->name;
+                                    ?>
+                                    {{$kelas_name}}
                                 </a>
                             </td>
-                            <td>Praktik Angle Foto</td>
+                            <td>{{$v->name}}</td>
                             <td style="width:10px">
-                                <a href="/admin/nilai/variabel-nilai" title="Variabel Penilaian" class="btn btn-success btn-sm">
+                                <a href="/nilai/{{$v->id}}/{{$v->name}}" title="Variabel Penilaian" class="btn btn-success btn-sm">
                                     <i class="fas fa-th-list"></i>
                                 </a>
                                 <a href="" title="Hapus Akun Siswa" class="btn btn-danger btn-sm delete-confirm">
@@ -79,6 +87,7 @@ active
                                 </a>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -101,49 +110,33 @@ active
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <form role="form">
+            <form role="form" method="POST" action="/nilai/store">
+                @csrf
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label >Kelas*</label>
-                                <select class="form-control" id="inputGroupSelect01">
-                                    <option selected>Pilih Kelas</option>
-                                    <option value="1">X</option>
-                                    <option value="2">XI</option>
-                                    <option value="2">XII</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label >Jurusan*</label>
-                                <select class="form-control" id="inputGroupSelect01">
-                                    <option selected>Pilih Jurusan</option>
-                                    <option value="1">Multimedia</option>
-                                    <option value="2">Teknik Sepeda Motor</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label >Nama Modul*</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Modul Pembelajaran">
+                                <!-- <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Modul Pembelajaran"> -->
+                                <select class="form-control" name="id_kelas"  id="inputGroupSelect01">
+                                    <option value="" selected>Pilih Kelas</option>
+                                    @foreach($kelas as $k)
+                                        <option value="{{$k->id}}">{{$k->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label >Modul Praktik*</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Kategori praktik">
+                                <input type="text" class="form-control" name="name" id="exampleInputEmail1" placeholder="Kategori praktik">
                             </div>
                         </div>
                     </div>                   
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                    <button type="button" class="btn btn-success">Tambahkan</button>
+                    <button type="submit" class="btn btn-success">Tambahkan</button>
                 </div>
             </form>
         </div>

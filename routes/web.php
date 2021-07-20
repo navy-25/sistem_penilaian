@@ -44,8 +44,11 @@ Route::get('/admin/kelas/nama-kelas/kelola', [App\Http\Controllers\KelasControll
 Route::get('/admin/kelas/nama-kelas/kelola/praktik', [App\Http\Controllers\KelasController::class, 'kelolaPraktik']);
 Route::get('/admin/kelas/nama-kelas/kelola/nilai', [App\Http\Controllers\KelasController::class, 'kelolaNilai']);
 Route::get('/admin/rekab', [App\Http\Controllers\RekabController::class, 'index']);
-Route::get('/admin/nilai', [App\Http\Controllers\NilaiController::class, 'index']);
-Route::get('/admin/nilai/variabel-nilai', [App\Http\Controllers\NilaiController::class, 'variabelNilai']);
+
+Route::get('/nilai', [App\Http\Controllers\NilaiController::class, 'index']);
+Route::post('/nilai/store', [App\Http\Controllers\NilaiController::class, 'store']);
+Route::get('/nilai/{id}/{name}', [App\Http\Controllers\NilaiController::class, 'variabelNilai']);
+Route::post('/nilai/{id}/{name}/store', [App\Http\Controllers\NilaiController::class, 'store_sub_variabel']);
 Route::get('/pengaturan', [App\Http\Controllers\PengaturanController::class, 'index']);
 Route::post('/pengaturan/{id}/update', [App\Http\Controllers\PengaturanController::class, 'update']);
 Route::post('/pengaturan/{id}/ganti-password', [App\Http\Controllers\PengaturanController::class, 'ganti_password']);

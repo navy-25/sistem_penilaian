@@ -82,7 +82,7 @@ active
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="tab-pane active" id="settings">
-                            <form class="form-horizontal" method="POST" action="/pengaturan/{{$user->id}}/update">
+                            <form class="form-horizontal" method="POST" action="/pengaturan/{{$user->id}}/update" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group row">
                                     <label for="inputName" class="col-sm-2 col-form-label">Nama*</label>
@@ -90,12 +90,18 @@ active
                                         <input type="text" class="form-control" name="name"  value="{{$user->name}}" id="inputName" placeholder="Nama Lengkap">
                                     </div>
                                 </div>
+                                @if(Auth::user()->status != "Admin")
                                 <div class="form-group row">
-                                    <label for="inputName" class="col-sm-2 col-form-label">NIDN</label>
+                                    @if(Auth::user()->status != "Guru")
+                                        <label for="inputName" class="col-sm-2 col-form-label">NIDN</label>
+                                    @elseif(Auth::user()->status != "Siswa")
+                                        <label for="inputName" class="col-sm-2 col-form-label">NISN</label>
+                                    @endif
                                     <div class="col-sm-10">
                                         <input type="number" class="form-control" name="nis"  value="{{$user->nis}}" id="inputName" placeholder="NIDN">
                                     </div>
                                 </div>
+                                @endif
                                 <div class="form-group row">
                                     <label for="inputName" class="col-sm-2 col-form-label">Telepon</label>
                                     <div class="col-sm-10">
@@ -147,6 +153,12 @@ active
                                     </div>
                                 </div>
                                 <div class="form-group row">
+                                    <label for="inputExperience" class="col-sm-2 col-form-label">Foto</label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control form-control-sm" name="foto" id="formFileSm" type="file">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
                                     <div class="offset-sm-2 col-md-12 col-sm-12">
                                         <button type="submit" class="btn btn-primary update-confirm" style=";margin-bottom:10px">
                                             <i class="fas fa-save mr-1"></i>Simpan
@@ -167,9 +179,9 @@ active
                 <div class="card card-primary card-outline">
                     <div class="card-body box-profile">
                         <div class="text-center">
-                            <a href="../../dist/img/user2-160x160.jpg" target="_blank" title="Foto Profil">
+                            <a href="{{$user->getFoto()}}" target="_blank" title="Foto Profil">
                                 <img class="profile-user-img img-fluid img-circle"
-                                src="../../dist/img/user2-160x160.jpg" alt="User profile picture">
+                                src="{{$user->getFoto()}}" alt="User profile picture">
                             </a>
                         </div>
 

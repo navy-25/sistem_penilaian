@@ -81,11 +81,14 @@ active
                                 <label >Guru/Pengajar/Pembimbing*</label>
                                 <!-- <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nama Kelas/Mata Pelajaran"> -->
                                 <select class="form-control" name="pembimbing"  id="inputGroupSelect01">
-                                    <option value="{{$kelas->pembimbing}}" selected>{{$kelas->pembimbing}}</option>
+                                    <?php
+                                        $pembimbing = \App\Models\User::find($kelas->pembimbing);
+                                    ?>
+                                    <option value="{{$pembimbing->id}}" selected>{{$pembimbing->name}}</option>
                                     @foreach($user as $s)
                                         @if($s->role != 'admin')
                                             @if($s->status == 'Guru')
-                                            <option value="{{$s->name}}">{{$s->name}}</option>
+                                            <option value="{{$s->id}}">{{$s->name}}</option>
                                             @endif
                                         @endif
                                     @endforeach

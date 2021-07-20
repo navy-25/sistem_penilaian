@@ -34,12 +34,6 @@ active
 {{$nama_menu_3}}
 @endsection
 
-@section('print')
-
-<a class="nav-link" title="Cetak data siswa">
-    <i class="fas fa-file-archive"></i>
-</a>
-@endsection
 
 @section('search')
 <form class="form-inline ml-3">
@@ -110,11 +104,14 @@ active
                         <div class="card-body table-responsive p-0">
                             <table class="table table-hover text-nowrap">
                                 <tbody>
+                                    <?php
+                                        $no = 1;
+                                    ?>
                                     @foreach($modul as $m)
                                         @if($m->id_kelas == $kelas->id)
                                         <tr>
                                             <td align="left">
-                                                <a target="_blank" style="text-decoration:none;color:black" href="{{$m->getFile()}}">{{$m->name}}</a> 
+                                                <a target="_blank" style="text-decoration:none;color:black" href="{{$m->getFile()}}">{{$no++}}. {{$m->name}}</a> 
                                                 @if($m->jenis == "Materi")
                                                 <small style="background:yellow;padding:3px">
                                                         {{$m->jenis}}
@@ -158,21 +155,28 @@ active
                         <div class="card-body table-responsive p-0">
                             <table class="table table-hover text-nowrap">
                                 <tbody>
-                                    <tr>
-                                        <td align="left">
-                                            <a style="text-decoration:none;color:black" href="/admin/kelas/nama-kelas/kelola/praktik">
-                                                001. Praktik Angle Foto
-                                            </a>
-                                        </td>
-                                        <td align="right">
-                                            <!-- <a href="" title="Hapus Akun Siswa" class="btn btn-secondary btn-sm stop-confirm">
-                                                <i class="fas fa-stop mr-1"></i>Stop
-                                            </a> -->
-                                            <a href="/admin/kelas/nama-kelas/kelola/praktik" title="Hapus Akun Siswa" class="btn btn-success btn-sm">
-                                                <i class="fas fa-play mr-1"></i>Mulai penilaian
-                                            </a>
-                                        </td>
-                                    </tr>
+                                    <?php
+                                        $no = 1;
+                                    ?>
+                                    @foreach($variabel_praktik as $v)
+                                        @if($v->id_kelas == $kelas->id)
+                                        <tr>
+                                            <td align="left">
+                                                <a style="text-decoration:none;color:black" href="/admin/kelas/nama-kelas/kelola/praktik">
+                                                    {{$no++}}. {{$v->name}}
+                                                </a>
+                                            </td>
+                                            <td align="right">
+                                                <!-- <a href="" title="Hapus Akun Siswa" class="btn btn-secondary btn-sm stop-confirm">
+                                                    <i class="fas fa-stop mr-1"></i>Stop
+                                                </a> -->
+                                                <a href="/admin/kelas/nama-kelas/kelola/praktik" title="Hapus Akun Siswa" class="btn btn-success btn-sm">
+                                                    <i class="fas fa-play mr-1"></i>Mulai penilaian
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        @endif
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -191,7 +195,7 @@ active
                             <table class="table table-hover text-nowrap">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        <th>No</th>
                                         <th>Nama Lengkap</th>
                                         <th>Kelas</th>
                                         <th>Status</th>
@@ -252,13 +256,7 @@ active
             <div class="card card-primary card-outline">
             <div class="card-body box-profile">
                 <?php
-                    for ($i=0;$i<count($user);$i++){
-                        if($user[$i]->name == $kelas->pembimbing){
-                            $id_user = $user[$i]->id;
-                        }
-                    }
-                    // dd($id_user);
-                    $pembimbing = \App\Models\User::find($id_user);
+                    $pembimbing = \App\Models\User::find($kelas->pembimbing);
                 ?>
                 <div class="text-center">
                     <a href="{{$pembimbing->getFoto()}}" target="_blank" title="Foto Profil">
@@ -268,7 +266,7 @@ active
                 </div>
 
                 <h3 class="profile-username text-center">{{$kelas->name}}</h3>
-                <p class="text-muted text-center"><b>Oleh : </b> {{$kelas->pembimbing}}</p>
+                <p class="text-muted text-center"><b>Oleh : </b> {{$pembimbing->name}}</p>
                 <ul class="ml-4 mb-0 fa-ul text-muted">
                     <li class="small"><span class="fa-li"><i class="fas fa-sm fa-calendar-alt mr-1"></i></span> Hari &nbsp;&nbsp;&nbsp;&nbsp; : {{$kelas->hari}}</li>
                     <li class="small"><span class="fa-li"><i class="fas fa-sm fa-clock mr-1"></i></span> Pukul &nbsp;&nbsp;: {{$kelas->jam}}</li>

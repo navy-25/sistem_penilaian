@@ -101,15 +101,28 @@ active
                                 <div class="card-body pt-0">
                                     <div class="row">
                                         <div class="col-7">
-                                            <h2 class="lead"><b>{{$x->name}}</b></h2>
-                                            <p class="text-muted text-sm">{{$x->pembimbing}}</p>
+                                            <h2 class="lead" style="font-weight:800"><b>{{$x->name}}</b></h2>
+                                            <?php
+                                                $pembimbing = \App\Models\User::find($x->pembimbing);
+                                            ?>
+                                            <p class="text-muted text-sm">
+                                                @if($x->status == 'aktif')
+                                                <span style="background:yellow">
+                                                @else
+                                                <span style="background:red;color:white">
+                                                @endif
+                                                    kelas {{$x->status}} 
+                                                </span>
+                                                <br> 
+                                                {{$pembimbing->name}}
+                                            </p>
                                             <ul class="ml-4 mb-0 fa-ul text-muted">
                                                 <li class="small"><span class="fa-li"><i class="fas fa-sm fa-calendar-alt mr-1"></i></span> Hari &nbsp;&nbsp;&nbsp;&nbsp; : {{$x->hari}}</li>
                                                 <li class="small"><span class="fa-li"><i class="fas fa-sm fa-clock mr-1"></i></span> Pukul &nbsp;&nbsp;: {{$x->jam}}</li>
                                             </ul>
                                         </div>
                                         <div class="col-5 text-center">
-                                            <img src="../../dist/img/user1-128x128.jpg" alt="" class="img-circle img-fluid">
+                                            <img src="{{$pembimbing->getFoto()}}" alt="" class="img-circle img-fluid">
                                         </div>
                                     </div>
                                 </div>
@@ -173,7 +186,7 @@ active
                                     @foreach($user as $s)
                                         @if($s->role != 'admin')
                                             @if($s->status == 'Guru')
-                                            <option value="{{$s->name}}">{{$s->name}}</option>
+                                            <option value="{{$s->id}}">{{$s->name}}</option>
                                             @endif
                                         @endif
                                     @endforeach
@@ -241,7 +254,7 @@ active
         const url = $(this).attr('href');
         swal({
             title: 'Hapus kelas ?',
-            text: 'Kelas yang sudah dihapus tidak bisa di onlinekan kembali',
+            text: 'Semua data yang berhubungan dengan kelas ini akan terhapus',
             icon: 'warning',
             buttons: ["Batalkan", "Hapus"],
         }).then(function(value) {

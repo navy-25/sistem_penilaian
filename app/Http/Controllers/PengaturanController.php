@@ -25,6 +25,13 @@ class PengaturanController extends Controller
                     'email' => $request->email,
                 ];
                 $user->update($data);
+                if ($request->hasFile('foto')) {
+                    $file = $request->file('foto');
+                    $filename = $request->file('foto')->getClientOriginalName();
+                    $request->file('foto')->move('image/',$filename);
+                    $user->foto = $request->file('foto')->getClientOriginalName();
+                    $user->save();
+                } 
             return redirect('/pengaturan/')->with(['success' => 'Data baru berhasil di simpan']);
         }catch (Exception $e){
             return redirect('/pengaturan/')->with(['gagal' => 'Data gagal diperbarui']);

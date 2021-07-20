@@ -32,7 +32,22 @@ class KelasController extends Controller
     public function destroy(Request $request, $id)
     {
         try{
-            $kelas = \App\Models\Kelas::find($id);       
+            $kelas = \App\Models\Kelas::find($id);      
+            $modul = \App\Models\Modul::all();     
+            $kontributor = \App\Models\Kontributor_Kelas::all();     
+            for ($i=0;$i < count($modul); $i++){
+                if ($modul[$i]->id_kelas == $id){
+                    $modul_delete = \App\Models\Modul::find($modul[$i]->id);
+                    $modul_delete->delete($modul_delete);
+                }
+            }
+            for ($i=0;$i < count($kontributor); $i++){
+                if ($kontributor[$i]->id_kelas == $id){
+                    $kontributor_delete = \App\Models\Kontributor_Kelas::find($kontributor[$i]->id);
+                    $kontributor_delete->delete($kontributor_delete);
+                }
+            }
+            // dd($modul_delete);
             $kelas->delete($kelas);
             return redirect('/kelas/')->with(['success' => 'Kelas '.$request->name.' berhasil di hapus']);
         }catch (Exception $e){
@@ -49,8 +64,9 @@ class KelasController extends Controller
     {
         $kelas = \App\Models\Kelas::find($id);  
         $user = \App\Models\User::all();
-        $modul = \App\Models\Modul::orderby('id','desc')->get();
-        return view('kelas.kelolaKelas',compact('kelas','user','modul'));
+        $modul = \App\Models\Modul::orderby('id','asc')->get();
+        $variabel_praktik = \App\Models\Variabel_Praktik::all();
+        return view('kelas.kelolaKelas',compact('kelas','user','modul','variabel_praktik'));
     }
     public function update(Request $request, $id)
     {
