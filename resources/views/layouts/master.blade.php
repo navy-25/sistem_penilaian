@@ -23,12 +23,12 @@
 
     //link routes
     $link_menu_1 = "/admin/beranda";
-    $link_menu_2 = "/admin/akun-siswa";
-    $link_menu_3 = "/admin/kelas";
+    $link_menu_2 = "/akun-siswa";
+    $link_menu_3 = "/kelas";
     $link_menu_4 = "/admin/soal";
     $link_menu_5 = "/admin/nilai";
     $link_menu_6 = "/admin/rekab";
-    $link_menu_7 = "/admin/pengaturan";
+    $link_menu_7 = "/pengaturan";
 ?>
 
 <!DOCTYPE html>
@@ -76,7 +76,7 @@
                         @yield('print')
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" title="Pengaturan Akun" href="/admin/pengaturan">
+                        <a class="nav-link" title="Pengaturan Akun" href="{{$link_menu_7}}">
                             <i class="fas fa-user-cog"></i>
                             <!-- <span class="badge badge-danger navbar-badge">3</span> -->
                         </a>
@@ -88,24 +88,33 @@
                                 <!-- <span class="badge badge-danger navbar-badge">3</span> -->
                             </a>
                             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                            <a href="#" class="dropdown-item">
+                            <div class="dropdown-item">
                                 <div class="media">
-                                    <img src="{{asset('../../dist/img/user1-128x128.jpg')}}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                                    <img src="{{Auth::user()->getFoto()}}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
                                     <div class="media-body">
                                         <h3 class="dropdown-item-title">
-                                        Nafi
+                                        {{Auth::user()->name}}
                                         <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
                                         </h3>
                                         <p class="text-sm">XII Multimedia</p>
                                     </div>
                                 </div>
-                            </a>
+                            </div>
                             <div class="dropdown-divider"></div>
                             
                             <div class="dropdown-divider"></div>
-                                <a href="/" class="dropdown-item dropdown-footer">
+                                <!-- <a href="/" class="dropdown-item dropdown-footer">
                                     Logout
+                                </a> -->
+                                <a class="dropdown-item dropdown-footer" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
                                 </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
                             </div>
                         </li>
                     </li>
@@ -120,10 +129,14 @@
                 <!-- Sidebar user (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                    <img src="{{asset('../../dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
+                    <img src="{{Auth::user()->getFoto()}}"" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                    <a href="#" class="d-block">Admin</a>
+                    <?php
+                        $name = Auth::user()->name;
+                        $name = explode(" ",$name);
+                    ?>
+                    <a href="#" class="d-block">{{$name[0]}}</a>
                     </div>
                 </div>
 

@@ -20,11 +20,11 @@
 
     //link routes
     $link_menu_1 = "/admin/beranda";
-    $link_menu_2 = "/admin/akun-siswa";
+    $link_menu_2 = "/akun-siswa";
     $link_menu_3 = "/admin/kelas";
     $link_menu_4 = "/admin/soal";
     $link_menu_5 = "/admin/nilai";
-    $link_menu_6 = "/admin/nilai";
+    $link_menu_6 = "/nilai";
 ?>
 @section('menu_2')
 active
@@ -58,14 +58,33 @@ active
     <section class="content-header" style="padding-bottom: 0px;">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-sm-6">
-                    <div class="row" style="margin-left:5px">
+                <div class="col-sm-12">
+                @if ($message = Session::get('success'))
+                    <div class="alert alert-success alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h5><i class="icon fas fa-check-circle"></i> Berhasil !</h5>
+                        {{$message}}
+                    </div>
+                @elseif ($message = Session::get('gagal'))
+                    <div class="alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h5><i class="icon fas fa-exclamation-triangle"></i> Gagal !</h5>
+                        {{$message}}
+                    </div>
+                @endif
+                </div>
+            </div>
+            @if(Auth::user()->status != 'Siswa')
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="row" style="margin-left:1px">
                         <button type="button"  class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                            <i class="fas fa-user mr-1"></i>Tambah Siswa
+                            <i class="fas fa-user mr-1"></i>Tambah
                         </button>
                     </div>
                 </div>               
             </div>
+            @endif
         </div><!-- /.container-fluid -->
     </section>
 
@@ -81,40 +100,65 @@ active
                             <th style="width:10px">ID</th>
                             <th style="width:100px">Foto</th>
                             <th>Nama Lengkap</th>
+                            @if(Auth::user()->status != 'Siswa')
                             <th style="width:10px">Opsi</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td style="width:10px">1</td>
-                            <td style="width:100px">
-                                <a href="/admin/akun-siswa/nama-siswa">
-                                    <img src="../../dist/img/user2-160x160.jpg" width="70px" alt="nama_siswa">
-                                </a>
-                            </td>
-                            <td>
-                                <a href="/admin/akun-siswa/nama-siswa" style="text-decoration:none;color:black">
-                                    Muhammad Nafi' Maula Hakim
-                                    <small>
-                                        <br>
-                                        XI Multimedia
-                                        <br>
-                                        nafimaulahakim123@gmail.com
-                                    </small>
-                                </a>
-                            </td>
-                            <td style="width:10px">
-                                <!-- <a href="/admin/akun-siswa/nama-siswa" title="Lihat Siswa" class="btn btn-primary btn-sm">
-                                    <i class="fas fa-eye"></i>
-                                </a> -->
-                                <!-- <a href="" title="Ubah Data Siswa" class="btn btn-secondary btn-sm">
-                                    <i class="fas fa-user-edit"></i>
-                                </a> -->
-                                <a href="" title="Hapus Akun Siswa" class="btn btn-danger btn-sm delete-confirm">
-                                    <i class="fas fa-trash"></i>
-                                </a>
-                            </td>
-                        </tr>
+                        @foreach($user as $x)
+                        <?php
+                            if($x->nis == Null){
+                                $nis = '-';
+                            }else{
+                                $nis = $x->nis;
+                            }
+                        ?>
+                            @if($x->status != 'Admin')
+                                @if($x->id != Auth::user()->id)
+                                <tr>
+                                    <td style="width:10px">1</td>
+                                    <td style="width:100px">
+                                        <a href="{{$link_menu_2}}/{{$x->id}}">
+                                            <img src="{{$x->getFoto()}}" width="70px" alt="nama_siswa">
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <?php
+                                            $Kelas_User = \App\Models\Kelas_User::all();
+                                            for ($i=0;$i<count($Kelas_User);$i++){
+                                                if($Kelas_User[$i]->id_siswa == $x->id){
+                                                    $id_kelas_user = $Kelas_User[$i]->id;
+                                                }
+                                            }
+                                            $Kelas_User = \App\Models\Kelas_User::find($id_kelas_user);
+                                        ?>
+                                        <a href="{{$link_menu_2}}/{{$x->id}}" style="text-decoration:none;color:black">
+                                            {{$x->name}}
+                                            <small>
+                                                <br>
+                                                @if($x->status == "Guru")
+                                                    Guru / NIDN : {{$nis}}
+                                                @elseif($x->status == "Siswa")
+                                                    {{$Kelas_User->kelas}}-{{$Kelas_User->jurusan}} / NISN : {{$nis}}
+                                                @endif
+                                                
+                                                <br>
+                                                {{$x->email}}
+                                            </small>
+                                        </a>
+                                    </td>
+                                    @if(Auth::user()->status != 'Siswa')
+                                    <td style="width:10px">
+                                        <a href="{{$link_menu_2}}/{{$x->id}}/destroy" title="Hapus Akun Siswa" class="btn btn-danger btn-sm delete-confirm">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
+                                    @endif
+                                </tr>
+                                @endif
+                            @endif
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -132,6 +176,67 @@ active
         <!-- /.card -->
     </section>
     <!-- /.content -->
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form class="form" method="POST" action="/akun-siswa/store" enctype="multipart/form-data"> 
+                @csrf
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label >Nama Lengkap*</label>
+                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Nama Lengkap" name="name" required autocomplete="name" autofocus>
+                        @error('name')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label >Status User*</label>
+                        <!-- <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nama Kelas/Mata Pelajaran"> -->
+                        <select class="form-control" name="status"  id="inputGroupSelect01">
+                            <option selected>Pilih Status</option>
+                            <option value="Guru">Guru</option>
+                            <option value="Siswa">Siswa</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label >Email*</label>
+                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email" name="email" required autocomplete="email" autofocus>
+                        @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label >Password*</label>
+                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password"  name="password" required autocomplete="new-password">
+                        @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputFile">Foto </label>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input class="form-control form-control-sm" name="foto" id="formFileSm" type="file">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-success">Buat Akun</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 @endsection
 
 @section('script')

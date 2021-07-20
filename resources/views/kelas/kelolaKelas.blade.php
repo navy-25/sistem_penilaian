@@ -21,7 +21,7 @@
     //link routes
     $link_menu_1 = "/admin/beranda";
     $link_menu_2 = "/admin/akun-siswa";
-    $link_menu_3 = "/admin/kelas";
+    $link_menu_3 = "/kelas";
     $link_menu_4 = "/admin/soal";
     $link_menu_5 = "/admin/nilai";
     $link_menu_6 = "/admin/nilai";
@@ -58,16 +58,34 @@ active
 <!-- Content Header (Page header) -->
 <section class="content-header">
 <div class="container-fluid">
-    <div class="row mb-2">
-        <div class="col-sm-6">
-            <button type="button"  class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modul_add">
-                <i class="fas fa-book mr-1"></i>Modul
-            </button>
-            <button type="button"  class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#soal_add">
-                <i class="fas fa-tasks mr-1"></i>Tugas
-            </button>
+    @if(Auth::user()->status != 'Siswa')
+        @if ($message = Session::get('success'))
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h5><i class="icon fas fa-check-circle"></i> Berhasil !</h5>
+                {{$message}}
+            </div>
+        @elseif ($message = Session::get('gagal'))
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h5><i class="icon fas fa-exclamation-triangle"></i> Gagal !</h5>
+                {{$message}}
+            </div>
+        @endif
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <button type="button"  class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modul_add">
+                    <i class="fas fa-book mr-1"></i>Modul
+                </button>
+                <button type="button"  class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#soal_add">
+                    <i class="fas fa-tasks mr-1"></i>Tugas
+                </button>
+                <button type="button"  class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#kontributor_add">
+                    <i class="fas fa-user-plus mr-1"></i>Kontributor
+                </button>
+            </div>
         </div>
-    </div>
+    @endif
 </div><!-- /.container-fluid -->
 </section>
 
@@ -92,57 +110,37 @@ active
                         <div class="card-body table-responsive p-0">
                             <table class="table table-hover text-nowrap">
                                 <tbody>
-                                    <tr>
-                                        <td align="left">001. Materi Editing dan Angle Kamera 
-                                        <small style="background:yellow;padding:3px">
-                                                Materi
-                                        </small>    
-                                        </td>
-                                        <td align="right">
-                                            <a href="" title="Download" class="btn btn-primary btn-sm">
-                                                <i class="fas fa-file-download"></i>
-                                            </a>
-                                            <a href="" title="Hapus Modul/Tugas" class="btn btn-danger btn-sm delete-confirm">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="left">002. Adobe Primier
-                                            <small style="background:yellow;padding:3px">
-                                                    Materi
-                                            </small> 
-                                        </td>
-                                        <td align="right">                                          
-                                            <a href="" title="Download" class="btn btn-primary btn-sm">
-                                                <i class="fas fa-file-download"></i>
-                                            </a>
-                                            <a href="" title="Hapus Modul/Tugas" class="btn btn-danger btn-sm delete-confirm">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="left">003. Tugas Review Materi
-                                            <small style="background:red;padding:3px;color:white">
-                                                    Tugas
-                                            </small> 
-                                        </td>
-                                        <td align="right">
-                                            <a href="/admin/kelas/nama-kelas/kelola/nilai" title="Upload Tugas" class="btn btn-outline-primary btn-sm">
-                                                <i class="fas fa-upload"></i>
-                                            </a>
-                                            <a href="/admin/kelas/nama-kelas/kelola/nilai" title="Input Nilai" class="btn btn-success btn-sm">
-                                                <i class="fas fa-award"></i>
-                                            </a>
-                                            <a href="" title="Download" class="btn btn-primary btn-sm">
-                                                <i class="fas fa-file-download"></i>
-                                            </a>
-                                            <a href="" title="Hapus Modul/Tugas" class="btn btn-danger btn-sm delete-confirm">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                    @foreach($modul as $m)
+                                        @if($m->id_kelas == $kelas->id)
+                                        <tr>
+                                            <td align="left">
+                                                <a target="_blank" style="text-decoration:none;color:black" href="{{$m->getFile()}}">{{$m->name}}</a> 
+                                                @if($m->jenis == "Materi")
+                                                <small style="background:yellow;padding:3px">
+                                                        {{$m->jenis}}
+                                                </small>    
+                                                @elseif($m->jenis == "Tugas")
+                                                <small style="background:red;padding:3px;color:white">
+                                                        {{$m->jenis}}
+                                                </small>  
+                                                @endif
+                                            </td>
+                                            <td align="left">
+                                                <a target="_blank" class="btn btn-info btn-sm" style="color:white;text-decoration:none;" href="{{$m->getFile()}}">{{$m->file}}</a> 
+                                            </td>
+                                            <td align="right">
+                                                <a href="{{$m->getFile()}}" target="_blank" title="Download" class="btn btn-primary btn-sm">
+                                                    <i class="fas fa-file-download"></i>
+                                                </a>
+                                                @if(Auth::user()->status != 'Siswa')
+                                                <a href="{{$link_menu_3}}/{{$kelas->id}}/{{$kelas->name}}/masuk-kelas/{{$m->id}}/hapus-modul" title="Hapus Modul/Tugas" class="btn btn-danger btn-sm delete-confirm">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        @endif
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -197,43 +195,45 @@ active
                                         <th>Nama Lengkap</th>
                                         <th>Kelas</th>
                                         <th>Status</th>
+                                        @if(Auth::user()->status != 'Siswa')
                                         <th>Opsi</th>
+                                        @endif
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Muhammad Nafi' Maula Hakim</td>
-                                        <td>XI Multimedia</td>
-                                        <td>Siswa</td>
-                                        <td>
-                                            <a href="" title="Hapus Akun Siswa" class="btn btn-danger btn-sm delete-confirm">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Widya Rizka Ulul Fadilah</td>
-                                        <td>XI Multimedia</td>
-                                        <td>Siswa</td>
-                                        <td>
-                                            <a href="" title="Hapus Akun Siswa" class="btn btn-danger btn-sm delete-confirm">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Rizky Arifiyantini</td>
-                                        <td>XI Multimedia</td>
-                                        <td>Siswa</td>
-                                        <td>
-                                            <a href="" title="Hapus Akun Siswa" class="btn btn-danger btn-sm delete-confirm">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                    <?php
+                                        $kontributor = \App\Models\Kontributor_Kelas::all();
+                                        $no = 1;
+                                    ?>
+                                    @foreach($kontributor as $k)
+                                        @if($k->id_kelas == $kelas->id)
+                                        <?php
+                                            $siswa = \App\Models\User::find($k->id_siswa);
+                                            $jurusan = \App\Models\Kategori_Jurusan::all();
+                                            $Kelas_User = \App\Models\Kelas_User::all();
+                                            for ($i=0;$i<count($Kelas_User);$i++){
+                                                if($Kelas_User[$i]->id_siswa == $k->id_siswa){
+                                                    $id_kelas_user = $Kelas_User[$i]->id;
+                                                }
+                                            }
+                                            $Kelas_User = \App\Models\Kelas_User::find($id_kelas_user);
+                                            // dd($Kelas_User);
+                                        ?>
+                                        <tr>
+                                            <td>{{$no++}}</td>
+                                            <td>{{$siswa->name}}</td>
+                                            <td>{{$Kelas_User->kelas}}-{{$Kelas_User->jurusan}}</td>
+                                            <td>{{$siswa->status}}</td>
+                                            @if(Auth::user()->status != 'Siswa')
+                                            <td>
+                                                <a href="/kelas/{{$k->id}}/{{$kelas->name}}/masuk-kelas/hapus-kontributor" title="Hapus Akun Siswa" class="btn btn-danger btn-sm delete-confirm">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            </td>
+                                            @endif
+                                        </tr>
+                                        @endif
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -251,18 +251,27 @@ active
             <!-- Profile Image -->
             <div class="card card-primary card-outline">
             <div class="card-body box-profile">
+                <?php
+                    for ($i=0;$i<count($user);$i++){
+                        if($user[$i]->name == $kelas->pembimbing){
+                            $id_user = $user[$i]->id;
+                        }
+                    }
+                    // dd($id_user);
+                    $pembimbing = \App\Models\User::find($id_user);
+                ?>
                 <div class="text-center">
-                    <a href="{{asset('../../dist/img/user2-160x160.jpg')}}" target="_blank" title="Foto Profil">
+                    <a href="{{$pembimbing->getFoto()}}" target="_blank" title="Foto Profil">
                         <img class="profile-user-img img-fluid img-circle"
-                        src="{{asset('../../dist/img/user2-160x160.jpg')}}" alt="User profile picture">
+                        src="{{$pembimbing->getFoto()}}" alt="User profile picture">
                     </a>
                 </div>
 
-                <h3 class="profile-username text-center">Multimedia</h3>
-                <p class="text-muted text-center"><b>Oleh : </b> Prof. Dr. Muhammad Nafi' Maula Hakim, S.Kom, M.Kom</p>
+                <h3 class="profile-username text-center">{{$kelas->name}}</h3>
+                <p class="text-muted text-center"><b>Oleh : </b> {{$kelas->pembimbing}}</p>
                 <ul class="ml-4 mb-0 fa-ul text-muted">
-                    <li class="small"><span class="fa-li"><i class="fas fa-sm fa-calendar-alt mr-1"></i></span> Hari &nbsp;&nbsp;&nbsp;&nbsp; : Selasa</li>
-                    <li class="small"><span class="fa-li"><i class="fas fa-sm fa-clock mr-1"></i></span> Pukul &nbsp;&nbsp;: 10.00 - 11.00</li>
+                    <li class="small"><span class="fa-li"><i class="fas fa-sm fa-calendar-alt mr-1"></i></span> Hari &nbsp;&nbsp;&nbsp;&nbsp; : {{$kelas->hari}}</li>
+                    <li class="small"><span class="fa-li"><i class="fas fa-sm fa-clock mr-1"></i></span> Pukul &nbsp;&nbsp;: {{$kelas->jam}}</li>
                 </ul>
                 <hr>
                 <small>
@@ -289,25 +298,21 @@ active
                 <h5 class="modal-title" id="staticBackdropLabel">Tambahkan Modul Pembelajaran</h5>
                 <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
             </div>
-            <form role="form">
+            <form class="form" method="POST" action="/kelas/{{$kelas->id}}/{{$kelas->name}}/masuk-kelas/upload-modul" enctype="multipart/form-data"> 
+                @csrf
                 <div class="modal-body">
                     <div class="form-group">
                         <label >Judul Modul/Materi*</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Judul Modul Pembelajaran">
+                        <input type="text" class="form-control" id="exampleInputEmail1" name="name" placeholder="Judul Modul Pembelajaran">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputFile">Upload Materi</label>
-                        <div class="input-group">
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="exampleInputFile">
-                                <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                            </div>
-                        </div>
+                        <label for="exampleInputFile">Upload Materi*</label>
+                        <input class="form-control form-control-sm" value="file" name="file" id="formFileSm" type="file">
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                    <button type="button" class="btn btn-success">Upload</button>
+                    <button type="submit" class="btn btn-success">Upload</button>
                 </div>
             </form>
         </div>
@@ -322,25 +327,52 @@ active
                 <h5 class="modal-title" id="staticBackdropLabel">Tambahkan Tugas</h5>
                 <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
             </div>
-            <form role="form">
+            <form class="form" method="POST" action="/kelas/{{$kelas->id}}/{{$kelas->name}}/masuk-kelas/upload-tugas" enctype="multipart/form-data"> 
+                @csrf
                 <div class="modal-body">
                     <div class="form-group">
                         <label >Judul Tugas*</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Judul Tugas Pembelajaran">
+                        <input type="text" class="form-control" id="exampleInputEmail1" name="name" placeholder="Judul Modul Pembelajaran">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputFile">Upload Tugas</label>
-                        <div class="input-group">
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="exampleInputFile">
-                                <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                            </div>
-                        </div>
+                        <label for="exampleInputFile">Upload Tugas*</label>
+                        <input class="form-control form-control-sm" value="file" name="file" id="formFileSm" type="file">
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                    <button type="button" class="btn btn-success">Upload</button>
+                    <button type="submit" class="btn btn-success">Upload</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="kontributor_add" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form class="form" method="POST" action="/kelas/{{$kelas->id}}/{{$kelas->name}}/masuk-kelas/tambah-kontributor">
+                @csrf
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label >Pilih Siswa*</label>
+                        <!-- <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nama Kelas/Mata Pelajaran"> -->
+                        <select class="form-control" name="id_siswa"  id="inputGroupSelect01">
+                            <option selected>Pilih Siswa</option>
+                            @foreach($user as $s)
+                                @if($s->role != 'admin')
+                                    @if($s->status == 'Siswa')
+                                    <option value="{{$s->id}}">{{$s->name}}</option>
+                                    @endif
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-success">Tambahkan</button>
                 </div>
             </form>
         </div>

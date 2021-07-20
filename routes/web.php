@@ -17,16 +17,36 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/admin/beranda', [App\Http\Controllers\BerandaController::class, 'index']);
-Route::get('/admin/akun-siswa', [App\Http\Controllers\AkunSiswaController::class, 'index']);
-Route::get('/admin/akun-siswa/nama-siswa', [App\Http\Controllers\AkunSiswaController::class, 'read']);
+Auth::routes();
 
-Route::get('/admin/kelas', [App\Http\Controllers\KelasController::class, 'index']);
-Route::get('/admin/kelas/nama-kelas', [App\Http\Controllers\KelasController::class, 'update']);
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/admin/beranda', [App\Http\Controllers\BerandaController::class, 'index']);
+Route::get('/akun-siswa', [App\Http\Controllers\AkunSiswaController::class, 'index']);
+Route::get('/akun-siswa/{id}/destroy', [App\Http\Controllers\AkunSiswaController::class, 'destroy']);
+Route::get('/akun-siswa/{id}', [App\Http\Controllers\AkunSiswaController::class, 'read']);
+Route::post('/akun-siswa/{id}/update', [App\Http\Controllers\AkunSiswaController::class, 'update']);
+Route::post('/akun-siswa/store', [App\Http\Controllers\AkunSiswaController::class, 'store']);
+
+Route::get('/kelas', [App\Http\Controllers\KelasController::class, 'index']);
+Route::post('/kelas/store', [App\Http\Controllers\KelasController::class, 'store']);
+Route::get('/kelas/{id}/destroy', [App\Http\Controllers\KelasController::class, 'destroy']);
+Route::get('/kelas/{id}/{name}', [App\Http\Controllers\KelasController::class, 'edit']);
+Route::get('/kelas/{id}/{name}/masuk-kelas', [App\Http\Controllers\KelasController::class, 'kelolaKelas']);
+Route::post('/kelas/{id}/{name}/masuk-kelas/upload-modul', [App\Http\Controllers\KelasController::class, 'tambah_modul']);
+Route::post('/kelas/{id}/{name}/masuk-kelas/upload-tugas', [App\Http\Controllers\KelasController::class, 'tambah_tugas']);
+Route::get('/kelas/{id}/{name}/masuk-kelas/{id_modul}/hapus-modul', [App\Http\Controllers\KelasController::class, 'destroy_modul']);
+Route::post('/kelas/{id}/{name}/masuk-kelas/tambah-kontributor', [App\Http\Controllers\KelasController::class, 'tambah_kontributor']);
+Route::get('/kelas/{id}/{name}/masuk-kelas/hapus-kontributor', [App\Http\Controllers\KelasController::class, 'hapus_kontributor']);
+Route::post('/kelas/{id}/update', [App\Http\Controllers\KelasController::class, 'update']);
+
 Route::get('/admin/kelas/nama-kelas/kelola', [App\Http\Controllers\KelasController::class, 'kelolaKelas']);
 Route::get('/admin/kelas/nama-kelas/kelola/praktik', [App\Http\Controllers\KelasController::class, 'kelolaPraktik']);
 Route::get('/admin/kelas/nama-kelas/kelola/nilai', [App\Http\Controllers\KelasController::class, 'kelolaNilai']);
 Route::get('/admin/rekab', [App\Http\Controllers\RekabController::class, 'index']);
 Route::get('/admin/nilai', [App\Http\Controllers\NilaiController::class, 'index']);
 Route::get('/admin/nilai/variabel-nilai', [App\Http\Controllers\NilaiController::class, 'variabelNilai']);
-Route::get('/admin/pengaturan', [App\Http\Controllers\PengaturanController::class, 'index']);
+Route::get('/pengaturan', [App\Http\Controllers\PengaturanController::class, 'index']);
+Route::post('/pengaturan/{id}/update', [App\Http\Controllers\PengaturanController::class, 'update']);
+Route::post('/pengaturan/{id}/ganti-password', [App\Http\Controllers\PengaturanController::class, 'ganti_password']);
+Route::get('/pengaturan/{id}/hapus-akun', [App\Http\Controllers\PengaturanController::class, 'hapus_akun']);

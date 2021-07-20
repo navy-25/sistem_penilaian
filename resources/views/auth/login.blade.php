@@ -1,77 +1,91 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Login Admin</title>
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.app')
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- icheck bootstrap -->
-    <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
-    <!-- Google Font: Source Sans Pro -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-</head>
-<body class="hold-transition login-page">
+@section('content')
 <div class="login-box">
     <div class="login-logo">
-        <a href="../../index2.html"><b>Login</b> Admin</a>
+        <p style="color:white;font-family:Montserrat;font-weight: 400;"><b>Login</b></p>
     </div>
-    <!-- /.login-logo -->
-    <div class="card">
-        <div class="card-body login-card-body">
-        <!-- <p class="login-box-msg">Sign in to start your session</p> -->
-
-        <form action="../../index3.html" method="post">
-            <div class="input-group mb-3">
-            <input type="email" class="form-control" placeholder="Email">
-            <div class="input-group-append">
-                <div class="input-group-text">
-                <span class="fas fa-envelope"></span>
+    @guest
+        @if (Route::has('login'))
+            <!-- /.login-logo -->
+            <div class="card" style="background: none;box-shadow: 0 0 0px rgb(0 0 0 / 13%), 0 0px 0px rgb(0 0 0 / 20%);">
+            <div class="card-body login-card-body" style="border-radius: 1rem;background: none;">
+                    @if ($message = Session::get('success'))
+                        <div class="alert alert-success alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h5><i class="icon fas fa-check-circle"></i> Berhasil !</h5>
+                            {{$message}}
+                        </div>
+                    @elseif ($message = Session::get('gagal'))
+                        <div class="alert alert-danger alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h5><i class="icon fas fa-exclamation-triangle"></i> Gagal disimpan !</h5>
+                            {{$message}}
+                        </div>
+                    @endif
+                    <form method="POST" action="{{ route('login') }}">
+                        @csrf
+                        <div class="input-group mb-3">
+                            <input id="email" type="email" placeholder="Email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                            <div class="input-group-append">
+                                <div class="input-group-text" style="background-color: white;">
+                                    <span class="fas fa-envelope"></span>
+                                </div>
+                            </div>
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="input-group mb-3">
+                            <input id="password" type="password" placeholder="Password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                            <div class="input-group-append">
+                                <div class="input-group-text" style="background-color: white;">
+                                    <span class="fas fa-lock"></span>
+                                </div>
+                            </div>
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="row">
+                            <!-- /.col -->
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-info btn-block">
+                                    Masuk
+                                </button>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                    </form>
                 </div>
             </div>
-            </div>
-            <div class="input-group mb-3">
-            <input type="password" class="form-control" placeholder="Password">
-            <div class="input-group-append">
-                <div class="input-group-text">
-                <span class="fas fa-lock"></span>
-                </div>
-            </div>
-            </div>
-            <div class="row">
-            <div class="col-8">
-                <div class="icheck-primary">
-                <input type="checkbox" id="remember">
-                <label for="remember">
-                    Remember Me
-                </label>
-                </div>
-            </div>
-            <!-- /.col -->
-            <div class="col-4">
-                <a href="/admin/beranda" class="btn btn-primary btn-block">Sign In</a>
-            </div>
-            <!-- /.col -->
-            </div>
-        </form>
-
+        @endif
+    @else
+    <div class="row"> 
+        <div class="col-lg-6 col-6"> 
+            <p align="right">
+                <a href="/home" class="btn btn-primary" style="font-size:50px;margin-bottom:10px">
+                    <i class="fas fa-home"></i>
+                </a>
+            </p>
+        </div>
+        <div class="col-lg-6 col-6"> 
+            <a class="btn btn-danger" href="{{ route('logout') }}" style="font-size:50px;"
+                onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+                <i class="fas fa-sign-out-alt"></i>
+            </a>
+    
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
+        </div>
     </div>
+    @endguest
+    <!-- /.login-box -->
 </div>
-<!-- /.login-box -->
-
-<!-- jQuery -->
-<script src="../../plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
-
-</body>
-</html>
+@endsection

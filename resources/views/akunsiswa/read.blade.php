@@ -41,11 +41,27 @@ active
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-12">
-            <div class="alert alert-danger alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                <h5><i class="icon fas fa-exclamation-triangle"></i> Hati - hati !</h5>
-                Akun yang sudah dihapus tidak bisa di onlinekan kembali.
-            </div>
+            @if(Auth::user()->status != 'Siswa')
+                @if ($message = Session::get('success'))
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h5><i class="icon fas fa-check-circle"></i> Berhasil !</h5>
+                    {{$message}}
+                </div>
+                @elseif ($message = Session::get('gagal'))
+                <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h5><i class="icon fas fa-exclamation-triangle"></i> Gagal disimpan !</h5>
+                    {{$message}}
+                </div>
+                @else
+                <div class="alert alert-warning alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h5><i class="icon fas fa-exclamation-triangle"></i> Hati - hati !</h5>
+                    Akun yang sudah dihapus tidak bisa di onlinekan kembali.
+                </div>
+                @endif
+            @endif
         </div>
     </div>
 </div><!-- /.container-fluid -->
@@ -61,17 +77,23 @@ active
         <div class="card card-primary card-outline">
         <div class="card-body box-profile">
             <div class="text-center">
-                <a href="../../dist/img/user2-160x160.jpg" target="_blank" title="Foto Profil">
+                <a href="{{$user->getFoto()}}" target="_blank" title="Foto Profil">
                     <img class="profile-user-img img-fluid img-circle"
-                    src="../../dist/img/user2-160x160.jpg" alt="User profile picture">
+                    src="{{$user->getFoto()}}" alt="User profile picture">
                 </a>
             </div>
 
-            <h3 class="profile-username text-center">Muhammad Nafi' Maula Hakim</h3>
-            <p class="text-muted text-center">XI Multimedia</p>
+            <h3 class="profile-username text-center">{{$user->name}}</h3>
+            <p class="text-muted text-center">
+                <?php
+                    if($user->nis == Null){
+                        $nis = '-';
+                    }else{
+                        $nis = $user->nis;
+                    }
+                ?>
+                {{$nis}} / {{$user->status}}</p>
             <!-- <br> -->
-            <p class="text-muted text-center">"Bio"</p>
-            <a href="#" class="btn btn-primary btn-block"><b>Upload</b></a>
         </div>
         <!-- /.card-body -->
         </div>
@@ -85,28 +107,36 @@ active
         <!-- /.card-header -->
         <div class="card-body">
             <strong><i class="fas fa-map-marker-alt mr-1"></i>Alamat Rumah</strong>
-            <p class="text-muted">Ds. Bandar Kec. Bandar Kedung Mulyo, Kab. Jombang</p>
+            <p class="text-muted">{{$user->alamat}}</p>
 
             <hr>
-
-            <strong><i class="fas fa-pencil-alt mr-1"></i> Hobby</strong>
-            <p class="text-muted">
-                <span class="tag">Bernyanyi, </span>
-                <span class="tag">Game, </span>
-                <span class="tag">Gitar</span>
-            </p>
+            <?php
+                try{
+                    $telp = explode("8",$user->telepon);
+                    if($telp[0] == 0){
+                        $phone_number = "628".$telp[1];
+                    }else{
+                        $phone_number = $user->telepon;
+                    }
+                }catch (Exception $e){
+                    $phone_number = $user->telepon;
+                }
+            ?>
+            <strong><i class="fas fa-phone-volume mr-1"></i>Telepon</strong>
+            <p class="text-muted">Whatsapp &nbsp;: 
+                <a href="https://wa.me/{{$phone_number}}" target="_blank">{{$user->telepon}}</a>
+            <br>
 
             <hr>
-
             <strong><i class="far fa-file-alt mr-1"></i> Social Media</strong>
             <p class="text-muted">Instagram &nbsp;: 
-                <a href="https://www.instagram.com/n_vi25/">@n_vi25</a>
+                <a href="https://www.instagram.com/n_vi25/" target="_blank">{{$user->ig}}</a>
             <br>
             Twitter &nbsp; &nbsp; &nbsp; &nbsp;: 
-                <a href="https://www.twitter.com/n_vi25/">@n_vi25</a>
+                <a href="https://www.twitter.com/n_vi25/" target="_blank">{{$user->tw}}</a>
             <br>
             Facebook &nbsp; : 
-                <a href="https://facebook.com/muhammadnafimaulahakim/">muhammadnafimaulahakim</a>
+                <a href="https://facebook.com/muhammadnafimaulahakim/" target="_blank">{{$user->fb}}</a>
             </p>
         </div>
         <!-- /.card-body -->
@@ -116,26 +146,24 @@ active
     <!-- /.col -->
     <div class="col-md-9">
         <div class="card">
-        <div class="card-header p-2">
-            <ul class="nav nav-pills">
-            <li class="nav-item"><a class="nav-link active" href="#timeline" data-toggle="tab">Aktivitas</a></li>
-            <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Pengaturan</a></li>
+        <!-- <div class="card-header p-2">
+            <ul class="nav nav-pills"> -->
+            <!-- <li class="nav-item"><a class="nav-link active" href="#timeline" data-toggle="tab">Aktivitas</a></li> -->
+            <!-- <li class="nav-item"><a class="nav-link active" href="#settings" data-toggle="tab">Pengaturan</a></li>
             </ul>
-        </div><!-- /.card-header -->
+        </div> -->
+        <!-- /.card-header -->
+        @if(Auth::user()->status != 'Siswa')
         <div class="card-body">
             <div class="tab-content">
                 <!-- /.tab-pane -->
-                <div class="active tab-pane" id="timeline">
-                    <!-- The timeline -->
+                <!-- <div class="active tab-pane" id="timeline">
                     <div class="timeline timeline-inverse">
-                        <!-- timeline time label -->
                         <div class="time-label">
                             <span class="bg-danger">
                             10 Feb. 2014
                             </span>
                         </div>
-                        <!-- /.timeline-label -->
-                        <!-- timeline item -->
                         <div>
                             <i class="fas fa-envelope bg-primary"></i>
 
@@ -156,57 +184,79 @@ active
                                 </div>
                             </div>
                         </div>
-                        <!-- END timeline item -->
                         <div>
                             <i class="far fa-clock bg-gray"></i>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!-- /.tab-pane -->
 
-                <div class="tab-pane" id="settings">
-                    <form class="form-horizontal">
+                <div class="tab-pane active" id="settings">
+                    <form class="form-horizontal" method="POST" action="/akun-siswa/{{$user->id}}/update" enctype="multipart/form-data"> 
+                        @csrf
                         <div class="form-group row">
                             <label for="inputName" class="col-sm-2 col-form-label">Nama*</label>
                             <div class="col-sm-10">
-                                <input type="email" class="form-control" id="inputName" placeholder="Nama Lengkap">
+                                <input type="text" class="form-control" id="inputName" name="name" value="{{$user->name}}" placeholder="Nama Lengkap">
                             </div>
                         </div>
+                        <?php
+                            $jurusan = \App\Models\Kategori_Jurusan::all();
+                            $Kelas_User = \App\Models\Kelas_User::all();
+                            for ($i=0;$i<count($Kelas_User);$i++){
+                                if($Kelas_User[$i]->id_siswa == $user->id){
+                                    $id_kelas_user = $Kelas_User[$i]->id;
+                                }
+                            }
+                            $Kelas_User = \App\Models\Kelas_User::find($id_kelas_user);
+                            // dd($Kelas_User);
+                        ?>
+                        @if($user->status != "Guru")
                         <div class="form-group row">
                             <label for="inputName2" class="col-sm-2 col-form-label">Kelas*</label>
                             <div class="col-sm-10">
-                                <select class="form-control" id="inputGroupSelect01">
-                                    <option selected>Pilih Kelas</option>
-                                    <option value="1">XII</option>
-                                    <option value="2">XI</option>
-                                    <option value="3">X</option>
+                                <select class="form-control" name="kelas" id="inputGroupSelect01">
+                                    <option value="{{$Kelas_User->kelas}}" selected>{{$Kelas_User->kelas}}</option>
+                                    <option value="XII">XII</option>
+                                    <option value="XI">XI</option>
+                                    <option value="X">X</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="inputName2" class="col-sm-2 col-form-label">Jurusan*</label>
                             <div class="col-sm-10">
-                                <select class="form-control" id="inputGroupSelect01">
-                                    <option selected>Pilih Jurusan</option>
-                                    <option value="1">Multimedia</option>
-                                    <option value="2">Teknik Sepeda Motor</option>
-                                    <option value="3">Akuntansi</option>
-                                    <option value="4">Perkantoran</option>
+                                <select class="form-control" name="jurusan" id="inputGroupSelect01">
+                                    <option value="{{$Kelas_User->jurusan}}" selected>{{$Kelas_User->jurusan}}</option>
+                                    @foreach($jurusan as $j)
+                                        <option value="{{$j->nama}}">{{$j->nama}}</option>
+                                    @endforeach
                                 </select>
+                            </div>
+                        </div>
+                        @endif
+                        <div class="form-group row">
+                            @if($user->status == "Guru")
+                                <label for="inputName" class="col-sm-2 col-form-label">NIDN*</label>
+                            @elseif($user->status == "Siswa")
+                                <label for="inputName" class="col-sm-2 col-form-label">NISN*</label>
+                            @endif
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="inputName" name="nis" value="{{$user->nis}}" placeholder="Nomor Induk ..">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputName" class="col-sm-2 col-form-label">Telepon*</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="inputName" name="telepon" value="{{$user->telepon}}" placeholder="Telepon">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="inputEmail" class="col-sm-2 col-form-label">Email*</label>
                             <div class="col-sm-10">
-                                <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                                <input type="email" class="form-control" name="email"   value="{{$user->email}}"  id="inputEmail" placeholder="Email">
                             </div>
-                        </div>                       
-                        <div class="form-group row">
-                            <label for="inputSkills" class="col-sm-2 col-form-label">Hobby</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="inputSkills" placeholder="Hobby">
-                            </div>
-                        </div>
+                        </div>                                           
                         <style>
                             .mb-3, .my-3 {
                                 margin-bottom: 0rem!important;
@@ -217,7 +267,7 @@ active
                             <div class="col-sm-10">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">instagram.com/</span>
-                                    <input type="text" class="form-control" placeholder="username intagram">
+                                    <input type="text" class="form-control"name="ig"   value="{{$user->ig}}"  placeholder="username intagram">
                                 </div>
                             </div>
                         </div>
@@ -226,7 +276,7 @@ active
                             <div class="col-sm-10">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">twitter.com/</span>
-                                    <input type="text" class="form-control" placeholder="username twitter">
+                                    <input type="text" class="form-control" name="tw"  value="{{$user->tw}}"  placeholder="username twitter">
                                 </div>
                             </div>
                         </div>
@@ -235,26 +285,26 @@ active
                             <div class="col-sm-10">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">facebook.com/</span>
-                                    <input type="text" class="form-control" placeholder="username facebook">
+                                    <input type="text" class="form-control" name="fb"  value="{{$user->fb}}"  placeholder="username facebook">
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="inputExperience" class="col-sm-2 col-form-label">Bio</label>
-                            <div class="col-sm-10">
-                                <textarea class="form-control" id="inputExperience" placeholder="Bio"></textarea>
-                            </div>
-                        </div>
+                        </div>                       
                         <div class="form-group row">
                             <label for="inputExperience" class="col-sm-2 col-form-label">Alamat*</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" id="inputExperience" placeholder="Alamat Lengkap Rumah"></textarea>
+                                <textarea class="form-control" id="inputExperience" name="alamat"  placeholder="Alamat Lengkap Rumah">{{$user->alamat}}</textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputExperience" class="col-sm-2 col-form-label">Foto</label>
+                            <div class="col-sm-10">
+                                <input class="form-control form-control-sm" value="foto" name="foto" id="formFileSm" type="file">
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-md-12 col-sm-12">
-                                <button type="submit" class="btn btn-primary update-confirm" style="width:100%;margin-bottom:10px">
-                                    <i class="fas fa-edit mr-1"></i>Update
+                                <button type="submit" class="btn btn-primary" style="width:100%;margin-bottom:10px">
+                                    <i class="fas fa-save mr-1"></i>Simpan
                                 </button>
                             </div>
                         </div>
@@ -283,6 +333,7 @@ active
                 <!-- /.tab-content -->
             </div><!-- /.card-body -->
         </div>
+        @endif
         <!-- /.nav-tabs-custom -->
     </div>
     <!-- /.col -->

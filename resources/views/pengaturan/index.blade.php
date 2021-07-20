@@ -47,16 +47,32 @@ active
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-12">
-            <div class="alert alert-danger alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                <h5><i class="icon fas fa-exclamation-triangle"></i> Hati - hati !</h5>
-                Akun yang sudah dihapus tidak bisa di onlinekan kembali.
-            </div>
+            @if ($message = Session::get('success'))
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h5><i class="icon fas fa-check-circle"></i> Berhasil !</h5>
+                    {{$message}}
+                </div>
+            @elseif ($message = Session::get('gagal'))
+                <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h5><i class="icon fas fa-exclamation-triangle"></i> Gagal disimpan !</h5>
+                    {{$message}}
+                </div>
+            @else
+                <div class="alert alert-warning alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h5><i class="icon fas fa-exclamation-triangle"></i> Hati - hati !</h5>
+                    Akun yang sudah dihapus tidak bisa di onlinekan kembali.
+                </div>
+            @endif
         </div>
     </div>
 </div><!-- /.container-fluid -->
 </section>
-
+<?php
+    $user = \App\Models\User::find(Auth::user()->id);
+?>
 <!-- Main content -->
 <section class="content">
     <div class="container-fluid">
@@ -66,23 +82,30 @@ active
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="tab-pane active" id="settings">
-                            <form class="form-horizontal">
+                            <form class="form-horizontal" method="POST" action="/pengaturan/{{$user->id}}/update">
+                                @csrf
                                 <div class="form-group row">
                                     <label for="inputName" class="col-sm-2 col-form-label">Nama*</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="inputName" placeholder="Nama Lengkap">
+                                        <input type="text" class="form-control" name="name"  value="{{$user->name}}" id="inputName" placeholder="Nama Lengkap">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="inputName" class="col-sm-2 col-form-label">NIDN*</label>
+                                    <label for="inputName" class="col-sm-2 col-form-label">NIDN</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="inputName" placeholder="NIDN">
+                                        <input type="number" class="form-control" name="nis"  value="{{$user->nis}}" id="inputName" placeholder="NIDN">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputName" class="col-sm-2 col-form-label">Telepon</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" class="form-control" name="telepon"  value="{{$user->telepon}}" id="inputName" placeholder="Telepon">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="inputEmail" class="col-sm-2 col-form-label">Email*</label>
                                     <div class="col-sm-10">
-                                        <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                                        <input type="email" class="form-control" id="inputEmail" name="email"  value="{{$user->email}}"  placeholder="Email">
                                     </div>
                                 </div>                       
                                 <style>
@@ -95,7 +118,7 @@ active
                                     <div class="col-sm-10">
                                         <div class="input-group mb-3">
                                             <span class="input-group-text">instagram.com/</span>
-                                            <input type="text" class="form-control" placeholder="username intagram">
+                                            <input type="text" class="form-control" name="ig" value="{{$user->ig}}" placeholder="username intagram">
                                         </div>
                                     </div>
                                 </div>
@@ -104,7 +127,7 @@ active
                                     <div class="col-sm-10">
                                         <div class="input-group mb-3">
                                             <span class="input-group-text">twitter.com/</span>
-                                            <input type="text" class="form-control" placeholder="username twitter">
+                                            <input type="text" class="form-control" name="tw" value="{{$user->tw}}" placeholder="username twitter">
                                         </div>
                                     </div>
                                 </div>
@@ -113,20 +136,20 @@ active
                                     <div class="col-sm-10">
                                         <div class="input-group mb-3">
                                             <span class="input-group-text">facebook.com/</span>
-                                            <input type="text" class="form-control" placeholder="username facebook">
+                                            <input type="text" class="form-control" name="fb" value="{{$user->fb}}" placeholder="username facebook">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="inputExperience" class="col-sm-2 col-form-label">Alamat*</label>
+                                    <label for="inputExperience" class="col-sm-2 col-form-label">Alamat</label>
                                     <div class="col-sm-10">
-                                        <textarea class="form-control" id="inputExperience" placeholder="Alamat Lengkap Rumah"></textarea>
+                                        <textarea class="form-control" name="alamat" id="inputExperience" placeholder="Alamat Lengkap Rumah">{{$user->alamat}}</textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-md-12 col-sm-12">
+                                    <div class="offset-sm-2 col-md-12 col-sm-12">
                                         <button type="submit" class="btn btn-primary update-confirm" style=";margin-bottom:10px">
-                                            <i class="fas fa-edit mr-1"></i>Update
+                                            <i class="fas fa-save mr-1"></i>Simpan
                                         </button>
                                     </div>
                                 </div>
@@ -150,8 +173,8 @@ active
                             </a>
                         </div>
 
-                        <h3 class="profile-username text-center">Admin</h3>
-                        <p class="text-muted text-center">Admin Sistem</p>
+                        <h3 class="profile-username text-center">{{$user->name}}</h3>
+                        <p class="text-muted text-center">{{$user->nis}}</p>
                         <!-- <br> -->
                         <!-- <a href="#" class="btn btn-primary btn-block"><b>Upload</b></a> -->
                     </div>
@@ -159,7 +182,7 @@ active
                 </div>
                 <div class="form-group row">
                     <div class="col-md-12 col-sm-12">
-                        <a href="" class="btn btn-outline-secondary delete-confirm" style="width:100%;margin-bottom:10px">
+                        <a href="/pengaturan/{{Auth::user()->id}}/hapus-akun" class="btn btn-outline-secondary delete-confirm" style="width:100%;margin-bottom:10px">
                             <i class="fas fa-trash mr-1"></i>
                             Hapus Akun
                         </a>
@@ -183,37 +206,41 @@ active
 
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-<div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-    <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Ganti Password</h5>
-    </div>
-    <div class="modal-body">
-        <form class="form-horizontal">
-            <div class="form-group mb-3" >
-                <div class="input-group input-group-merge input-group-alternative">
-                    <input id="password" type="password" placeholder="Password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-                    @error('password')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Ganti Password</h5>
             </div>
-            <br>
-            <div class="form-group mb-3" >
-                <div class="input-group input-group-merge input-group-alternative">
-                    <input id="password-confirm" type="password" placeholder="Password Confirm"  class="form-control" name="password_confirmation" required autocomplete="new-password">
-                </div>
+            <div class="modal-body">
+                <form class="form-horizontal" method="POST" action="/pengaturan/{{$user->id}}/ganti-password">
+                    @csrf
+                    <div class="form-group mb-3" >
+                        <div class="input-group input-group-merge input-group-alternative">
+                            <input id="password" type="password" placeholder="Password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group mb-3" >
+                        <div class="input-group input-group-merge input-group-alternative">
+                            <input id="password-confirm" type="password" placeholder="Password Confirm"  class="form-control" name="password_confirmation" required autocomplete="new-password">
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-group mb-3">
+                        <p align="right">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-danger ubah-password-confirm">Konfirmasi</button>
+                        </p>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
     </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-        <button type="button" class="btn btn-danger ubah-password-confirm">Konfirmasi</button>
-    </div>
-    </div>
-</div>
 </div>
 @endsection
 

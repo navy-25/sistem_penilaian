@@ -18,9 +18,26 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'foto',
         'email',
+        'role',
+        'status',
+        'nis',
+        'ig',
+        'tw',
+        'telepon',
+        'fb',
+        'alamat',
         'password',
     ];
+
+    public function getFoto(){
+        if($this->foto != null){
+            return asset('image/'.$this->foto);
+        }else{
+            return asset('image/no-image.png'.$this->foto);
+        }
+    }
 
     /**
      * The attributes that should be hidden for arrays.
