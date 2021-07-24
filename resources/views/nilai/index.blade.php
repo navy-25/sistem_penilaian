@@ -58,6 +58,7 @@ active
                             <th style="width:10px">ID</th>
                             <th>Modul Praktik</th>
                             <th>Praktik</th>
+                            <th>KKM</th>
                             <th style="width:10px">Opsi</th>
                         </tr>
                     </thead>
@@ -78,11 +79,12 @@ active
                                 </a>
                             </td>
                             <td>{{$v->name}}</td>
+                            <td>{{$v->kkm}}</td>
                             <td style="width:10px">
                                 <a href="/nilai/{{$v->id}}/{{$v->name}}" title="Variabel Penilaian" class="btn btn-success btn-sm">
                                     <i class="fas fa-th-list"></i>
                                 </a>
-                                <a href="" title="Hapus Akun Siswa" class="btn btn-danger btn-sm delete-confirm">
+                                <a href="/nilai/{{$v->id}}/destroy" title="Hapus Akun Siswa" class="btn btn-danger btn-sm delete-confirm">
                                     <i class="fas fa-trash"></i>
                                 </a>
                             </td>
@@ -91,7 +93,7 @@ active
                     </tbody>
                 </table>
             </div>
-            <div class="card-footer clearfix">
+            <!-- <div class="card-footer clearfix">
                 <ul class="pagination pagination-sm m-0 float-left">
                 <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">«</a></li>
                 <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">1</a></li>
@@ -99,7 +101,7 @@ active
                 <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">3</a></li>
                 <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">»</a></li>
                 </ul>
-            </div>
+            </div> -->
             <!-- /.card-footer-->
         </div>
         <!-- /.card -->
@@ -130,6 +132,12 @@ active
                             <div class="form-group">
                                 <label >Modul Praktik*</label>
                                 <input type="text" class="form-control" name="name" id="exampleInputEmail1" placeholder="Kategori praktik">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label >KKM*</label>
+                                <input type="number" class="form-control" name="kkm" id="exampleInputEmail1" placeholder="Nilai minimal lulus">
                             </div>
                         </div>
                     </div>                   

@@ -90,14 +90,31 @@ class KelasController extends Controller
     {
         return view('kelas.kelolaNilai');
     }
-    public function kelolaPraktik()
+    public function store_nilai_praktik(Request $request,$id_user,$id,$nama,$id_praktik,$nama_praktik)
     {
-        return view('kelas.kelolaPraktik');
+        dd($request->nilai);
+        try{
+            // $kelas = \App\Models\Kelas::create([        
+            //     'name' => $request->name,
+            //     'pembimbing' => $request->pembimbing,
+            //     'hari' => $request->hari,
+            //     'status' => $request->status,
+            //     'jam' =>  $jam,
+            // ]);
+            return redirect('/kelas/');
+        }catch (Exception $e){
+            return redirect('/kelas/');
+        }
+    }
+    public function kelolaPraktik($id,$nama,$id_praktik,$nama_praktik)
+    {
+        $sub_variabel_praktik =  \App\Models\Sub_Variabel_Praktik::all(); 
+        $kelas = \App\Models\Kelas::find($id);  
+        return view('kelas.kelolaPraktik',compact('kelas','sub_variabel_praktik','id_praktik'));
     }
     // ========================================================
     public function tambah_kontributor(Request $request,$id,$nama)
     {
-
         try{
             $KontributorKelas = \App\Models\Kontributor_Kelas::create([        
                 'id_kelas' => $id,

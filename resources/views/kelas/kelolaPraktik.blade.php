@@ -84,61 +84,44 @@ active
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td data-bs-toggle="modal" data-bs-target="#soal_add">M. Nafi' Maula Hakim</td>
-                                    <td>
-                                        <center>
-                                            <i class="fas fa-check"></i>
-                                        </center>    
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#play_praktik">
-                                            <i class="fas fa-play"></i>
-                                        </button>
-                                        <button class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#feedback_praktik">
-                                            <i class="fas fa-comments"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td data-bs-toggle="modal" data-bs-target="#soal_add">Widya Rizka Ulul Fadilah</td>
-                                    <td>
-                                        <center>
-                                            <i class="fas fa-check"></i>
-                                        </center>    
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#play_praktik">
-                                            <i class="fas fa-play"></i>
-                                        </button>
-                                        <button class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#feedback_praktik">
-                                            <i class="fas fa-comments"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td data-bs-toggle="modal" data-bs-target="#soal_add">Rizky Arifiyantini</td>
-                                    <td>
-                                        <center>
-                                            <i class="fas fa-times"></i>
-                                        </center>    
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#play_praktik">
-                                            <i class="fas fa-play"></i>
-                                        </button>
-                                        <button class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#feedback_praktik">
-                                            <i class="fas fa-comments"></i>
-                                        </button>
-                                    </td>
-                                </tr>
+                                <?php
+                                    $kontributor = \App\Models\Kontributor_Kelas::all();
+                                    $no = 1;
+                                ?>
+                                @foreach($kontributor as $k)
+                                    @if($k->id_kelas == $kelas->id)
+                                    <?php
+                                        $siswa = \App\Models\User::find($k->id_siswa);
+                                        $jurusan = \App\Models\Kategori_Jurusan::all();
+                                        $Kelas_User = \App\Models\Kelas_User::all();
+                                        for ($i=0;$i<count($Kelas_User);$i++){
+                                            if($Kelas_User[$i]->id_siswa == $k->id_siswa){
+                                                $id_kelas_user = $Kelas_User[$i]->id;
+                                            }
+                                        }
+                                        $Kelas_User = \App\Models\Kelas_User::find($id_kelas_user);
+                                    ?>
+                                    <tr>
+                                        <td>{{$no++}}</td>
+                                        <td>{{$siswa->name}}</td>
+                                        <td><i class="fas fa-check"></i><i class="fas fa-times"></i></td>
+                                        @if(Auth::user()->status != 'Siswa')
+                                        <td>
+                                            <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#play_praktik">
+                                                <i class="fas fa-play"></i>
+                                            </button>
+                                            <button class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#feedback_praktik">
+                                                <i class="fas fa-comments"></i>
+                                            </button>
+                                        </td>
+                                        @endif
+                                    </tr>
+                                    @endif
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
-                    <div class="card-footer clearfix">
+                    <!-- <div class="card-footer clearfix">
                         <ul class="pagination pagination-sm m-0 float-left">
                         <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">«</a></li>
                         <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">1</a></li>
@@ -146,7 +129,7 @@ active
                         <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">3</a></li>
                         <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">»</a></li>
                         </ul>
-                    </div>
+                    </div> -->
                     <!-- /.card-footer-->
                 </div>
             </div>
@@ -197,116 +180,58 @@ active
             <!-- <div class="modal-header">
                 <h5 class="modal-title" id="staticBackdropLabel">Variabel Praktik</h5>
             </div> -->
-            <form role="form">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label >1. Cara pengambilan gambar*</label>
-                        <input type="range" min="1" max="5" step="1" class="form-control">
-                        <div class="row">
-                            <div class="col-2">
-                                <p align="left" style="padding-left:15px">
-                                    E   
-                                </p>
+            <?php
+                $praktik = \App\Models\Variabel_Praktik::find($id_praktik);
+            ?>
+            @foreach($sub_variabel_praktik as $s)
+                @if($s->id_variabel_praktik == $id_praktik)
+                <form class="form" method="POST" action=""> 
+                    @csrf
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label >{{$s->name}}*</label>
+                            <input type="range" min="1" value="nilai" max="5" step="0.5" class="form-control">
+                            <div class="row">
+                                <div class="col-2">
+                                    <p align="left" style="padding-left:15px">
+                                        E   
+                                    </p>
+                                </div>
+                                <div class="col-2" >
+                                    <p align="right" style="padding-right:15px">
+                                        D   
+                                    </p>     
+                                </div>
+                                <div class="col-4">
+                                    <center>
+                                        C
+                                    </center>    
+                                </div>
+                                <div class="col-2">
+                                    <p align="left" style="padding-left:15px">
+                                        B   
+                                    </p>
+                                </div>
+                                <div class="col-2">
+                                    <p align="right" style="padding-right:15px">
+                                        A
+                                    </p>
+                                </div>
+                                <!-- <textarea class="form-control" rows="2" placeholder="Catatan untuk siswa"></textarea> -->
                             </div>
-                            <div class="col-2" >
-                                <p align="right" style="padding-right:15px">
-                                    D   
-                                </p>     
-                            </div>
-                            <div class="col-4">
-                                <center>
-                                    C
-                                </center>    
-                            </div>
-                            <div class="col-2">
-                                <p align="left" style="padding-left:15px">
-                                    B   
-                                </p>
-                            </div>
-                            <div class="col-2">
-                                <p align="right" style="padding-right:15px">
-                                    A
-                                </p>
-                            </div>
-                            <!-- <textarea class="form-control" rows="2" placeholder="Catatan untuk siswa"></textarea> -->
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <textarea class="form-control" rows="2" placeholder="Catatan untuk siswa"></textarea>
                         </div>
                     </div>
-                    <hr>
-                    <div class="form-group">
-                        <label >2. Penguasaan kamera*</label>
-                        <input type="range" min="1" max="5" step="1" class="form-control">
-                        <div class="row">
-                            <div class="col-2">
-                                <p align="left" style="padding-left:15px">
-                                    E   
-                                </p>
-                            </div>
-                            <div class="col-2" >
-                                <p align="right" style="padding-right:15px">
-                                    D   
-                                </p>     
-                            </div>
-                            <div class="col-4">
-                                <center>
-                                    C
-                                </center>    
-                            </div>
-                            <div class="col-2">
-                                <p align="left" style="padding-left:15px">
-                                    B   
-                                </p>
-                            </div>
-                            <div class="col-2">
-                                <p align="right" style="padding-right:15px">
-                                    A
-                                </p>
-                            </div>
-                            <!-- <textarea class="form-control" rows="2" placeholder="Catatan untuk siswa"></textarea> -->
-                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-success confirm">Finish</button>
                     </div>
-                    <hr>
-                    <div class="form-group">
-                        <label >3. Penguasaan Lokasi*</label>
-                        <input type="range" min="1" max="5" step="1" class="form-control">
-                        <div class="row">
-                            <div class="col-2">
-                                <p align="left" style="padding-left:15px">
-                                    E   
-                                </p>
-                            </div>
-                            <div class="col-2" >
-                                <p align="right" style="padding-right:15px">
-                                    D   
-                                </p>     
-                            </div>
-                            <div class="col-4">
-                                <center>
-                                    C
-                                </center>    
-                            </div>
-                            <div class="col-2">
-                                <p align="left" style="padding-left:15px">
-                                    B   
-                                </p>
-                            </div>
-                            <div class="col-2">
-                                <p align="right" style="padding-right:15px">
-                                    A
-                                </p>
-                            </div>
-                            <!-- <textarea class="form-control" rows="2" placeholder="Catatan untuk siswa"></textarea> -->
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="form-group">
-                        <textarea class="form-control" rows="2" placeholder="Catatan untuk siswa"></textarea>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-success confirm">Finish</button>
-                </div>
-            </form>
+                </form>
+                @endif
+            @endforeach
         </div>
     </div>
 </div>

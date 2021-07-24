@@ -82,15 +82,16 @@ active
                             <tbody>
                                 <?php
                                     // dd($sub_variabel_praktik);
+                                    $no = 1; 
                                 ?>
                                 @foreach($sub_variabel_praktik as $s)
                                     @if($s->id_variabel_praktik == $variabel_praktik->id)
                                     <tr>
-                                        <td>1</td>
+                                        <td>{{$no++}}</td>
                                         <td>{{$s->name}}</td>
-                                        <!-- <td>Koqnitif</td> -->
                                         <td>
-                                            <a href="" title="Hapus Akun Siswa" class="btn btn-danger btn-sm delete-confirm">
+                                            <!-- /nilai/{{$s->id_variabel_praktik}}/{{$variabel_praktik->name}}/{{$s->id}}/destroy -->
+                                            <a href="/nilai/{{$s->id_variabel_praktik}}/{{$variabel_praktik->name}}/{{$s->id}}/destroy" title="Hapus Akun Siswa" class="btn btn-danger btn-sm delete-confirm">
                                                 <i class="fas fa-trash"></i>
                                             </a>
                                         </td>
@@ -100,7 +101,7 @@ active
                             </tbody>
                         </table>
                     </div>
-                    <div class="card-footer clearfix">
+                    <!-- <div class="card-footer clearfix">
                         <ul class="pagination pagination-sm m-0 float-left">
                         <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">«</a></li>
                         <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">1</a></li>
@@ -108,7 +109,7 @@ active
                         <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">3</a></li>
                         <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">»</a></li>
                         </ul>
-                    </div>
+                    </div> -->
                     <!-- /.card-footer-->
                 </div>
             </div>
@@ -133,26 +134,27 @@ active
                     <div class="card-body pt-0">
                         <div class="row">
                             <div class="col-7">
-                                <h2 class="lead"><b>PHP Programming</b></h2>
-                                <p class="text-muted text-sm">Prof. Dr. Muhammad Nafi' Maula Hakim, S.Kom, M.Kom</p>
+                                <?php
+                                    $kelas = \App\Models\Kelas::find($variabel_praktik->id_kelas);
+                                    $pembimbing = \App\Models\User::find($kelas->pembimbing);
+                                ?>
+                                <h2 class="lead"><b>{{$kelas->name}}</b></h2>
+                                <p class="text-muted text-sm">{{$pembimbing->name}}</p>
                                 <ul class="ml-4 mb-0 fa-ul text-muted">
-                                    <li class="small"><span class="fa-li"><i class="fas fa-sm fa-book mr-1"></i></span> 
-                                        Modul &nbsp;&nbsp;&nbsp; : Foto & Sinematografi
-                                    </li>
                                     <li class="small"><span class="fa-li"><i class="fas fa-sm fa-person-booth mr-1"></i></span> 
-                                        Praktik &nbsp;&nbsp;: Praktik Angle Foto
+                                        Praktik &nbsp;&nbsp;: {{$variabel_praktik->name}}
                                     </li>
                                 </ul>
                             </div>
                             <div class="col-5 text-center">
-                                <img src="../../dist/img/user1-128x128.jpg" alt="" class="img-circle img-fluid">
+                                <img src="{{$pembimbing->getFoto()}}" alt="" class="img-circle img-fluid">
                             </div>
                         </div>
                     </div>
                     <div class="card-footer">
                         <div class="row">                            
                             <div class="col-4" style="padding:2px">
-                                <a href="/admin/kelas/nama-kelas/kelola" class="btn btn-sm btn-success" style="width:100%">
+                                <a href="/kelas/{{$kelas->id}}/{{$kelas->name}}/masuk-kelas" class="btn btn-sm btn-success" style="width:100%">
                                     <i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp; Lihat Kelas
                                 </a>
                             </div>
@@ -197,7 +199,7 @@ active
                     </div>
                     <div class="form-group">
                         <label >Deskripsi praktik</label>
-                        <textarea class="form-control" rows="3" placeholder="Jelaskan & deskripsikan praktik ..."></textarea>
+                        <textarea class="form-control" rows="3" name="deskripsi" placeholder="Jelaskan & deskripsikan praktik ..."></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">

@@ -170,7 +170,8 @@ active
                                                 <!-- <a href="" title="Hapus Akun Siswa" class="btn btn-secondary btn-sm stop-confirm">
                                                     <i class="fas fa-stop mr-1"></i>Stop
                                                 </a> -->
-                                                <a href="/admin/kelas/nama-kelas/kelola/praktik" title="Hapus Akun Siswa" class="btn btn-success btn-sm">
+                                                <!-- /kelas/{{$kelas->id}}/{{$kelas->name}}/masuk-kelas/{{$v->id}}/{{$v->name}} -->
+                                                <a href="/kelas/{{$kelas->id}}/{{$kelas->name}}/masuk-kelas/{{$v->id}}/{{$v->name}}" title="Lakukan Penilaian" class="btn btn-success btn-sm">
                                                     <i class="fas fa-play mr-1"></i>Mulai penilaian
                                                 </a>
                                             </td>
@@ -181,13 +182,13 @@ active
                             </table>
                         </div>
                         <hr>
-                        <ul class="pagination pagination-sm m-0 float-left">
+                        <!-- <ul class="pagination pagination-sm m-0 float-left">
                             <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">«</a></li>
                             <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">1</a></li>
                             <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">2</a></li>
                             <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">3</a></li>
                             <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">»</a></li>
-                        </ul>
+                        </ul> -->
                     </div>
                     <!-- /.tab-pane -->
                     <div class="tab-pane" id="kontributor">

@@ -162,7 +162,7 @@ active
                     </tbody>
                 </table>
             </div>
-            <div class="card-footer clearfix">
+            <!-- <div class="card-footer clearfix">
                 <ul class="pagination pagination-sm m-0 float-left">
                 <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">«</a></li>
                 <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">1</a></li>
@@ -170,7 +170,7 @@ active
                 <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">3</a></li>
                 <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">»</a></li>
                 </ul>
-            </div>
+            </div> -->
             <!-- /.card-footer-->
         </div>
         <!-- /.card -->

@@ -13,5 +13,6 @@ class Variabel_Praktik extends Model
     protected $fillable = [
         'name',
         'id_kelas',
+        'kkm',
     ];
 }

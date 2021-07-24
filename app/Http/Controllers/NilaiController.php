@@ -21,11 +21,28 @@ class NilaiController extends Controller
     public function destroy(Request $request, $id)
     {
         try{
+            $sub_variabel_praktik = \App\Models\Sub_Variabel_Praktik::all();
+            for ($i=0;$i < count($sub_variabel_praktik); $i++){
+                if ($sub_variabel_praktik[$i]->id_variabel_praktik == $id){
+                    $sub_variabel_praktik_delete = \App\Models\Sub_Variabel_Praktik::find($sub_variabel_praktik[$i]->id);
+                    $sub_variabel_praktik_delete->delete($sub_variabel_praktik_delete);
+                }
+            }
             $variabel_praktik = \App\Models\Variabel_Praktik::find($id);     
             $variabel_praktik->delete($variabel_praktik);
             return redirect('/nilai/')->with(['success' => 'Akun berhasil di hapus selamanya !']);
         }catch (Exception $e){
             return redirect('/nilai/')->with(['gagal' => 'Gagal dihapus']);
+        }
+    }
+    public function destroy_sub_variabel(Request $request, $id,$name,$id_sub_var)
+    {
+        try{
+            $sub_variabel_praktik = \App\Models\Sub_Variabel_Praktik::find($id_sub_var);       
+            $sub_variabel_praktik->delete($sub_variabel_praktik);
+            return redirect('/nilai/'.$id.'/'.$name)->with(['success' => 'Variabel berhasil di hapus']);
+        }catch (Exception $e){
+            return redirect('/nilai/'.$id.'/'.$name)->with(['gagal' => 'Gagal dihapus']);
         }
     }
     public function store(Request $request)
@@ -34,6 +51,7 @@ class NilaiController extends Controller
             $variabel_praktik = \App\Models\Variabel_Praktik::create([        
                 'name' => $request->name,
                 'id_kelas' => $request->id_kelas,
+                'kkm' => $request->kkm,
             ]);
             return redirect('/nilai/')->with(['success' => 'Variabel Praktik '.$request->name.' berhasil dibuat']);
         }catch (Exception $e){

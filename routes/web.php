@@ -39,15 +39,18 @@ Route::get('/kelas/{id}/{name}/masuk-kelas/{id_modul}/hapus-modul', [App\Http\Co
 Route::post('/kelas/{id}/{name}/masuk-kelas/tambah-kontributor', [App\Http\Controllers\KelasController::class, 'tambah_kontributor']);
 Route::get('/kelas/{id}/{name}/masuk-kelas/hapus-kontributor', [App\Http\Controllers\KelasController::class, 'hapus_kontributor']);
 Route::post('/kelas/{id}/update', [App\Http\Controllers\KelasController::class, 'update']);
+Route::get('/kelas/{id}/{name}/masuk-kelas/{id_praktik}/{nama_praktik}', [App\Http\Controllers\KelasController::class, 'kelolaPraktik']);
+Route::post('/kelas/{id}/{name}/masuk-kelas/{id_praktik}/{nama_praktik}/{id_user}/store', [App\Http\Controllers\KelasController::class, 'store_nilai_praktik']);
 
 Route::get('/admin/kelas/nama-kelas/kelola', [App\Http\Controllers\KelasController::class, 'kelolaKelas']);
-Route::get('/admin/kelas/nama-kelas/kelola/praktik', [App\Http\Controllers\KelasController::class, 'kelolaPraktik']);
 Route::get('/admin/kelas/nama-kelas/kelola/nilai', [App\Http\Controllers\KelasController::class, 'kelolaNilai']);
 Route::get('/admin/rekab', [App\Http\Controllers\RekabController::class, 'index']);
 
 Route::get('/nilai', [App\Http\Controllers\NilaiController::class, 'index']);
 Route::post('/nilai/store', [App\Http\Controllers\NilaiController::class, 'store']);
+Route::get('/nilai/{id}/destroy', [App\Http\Controllers\NilaiController::class, 'destroy']);
 Route::get('/nilai/{id}/{name}', [App\Http\Controllers\NilaiController::class, 'variabelNilai']);
+Route::get('/nilai/{id}/{name}/{id_sub_var}/destroy', [App\Http\Controllers\NilaiController::class, 'destroy_sub_variabel']);
 Route::post('/nilai/{id}/{name}/store', [App\Http\Controllers\NilaiController::class, 'store_sub_variabel']);
 Route::get('/pengaturan', [App\Http\Controllers\PengaturanController::class, 'index']);
 Route::post('/pengaturan/{id}/update', [App\Http\Controllers\PengaturanController::class, 'update']);
