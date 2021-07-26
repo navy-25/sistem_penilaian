@@ -9,7 +9,7 @@
     $nama_menu_3 = "Kelas";
     $nama_menu_4 = "Input Nilai";
     $nama_menu_5 = "Variabel Praktik";
-    $nama_menu_6 = "Rekab Nilai";
+    $nama_menu_6 = "Rekap Nilai";
     $nama_menu_7 = "Pengaturan";
 
     // icon menu
@@ -22,12 +22,12 @@
     $icon_menu_7 = "sliders-h";
 
     //link routes
-    $link_menu_1 = "/admin/beranda";
+    $link_menu_1 = "/beranda";
     $link_menu_2 = "/akun-siswa";
     $link_menu_3 = "/kelas";
     $link_menu_4 = "/admin/soal";
     $link_menu_5 = "/nilai";
-    $link_menu_6 = "/admin/rekab";
+    $link_menu_6 = "/history-nilai";
     $link_menu_7 = "/pengaturan";
 ?>
 

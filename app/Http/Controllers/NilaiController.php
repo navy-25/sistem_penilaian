@@ -12,7 +12,7 @@ class NilaiController extends Controller
         $kelas = \App\Models\Kelas::all();
         return view('nilai.index',compact('kelas','variabel_praktik'));
     }
-    public function variabelNilai($id)
+    public function variabelNilai($id,$name)
     {
         $variabel_praktik = \App\Models\Variabel_Praktik::find($id);
         $sub_variabel_praktik = \App\Models\Sub_Variabel_Praktik::all();
@@ -56,19 +56,6 @@ class NilaiController extends Controller
             return redirect('/nilai/')->with(['success' => 'Variabel Praktik '.$request->name.' berhasil dibuat']);
         }catch (Exception $e){
             return redirect('/nilai/')->with(['gagal' => 'Variabel Praktik  '.$request->name.' gagal dibuat']);
-        }
-    }
-    public function store_sub_variabel(Request $request,$id,$name)
-    {
-        try{
-            $sub_variabel_praktik = \App\Models\Sub_Variabel_Praktik::create([        
-                'name' => $request->name,
-                'deskripsi' => $request->deskripsi,
-                'id_variabel_praktik' => $id,
-            ]);
-            return redirect('/nilai/'.$id.'/'.$name)->with(['success' => 'Variabel Praktik '.$request->name.' berhasil dibuat']);
-        }catch (Exception $e){
-            return redirect('/nilai/'.$id.'/'.$name)->with(['gagal' => 'Variabel Praktik  '.$request->name.' gagal dibuat']);
         }
     }
 }

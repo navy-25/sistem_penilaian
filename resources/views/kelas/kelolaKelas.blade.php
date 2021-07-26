@@ -88,7 +88,7 @@ active
 <div class="container-fluid">
     <div class="row">
         <!-- /.col -->
-        <div class="col-md-9">
+        <div class="col-md-8">
             <div class="card card-primary card-outline">
             <div class="card-header p-2">
                 <ul class="nav nav-pills">
@@ -111,24 +111,24 @@ active
                                         @if($m->id_kelas == $kelas->id)
                                         <tr>
                                             <td align="left">
-                                                <a target="_blank" style="text-decoration:none;color:black" href="{{$m->getFile()}}">{{$no++}}. {{$m->name}}</a> 
                                                 @if($m->jenis == "Materi")
+                                                <a target="_blank" style="text-decoration:none;color:black" href="{{$m->getFile()}}">{{$no++}}. {{$m->name}}</a> 
                                                 <small style="background:yellow;padding:3px">
                                                         {{$m->jenis}}
                                                 </small>    
                                                 @elseif($m->jenis == "Tugas")
+                                                <a style="text-decoration:none;color:black" href="/kelas/{{$kelas->id}}/{{$kelas->name}}/{{$m->id}}/tugas">{{$no++}}. {{$m->name}}</a> 
                                                 <small style="background:red;padding:3px;color:white">
                                                         {{$m->jenis}}
                                                 </small>  
                                                 @endif
                                             </td>
                                             <td align="left">
-                                                <a target="_blank" class="btn btn-info btn-sm" style="color:white;text-decoration:none;" href="{{$m->getFile()}}">{{$m->file}}</a> 
+                                                @if($m->file != null)
+                                                <a target="_blank" class="btn btn-info btn-sm" style="color:white;text-decoration:none;" href="{{$m->getFile()}}"><i class="fas fa-file-download mr-1"></i> {{$m->file}}</a> 
+                                                @endif
                                             </td>
                                             <td align="right">
-                                                <a href="{{$m->getFile()}}" target="_blank" title="Download" class="btn btn-primary btn-sm">
-                                                    <i class="fas fa-file-download"></i>
-                                                </a>
                                                 @if(Auth::user()->status != 'Siswa')
                                                 <a href="{{$link_menu_3}}/{{$kelas->id}}/{{$kelas->name}}/masuk-kelas/{{$m->id}}/hapus-modul" title="Hapus Modul/Tugas" class="btn btn-danger btn-sm delete-confirm">
                                                     <i class="fas fa-trash"></i>
@@ -141,14 +141,6 @@ active
                                 </tbody>
                             </table>
                         </div>
-                        <hr>
-                        <ul class="pagination pagination-sm m-0 float-left">
-                            <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">«</a></li>
-                            <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">»</a></li>
-                        </ul>
                     </div>
                     <!-- /.tab-pane -->
                     <div class="tab-pane" id="praktik">
@@ -167,11 +159,7 @@ active
                                                 </a>
                                             </td>
                                             <td align="right">
-                                                <!-- <a href="" title="Hapus Akun Siswa" class="btn btn-secondary btn-sm stop-confirm">
-                                                    <i class="fas fa-stop mr-1"></i>Stop
-                                                </a> -->
-                                                <!-- /kelas/{{$kelas->id}}/{{$kelas->name}}/masuk-kelas/{{$v->id}}/{{$v->name}} -->
-                                                <a href="/kelas/{{$kelas->id}}/{{$kelas->name}}/masuk-kelas/{{$v->id}}/{{$v->name}}" title="Lakukan Penilaian" class="btn btn-success btn-sm">
+                                                <a href="/{{$v->id}}/{{$v->name}}" title="Lakukan Penilaian" class="btn btn-success btn-sm">
                                                     <i class="fas fa-play mr-1"></i>Mulai penilaian
                                                 </a>
                                             </td>
@@ -181,14 +169,6 @@ active
                                 </tbody>
                             </table>
                         </div>
-                        <hr>
-                        <!-- <ul class="pagination pagination-sm m-0 float-left">
-                            <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">«</a></li>
-                            <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">»</a></li>
-                        </ul> -->
                     </div>
                     <!-- /.tab-pane -->
                     <div class="tab-pane" id="kontributor">
@@ -222,7 +202,6 @@ active
                                                 }
                                             }
                                             $Kelas_User = \App\Models\Kelas_User::find($id_kelas_user);
-                                            // dd($Kelas_User);
                                         ?>
                                         <tr>
                                             <td>{{$no++}}</td>
@@ -243,49 +222,53 @@ active
                             </table>
                         </div>
                     </div>
-                    <!-- /.tab-pane -->
                     </div>
-                    <!-- /.tab-content -->
-                </div><!-- /.card-body -->
-            </div>
-            <!-- /.nav-tabs-custom -->
-        </div>
-        <!-- /.col -->
-        <div class="col-md-3">
-
-            <!-- Profile Image -->
-            <div class="card card-primary card-outline">
-            <div class="card-body box-profile">
-                <?php
-                    $pembimbing = \App\Models\User::find($kelas->pembimbing);
-                ?>
-                <div class="text-center">
-                    <a href="{{$pembimbing->getFoto()}}" target="_blank" title="Foto Profil">
-                        <img class="profile-user-img img-fluid img-circle"
-                        src="{{$pembimbing->getFoto()}}" alt="User profile picture">
-                    </a>
                 </div>
-
-                <h3 class="profile-username text-center">{{$kelas->name}}</h3>
-                <p class="text-muted text-center"><b>Oleh : </b> {{$pembimbing->name}}</p>
-                <ul class="ml-4 mb-0 fa-ul text-muted">
-                    <li class="small"><span class="fa-li"><i class="fas fa-sm fa-calendar-alt mr-1"></i></span> Hari &nbsp;&nbsp;&nbsp;&nbsp; : {{$kelas->hari}}</li>
-                    <li class="small"><span class="fa-li"><i class="fas fa-sm fa-clock mr-1"></i></span> Pukul &nbsp;&nbsp;: {{$kelas->jam}}</li>
-                </ul>
-                <hr>
-                <small>
-                    <a href="" class="btn btn-success btn-sm" style="width:100%;margin-bottom:10px"> <i class="fas fa-video mr-2"></i>Join Meet</a>
-                    <a href="" class="btn btn-outline-success btn-sm" style="width:100%"> <i class="fas fa-sms mr-2"></i>Join Grup Whatsapp</a>
-                </small>
             </div>
-            <!-- /.card-body -->
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-light card-primary card-outline">   
+                <div class="card-header text-muted border-bottom-0">
+                    <!-- 2 Hari lagi -->
+                </div>
+                <div class="card-body pt-0">
+                    <div class="row">
+                        <div class="col-7">
+                            <h2 class="lead"><b>{{$kelas->name}}</b></h2>
+                            <?php
+                                $pembimbing = \App\Models\User::find($kelas->pembimbing);
+                                $variabel_praktik = \App\Models\Variabel_Praktik::all();
+                                $praktik = "Unknown";
+                                for($i = 0 ; $i < count($variabel_praktik) ; $i++){
+                                    if($variabel_praktik[$i]->id_kelas == $kelas->id){
+                                        $vp = \App\Models\Variabel_Praktik::find($variabel_praktik[$i]->id);
+                                        $praktik = $vp->name;
+                                    }
+                                }
+                            ?>
+                            <p class="text-muted text-sm">{{$pembimbing->name}}</p>
+                            <ul class="ml-4 mb-0 fa-ul text-muted">
+                                <li class="small"><span class="fa-li"><i class="fas fa-sm fa-calendar-alt mr-1"></i></span> Hari &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : {{$kelas->hari}}</li>
+                                <li class="small"><span class="fa-li"><i class="fas fa-sm fa-clock mr-1"></i></span> Pukul &nbsp;&nbsp;&nbsp;&nbsp;: {{$kelas->jam}}</li>
+                                <li class="small"><span class="fa-li"><i class="fas fa-sm fa-person-booth mr-1"></i></span> 
+                                    Praktik &nbsp;: <br> {{$praktik}}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-5 text-center">
+                            <img src="{{$pembimbing->getFoto()}}" alt="" class="img-circle img-fluid">
+                        </div>
+                    </div>
+                    <hr>
+                    <small>
+                        <a href="" class="btn btn-success btn-sm" style="width:100%;margin-bottom:10px"> <i class="fas fa-video mr-2"></i>Join Meet</a>
+                        <a href="" class="btn btn-outline-success btn-sm" style="width:100%"> <i class="fas fa-sms mr-2"></i>Join Grup Whatsapp</a>
+                    </small>
+                </div>
             </div>
-            <!-- /.card -->
-
         </div>
     </div>
-    <!-- /.row -->
-</div><!-- /.container-fluid -->
+</div>
 </section>
 <!-- /.content -->
 
@@ -295,7 +278,6 @@ active
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="staticBackdropLabel">Tambahkan Modul Pembelajaran</h5>
-                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
             </div>
             <form class="form" method="POST" action="/kelas/{{$kelas->id}}/{{$kelas->name}}/masuk-kelas/upload-modul" enctype="multipart/form-data"> 
                 @csrf
@@ -356,7 +338,6 @@ active
                 <div class="modal-body">
                     <div class="form-group">
                         <label >Pilih Siswa*</label>
-                        <!-- <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nama Kelas/Mata Pelajaran"> -->
                         <select class="form-control" name="id_siswa"  id="inputGroupSelect01">
                             <option selected>Pilih Siswa</option>
                             @foreach($user as $s)

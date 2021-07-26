@@ -81,7 +81,7 @@ active
                             <td>{{$v->name}}</td>
                             <td>{{$v->kkm}}</td>
                             <td style="width:10px">
-                                <a href="/nilai/{{$v->id}}/{{$v->name}}" title="Variabel Penilaian" class="btn btn-success btn-sm">
+                                <a href="/nilai/{{$v->id}}/{{$v->name}}/list_variabel" title="Variabel Penilaian" class="btn btn-success btn-sm">
                                     <i class="fas fa-th-list"></i>
                                 </a>
                                 <a href="/nilai/{{$v->id}}/destroy" title="Hapus Akun Siswa" class="btn btn-danger btn-sm delete-confirm">
@@ -92,17 +92,7 @@ active
                         @endforeach
                     </tbody>
                 </table>
-            </div>
-            <!-- <div class="card-footer clearfix">
-                <ul class="pagination pagination-sm m-0 float-left">
-                <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">«</a></li>
-                <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">»</a></li>
-                </ul>
-            </div> -->
-            <!-- /.card-footer-->
+            </div>           
         </div>
         <!-- /.card -->
     </section>

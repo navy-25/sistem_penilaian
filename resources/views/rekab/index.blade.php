@@ -197,9 +197,6 @@ active
                                 </small> 
                             </td>
                             <td style="width:10px">
-                                <a href="/admin/kelas/nama-kelas/kelola/nilai" title="Ubah Nilai" class="btn btn-secondary btn-sm">
-                                    <i class="fas fa-award"></i>
-                                </a>
                                 <a href="" title="Hapus Akun Siswa" class="btn btn-danger btn-sm delete-confirm">
                                     <i class="fas fa-trash"></i>
                                 </a>
@@ -207,15 +204,6 @@ active
                         </tr>
                     </tbody>
                 </table>
-            </div>
-            <div class="card-footer clearfix">
-                <ul class="pagination pagination-sm m-0 float-left">
-                <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">«</a></li>
-                <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">»</a></li>
-                </ul>
             </div>
         </div>
     </section>

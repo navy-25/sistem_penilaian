@@ -41,7 +41,7 @@ active
 
 @section('content')
     <!-- Main content -->
-    <section class="content" style="padding:5px">
+    <section class="content" style="padding:10px">
         <!-- Default box -->
         <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
@@ -83,52 +83,33 @@ active
             </div>
         <!-- /.card -->
     </section>
-    <!-- <div class="card-body pb-0">
-        <div class="row d-flex align-items-stretch">
-            <div class="col-12 col-sm-6 col-md-6 d-flex align-items-stretch">
-                <div class="card bg-light card-primary card-outline" style="width:100%">
-                    <div class="card-header text-muted border-bottom-0">
-                    </div>
-                    <div class="card-body pt-0">
-                        <div class="row">
-                            <div class="col-7">
-                                <h2 class="lead"><b>PHP Programming</b></h2>
-                                <p class="text-muted text-sm">Prof. Dr. Muhammad Nafi' Maula Hakim, S.Kom, M.Kom</p>
-                                <ul class="ml-4 mb-0 fa-ul text-muted">
-                                    <li class="small"><span class="fa-li"><i class="fas fa-sm fa-calendar-alt mr-1"></i></span> Hari &nbsp;&nbsp;&nbsp;&nbsp; : Selasa</li>
-                                    <li class="small"><span class="fa-li"><i class="fas fa-sm fa-clock mr-1"></i></span> Pukul &nbsp;&nbsp;: 10.00 - 11.00</li>
-                                </ul>
-                            </div>
-                            <div class="col-5 text-center">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="row">
-                            <div class="col-2">
-                                <a href="#" class="btn btn-sm bg-danger delete-confirm">
-                                    <i class="fas fa-trash"></i>
-                                </a>
-                            </div>
-                            <div class="col-4">
-
-                            </div>
-                            <div class="col-2" style="padding:2px">
-                                <a href="/admin/kelas/nama-kelas" class="btn btn-sm btn-secondary" style="width:100%">
-                                    <i class="fas fa-cog"></i>
-                                </a>
-                            </div>
-                            <div class="col-4" style="padding:2px">
-                                <a href="/admin/kelas/nama-kelas/kelola" class="btn btn-sm btn-success" style="width:100%">
-                                    <i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp; Masuk
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+    <div class="row" style="padding:10px">
+        <div class="col-xl-4">
+            <div class="info-box mb-3 bg-primary">
+                <span class="info-box-icon"><i class="fas fa-users"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Seluruh Pengguna</span>
+                    <span class="info-box-number">{{$all}} orang</span>
                 </div>
             </div>
         </div>
-    </div> -->
-    <!-- /.card-body -->
-    <!-- /.content -->
+        <div class="col-xl-4">
+            <div class="info-box mb-3 bg-info">
+                <span class="info-box-icon"><i class="fas fa-chalkboard-teacher"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Jumlah Guru</span>
+                    <span class="info-box-number">{{$jumlah_guru}} orang</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4">
+            <div class="info-box mb-3 bg-success">
+                <span class="info-box-icon"><i class="fas fa-graduation-cap"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Jumlah Siswa</span>
+                    <span class="info-box-number">{{$all}} orang</span>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

@@ -141,8 +141,10 @@ active
                                 <h2 class="lead"><b>{{$kelas->name}}</b></h2>
                                 <p class="text-muted text-sm">{{$pembimbing->name}}</p>
                                 <ul class="ml-4 mb-0 fa-ul text-muted">
+                                    <li class="small"><span class="fa-li"><i class="fas fa-sm fa-calendar-alt mr-1"></i></span> Hari &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : {{$kelas->hari}}</li>
+                                    <li class="small"><span class="fa-li"><i class="fas fa-sm fa-clock mr-1"></i></span> Pukul &nbsp;&nbsp;&nbsp;&nbsp;: {{$kelas->jam}}</li>
                                     <li class="small"><span class="fa-li"><i class="fas fa-sm fa-person-booth mr-1"></i></span> 
-                                        Praktik &nbsp;&nbsp;: {{$variabel_praktik->name}}
+                                        Praktik &nbsp;: <br> {{$variabel_praktik->name}}
                                     </li>
                                 </ul>
                             </div>
@@ -171,10 +173,6 @@ active
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <!-- <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Variabel Praktik</h5>
-            </div> -->
-
             <form role="form" method="POST" action="/nilai/{{$variabel_praktik->id}}/{{$variabel_praktik->name}}/store">
                 @csrf
                 <div class="modal-body">
@@ -184,18 +182,7 @@ active
                                 <label >Variabel Penilaian*</label>
                                 <input type="text" name="name" class="form-control" id="exampleInputEmail1" placeholder="Nama Variabel Penilaian">
                             </div>
-                        </div>
-                        <!-- <div class="col-md-4">
-                            <div class="form-group">
-                                <label >Aspek Penilaian*</label>
-                                <select class="form-control" id="inputGroupSelect01">
-                                    <option selected>Pilih Aspek</option>
-                                    <option value="1">Koqnitif</option>
-                                    <option value="2">Afektif</option>
-                                    <option value="2">Psikomotorik</option>
-                                </select>
-                            </div>
-                        </div> -->
+                        </div>                        
                     </div>
                     <div class="form-group">
                         <label >Deskripsi praktik</label>
