@@ -40,9 +40,9 @@ class NilaiController extends Controller
         try{
             $sub_variabel_praktik = \App\Models\Sub_Variabel_Praktik::find($id_sub_var);       
             $sub_variabel_praktik->delete($sub_variabel_praktik);
-            return redirect('/nilai/'.$id.'/'.$name)->with(['success' => 'Variabel berhasil di hapus']);
+            return redirect('/nilai/'.$id.'/'.$name.'/list_variabel')->with(['success' => 'Variabel berhasil di hapus']);
         }catch (Exception $e){
-            return redirect('/nilai/'.$id.'/'.$name)->with(['gagal' => 'Gagal dihapus']);
+            return redirect('/nilai/'.$id.'/'.$name.'/list_variabel')->with(['gagal' => 'Gagal dihapus']);
         }
     }
     public function store(Request $request)
@@ -56,6 +56,19 @@ class NilaiController extends Controller
             return redirect('/nilai/')->with(['success' => 'Variabel Praktik '.$request->name.' berhasil dibuat']);
         }catch (Exception $e){
             return redirect('/nilai/')->with(['gagal' => 'Variabel Praktik  '.$request->name.' gagal dibuat']);
+        }
+    }
+    public function store_sub_variabel(Request $request,$id,$name)
+    {
+        try{
+            $Sub_Variabel_Praktik = \App\Models\Sub_Variabel_Praktik::create([        
+                'name' => $request->name,
+                'id_variabel_praktik' =>$id,
+                'deskripsi' => $request->deskripsi,
+            ]);
+            return redirect('/nilai/'.$id.'/'.$name.'/list_variabel')->with(['success' => 'Variabel Praktik '.$request->name.' berhasil dibuat']);
+        }catch (Exception $e){
+            return redirect('/nilai/'.$id.'/'.$name.'/list_variabel')->with(['gagal' => 'Variabel Praktik  '.$request->name.' gagal dibuat']);
         }
     }
 }

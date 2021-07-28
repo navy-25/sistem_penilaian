@@ -12,11 +12,11 @@ class AkunSiswaController extends Controller
         if($cari != null){
             $user = \App\Models\User::where('name','like',"%".$cari."%")
                 ->orWhere('email','like',"%".$cari."%")
-                ->orderBy('updated_at', 'DESC')
-                ->paginate(15);
+                ->orderBy('name', 'ASC')
+                ->get();
             return view('akunsiswa.index',compact('user'));
         }else{
-            $user = \App\Models\User::orderBy('updated_at', 'DESC')->paginate(15);
+            $user = \App\Models\User::orderBy('name', 'ASC')->get();
             return view('akunsiswa.index',compact('user'));
         }
         return view('akunsiswa.index');
@@ -54,7 +54,7 @@ class AkunSiswaController extends Controller
         $user = \App\Models\User::find($id);
         return view('akunsiswa.read',compact('user'));
     }
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
         try{
             $user = \App\Models\User::find($id);       

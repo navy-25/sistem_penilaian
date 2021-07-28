@@ -5,7 +5,7 @@
 
     // fitur name
     $nama_menu_1 = "Beranda";
-    $nama_menu_2 = "Akun Siswa";
+    $nama_menu_2 = "Akun Pengguna";
     $nama_menu_3 = "Kelas";
     $nama_menu_4 = "Input Nilai";
     $nama_menu_5 = "Variabel Praktik";
@@ -27,7 +27,7 @@
     $link_menu_3 = "/kelas";
     $link_menu_4 = "/admin/soal";
     $link_menu_5 = "/nilai";
-    $link_menu_6 = "/history-nilai";
+    $link_menu_6 = "/history";
     $link_menu_7 = "/pengaturan";
 ?>
 
@@ -39,7 +39,7 @@
         <title>{{$tittle}} | @yield('sub_tittle')</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        <link rel="icon" href="{{asset('assets/dist/logo.png')}}" type="image/png">
         <!-- Font Awesome -->
         <link rel="stylesheet" href="{{asset('plugins/fontawesome-free/css/all.min.css')}}">
         <!-- Ionicons -->
@@ -156,7 +156,11 @@
                             <a href="{{$link_menu_2}}" class="nav-link @yield('menu_2')">
                             <i class="nav-icon fas fa-{{$icon_menu_2}}"></i>
                             <p>
+                                @if(Auth::user()->status == 'Siswa')
+                                Pengguna
+                                @else
                                 {{$nama_menu_2}}
+                                @endif
                                 <!-- <span class="right badge badge-danger">New</span> -->
                             </p>
                             </a>
@@ -178,6 +182,7 @@
                             </p>
                             </a>
                         </li> -->
+                        @if(Auth::user()->status != 'Siswa')
                         <li class="nav-item">
                             <a href="{{$link_menu_5}}" class="nav-link  @yield('menu_5')">
                             <i class="nav-icon fas fa-{{$icon_menu_5}}"></i>
@@ -187,15 +192,15 @@
                             </p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a href="{{$link_menu_6}}" class="nav-link  @yield('menu_6')">
                             <i class="nav-icon fas fa-{{$icon_menu_6}}"></i>
                             <p>
                                 {{$nama_menu_6}}
-                                <!-- <span class="right badge badge-danger">New</span> -->
                             </p>
                             </a>
-                        </li>
+                        </li> -->
+                        @endif
                         <li class="nav-item">
                             <a href="{{$link_menu_7}}" class="nav-link  @yield('menu_7')">
                             <i class="nav-icon fas fa-{{$icon_menu_7}}"></i>

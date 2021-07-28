@@ -193,12 +193,7 @@ active
                     <!-- /.card-body -->
                 </div>
                 <div class="form-group row">
-                    <div class="col-md-12 col-sm-12">
-                        <a href="/pengaturan/{{Auth::user()->id}}/hapus-akun" class="btn btn-outline-secondary delete-confirm" style="width:100%;margin-bottom:10px">
-                            <i class="fas fa-trash mr-1"></i>
-                            Hapus Akun
-                        </a>
-                    </div>
+                    
                     <div class="col-md-12 col-sm-12">
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-danger" style="width:100%;margin-bottom:10px" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
@@ -257,7 +252,6 @@ active
 @endsection
 
 @section('script')
-<!-- Modal feedback -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
     $('.delete-confirm').on('click', function (event) {

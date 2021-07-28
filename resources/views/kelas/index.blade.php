@@ -37,7 +37,7 @@ active
 @section('search')
 <form class="form-inline ml-3">
     <div class="input-group input-group-sm">
-        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+        <input class="form-control form-control-navbar" name="cari" type="search" placeholder="Search" aria-label="Search">
         <div class="input-group-append">
         <button class="btn btn-navbar" type="submit">
             <i class="fas fa-search"></i>
@@ -94,6 +94,7 @@ active
             <div class="card-body pb-0">
                 <div class="row d-flex align-items-stretch">
                     @foreach($kelas as $x)
+                        @if($x->pembimbing == Auth::user()->id or Auth::user()->status == "Admin" or Auth::user()->status == "Siswa")
                         <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
                             <div class="card bg-light card-primary card-outline" style="width:100%">
                                 <div class="card-header text-muted border-bottom-0">
@@ -130,7 +131,7 @@ active
                                     <div class="row">
                                         @if(Auth::user()->status != 'Siswa')
                                         <div class="col-2">
-                                            <a href="{{$link_menu_3}}/{{$x->id}}/destroy" class="btn btn-sm bg-danger delete-confirm">
+                                            <a href="{{$link_menu_3}}/{{$x->id}}/destroy" class="btn btn-sm bg-danger">
                                                 <i class="fas fa-trash"></i>
                                             </a>
                                         </div>
@@ -153,6 +154,7 @@ active
                                 </div>
                             </div>
                         </div>
+                        @endif
                     @endforeach
                 </div>
             </div>
@@ -180,17 +182,20 @@ active
                         <div class="col-8">
                             <div class="form-group">
                                 <label >Guru/Pengajar/Pembimbing*</label>
-                                <!-- <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nama Kelas/Mata Pelajaran"> -->
-                                <select class="form-control" name="pembimbing"  id="inputGroupSelect01">
-                                    <option selected>Pilih Guru/Pengajar</option>
-                                    @foreach($user as $s)
-                                        @if($s->role != 'admin')
-                                            @if($s->status == 'Guru')
-                                            <option value="{{$s->id}}">{{$s->name}}</option>
+                                @if(Auth::user()->status == "Guru")
+                                    <input type="text" class="form-control" name="pembimbing" value="{{Auth::user()->name}}" readonly>
+                                @elseif(Auth::user()->status == "Admin")
+                                    <select class="form-control" name="pembimbing"  id="inputGroupSelect01">
+                                        <option selected>Pilih Guru/Pengajar</option>
+                                        @foreach($user as $s)
+                                            @if($s->role != 'admin')
+                                                @if($s->status == 'Guru')
+                                                <option value="{{$s->id}}">{{$s->name}}</option>
+                                                @endif
                                             @endif
-                                        @endif
-                                    @endforeach
-                                </select>
+                                        @endforeach
+                                    </select>
+                                @endif
                             </div>
                         </div>
                         <div class="col-4">
@@ -244,9 +249,8 @@ active
     </div>
 </div>
 @endsection
-
+<!-- 
 @section('script')
-<!-- Modal feedback -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
     $('.delete-confirm').on('click', function (event) {
@@ -264,4 +268,4 @@ active
         });
     });
 </script>
-@endsection
+@endsection -->

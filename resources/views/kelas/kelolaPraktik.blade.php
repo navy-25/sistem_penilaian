@@ -36,16 +36,16 @@ active
 @endsection
 
 @section('search')
-<form class="form-inline ml-3">
+<!-- <form class="form-inline ml-3">
     <div class="input-group input-group-sm">
-        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+        <input class="form-control form-control-navbar" type="search" name="cari" placeholder="Search" aria-label="Search">
         <div class="input-group-append">
             <button class="btn btn-navbar" type="submit">
                 <i class="fas fa-search"></i>
             </button>
         </div>
     </div>
-</form>
+</form> -->
 @endsection
 
 @section('content')
@@ -76,14 +76,13 @@ active
                 </div>
             </div>
             <div class="row mb-2">
+            @if(Auth::user()->status != 'Siswa')
             <div class="col-sm-12">
                 <button type="button"  class="btn btn-primary btn-sm"  title="Mulai melakukan penilaian"  data-bs-toggle="modal" data-bs-target="#play_praktik">
                     <i class="fas fa-play mr-1"></i> Mulai Penilaian
                 </button>
-                <!-- <button type="button"  class="btn btn-secondary btn-sm" title="Tambah Feedback" data-bs-toggle="modal" data-bs-target="#feedback_praktik">
-                    <i class="fas fa-comments mr-1"></i> Berikan Feedback
-                </button> -->
             </div>
+            @endif
         </div>
         </div><!-- /.container-fluid -->
     </section>
@@ -101,7 +100,9 @@ active
                                     <th>Nama Siswa</th>
                                     <th>Nilai</th>
                                     <th>Status</th>
+                                    @if(Auth::user()->status != 'Siswa')
                                     <th>Opsi</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
@@ -142,14 +143,13 @@ active
                                         </td>
                                         <td>{{$avg}} / 100</td>
                                         <td>{{$status}}</td>
+                                        @if(Auth::user()->status != 'Siswa')
                                         <td>
-                                            <!-- <button class="btn btn-secondary btn-sm"  title="Feedback" data-bs-toggle="modal" data-bs-target="#feedback_praktik">
-                                                <i class="fas fa-comments"></i>
-                                            </button> -->
                                             <a href="/{{$variabel_praktik->id}}/{{$variabel_praktik->name}}/{{$k->id}}/destroy" title="Hapus Akun Siswa" class="btn btn-danger btn-sm delete-confirm">
                                                 <i class="fas fa-trash"></i>
                                             </a>
                                         </td>
+                                        @endif
                                     </tr>
                                     @endif
                                 @endforeach
@@ -396,7 +396,6 @@ active
 @endsection
 
 @section('script')
-<!-- Modal feedback -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
     $('.delete-confirm').on('click', function (event) {

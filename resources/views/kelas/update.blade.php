@@ -154,7 +154,6 @@ active
 @endsection
 
 @section('script')
-<!-- Modal feedback -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
     $('.delete-confirm').on('click', function (event) {

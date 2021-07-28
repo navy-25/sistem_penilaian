@@ -70,7 +70,7 @@ active
                         <tr>
                             <td style="width:10px">{{$no++}}</td>
                             <td>
-                                <a href="/nilai/{{$v->id}}/{{$v->name}}i" style="text-decoration:none;color:black">
+                                <a href="/nilai/{{$v->id}}/{{$v->name}}/list_variabel" style="text-decoration:none;color:black">
                                     <?php
                                         $kelas_name = \App\Models\Kelas::find($v->id_kelas);
                                         $kelas_name = $kelas_name->name;
@@ -143,7 +143,6 @@ active
 @endsection
 
 @section('script')
-<!-- Modal feedback -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
     $('.delete-confirm').on('click', function (event) {

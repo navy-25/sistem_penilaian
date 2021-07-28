@@ -6,24 +6,40 @@ use Illuminate\Http\Request;
 
 class KelasController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $kelas = \App\Models\Kelas::orderBy('id', 'DESC')->get();
+        $cari = $request->cari;
+        if($cari != null){
+            $kelas = \App\Models\Kelas::where('name','like',"%".$cari."%")
+                ->orderBy('updated_at', 'DESC')
+                ->get();
+        }else{
+            $kelas = \App\Models\Kelas::orderBy('id', 'DESC')->get();
+        }
         $user = \App\Models\User::all();
         return view('kelas.index',compact('kelas','user'));
     }
     public function store(Request $request)
     {
-        // dd($request->);
         $jam = $request->jam_mulai." - ".$request->jam_selesai;
         try{
-            $kelas = \App\Models\Kelas::create([        
-                'name' => $request->name,
-                'pembimbing' => $request->pembimbing,
-                'hari' => $request->hari,
-                'status' => $request->status,
-                'jam' =>  $jam,
-            ]);
+            if (Auth::user()->status == "Admin"){
+                $kelas = \App\Models\Kelas::create([        
+                    'name' => $request->name,
+                    'pembimbing' => $request->pembimbing,
+                    'hari' => $request->hari,
+                    'status' => $request->status,
+                    'jam' =>  $jam,
+                ]);
+            }elseif (Auth::user()->status == "Guru"){
+                $kelas = \App\Models\Kelas::create([        
+                    'name' => $request->name,
+                    'pembimbing' => Auth::user()->id,
+                    'hari' => $request->hari,
+                    'status' => $request->status,
+                    'jam' =>  $jam,
+                ]);
+            }
             return redirect('/kelas/')->with(['success' => 'Kelas '.$request->name.' berhasil dibuat']);
         }catch (Exception $e){
             return redirect('/kelas/')->with(['gagal' => 'Kelas '.$request->name.' gagal dibuat']);
@@ -92,11 +108,17 @@ class KelasController extends Controller
     // ========================================================
     public function tambah_kontributor(Request $request,$id,$nama)
     {
+        if (Auth::user()->status == "Admin"){
+            $kelas = \App\Models\Kelas::find($id);
+            $id_guru = $kelas->pembimbing;
+        }elseif (Auth::user()->status == "Guru"){
+            $id_guru = Auth::user()->id;
+        }
         try{
             $KontributorKelas = \App\Models\Kontributor_Kelas::create([        
                 'id_kelas' => $id,
                 'id_siswa' => $request->id_siswa,
-                'id_guru' => Auth::user()->id,
+                'id_guru' => $id_guru,
             ]);           
             $user = \App\Models\User::find($request->id_siswa);   
             return redirect('/kelas/'.$id.'/'.$nama.'/masuk-kelas')->with(['success' => $user->name.' berhasil ditambahkan']);
@@ -183,7 +205,7 @@ class KelasController extends Controller
         else{
             $FTS =  \App\Models\File_Tugas_Siswa::all();
             for ($i = 0 ; $i < count($FTS); $i++){
-                if ($FTS[$i]->id_siswa == $request->id_siswa and $FTS[$i]->id_tugas == $id_tugas){
+                if ($FTS[$i]->id_siswa == Auth::user()->id and $FTS[$i]->id_tugas == $id_tugas){
                     $File_Tugas_Siswa = \App\Models\File_Tugas_Siswa::find($FTS[$i]->id);       
                     if ($request->hasFile('file')) {
                         $file = $request->file('file');

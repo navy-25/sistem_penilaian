@@ -83,6 +83,22 @@ active
             </div>
         <!-- /.card -->
     </section>
+    <?php
+        $user = \App\Models\User::all();
+        $jumlah_guru = 0;
+        $jumlah_admin = 0;
+        $jumlah_siswa = 0;
+        foreach ($user as $x){
+            if($x->status == "Siswa"){
+                $jumlah_siswa = $jumlah_siswa + 1;
+            }elseif($x->status == "Guru"){
+                $jumlah_guru = $jumlah_guru + 1;
+            }else{
+                $jumlah_admin = $jumlah_admin + 1;
+            }
+        }
+        $all =  $jumlah_siswa + $jumlah_guru;
+    ?>
     <div class="row" style="padding:10px">
         <div class="col-xl-4">
             <div class="info-box mb-3 bg-primary">
@@ -107,7 +123,7 @@ active
                 <span class="info-box-icon"><i class="fas fa-graduation-cap"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">Jumlah Siswa</span>
-                    <span class="info-box-number">{{$all}} orang</span>
+                    <span class="info-box-number">{{$jumlah_siswa}} orang</span>
                 </div>
             </div>
         </div>

@@ -154,185 +154,185 @@ active
         </div> -->
         <!-- /.card-header -->
         @if(Auth::user()->status != 'Siswa')
-        <div class="card-body">
-            <div class="tab-content">
-                <!-- /.tab-pane -->
-                <!-- <div class="active tab-pane" id="timeline">
-                    <div class="timeline timeline-inverse">
-                        <div class="time-label">
-                            <span class="bg-danger">
-                            10 Feb. 2014
-                            </span>
-                        </div>
-                        <div>
-                            <i class="fas fa-envelope bg-primary"></i>
+            @if($user->status == 'Siswa' or Auth::user()->status == 'Admin' )
+                <div class="card-body">
+                    <div class="tab-content">
+                        <!-- /.tab-pane -->
+                        <!-- <div class="active tab-pane" id="timeline">
+                            <div class="timeline timeline-inverse">
+                                <div class="time-label">
+                                    <span class="bg-danger">
+                                    10 Feb. 2014
+                                    </span>
+                                </div>
+                                <div>
+                                    <i class="fas fa-envelope bg-primary"></i>
 
-                            <div class="timeline-item">
-                                <span class="time"><i class="far fa-clock"></i> 12:05</span>
+                                    <div class="timeline-item">
+                                        <span class="time"><i class="far fa-clock"></i> 12:05</span>
 
-                                <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
+                                        <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
 
-                                <div class="timeline-body">
-                                    Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                                    weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                                    jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-                                    quora plaxo ideeli hulu weebly balihoo...
+                                        <div class="timeline-body">
+                                            Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
+                                            weebly ning heekya handango imeem plugg dopplr jibjab, movity
+                                            jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
+                                            quora plaxo ideeli hulu weebly balihoo...
+                                        </div>
+                                        <div class="timeline-footer">
+                                            <a href="#" class="btn btn-primary btn-sm">Read more</a>
+                                            <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="timeline-footer">
-                                    <a href="#" class="btn btn-primary btn-sm">Read more</a>
-                                    <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                                <div>
+                                    <i class="far fa-clock bg-gray"></i>
                                 </div>
                             </div>
-                        </div>
-                        <div>
-                            <i class="far fa-clock bg-gray"></i>
-                        </div>
-                    </div>
-                </div> -->
-                <!-- /.tab-pane -->
+                        </div> -->
+                        <!-- /.tab-pane -->
 
-                <div class="tab-pane active" id="settings">
-                    <form class="form-horizontal" method="POST" action="/akun-siswa/{{$user->id}}/update" enctype="multipart/form-data"> 
-                        @csrf
-                        <div class="form-group row">
-                            <label for="inputName" class="col-sm-2 col-form-label">Nama*</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="inputName" name="name" value="{{$user->name}}" placeholder="Nama Lengkap">
-                            </div>
-                        </div>
-                        <?php
-                            $jurusan = \App\Models\Kategori_Jurusan::all();
-                            $Kelas_User = \App\Models\Kelas_User::all();
-                            for ($i=0;$i<count($Kelas_User);$i++){
-                                if($Kelas_User[$i]->id_siswa == $user->id){
-                                    $id_kelas_user = $Kelas_User[$i]->id;
-                                }
-                            }
-                            $Kelas_User = \App\Models\Kelas_User::find($id_kelas_user);
-                            // dd($Kelas_User);
-                        ?>
-                        @if($user->status != "Guru")
-                        <div class="form-group row">
-                            <label for="inputName2" class="col-sm-2 col-form-label">Kelas*</label>
-                            <div class="col-sm-10">
-                                <select class="form-control" name="kelas" id="inputGroupSelect01">
-                                    <option value="{{$Kelas_User->kelas}}" selected>{{$Kelas_User->kelas}}</option>
-                                    <option value="XII">XII</option>
-                                    <option value="XI">XI</option>
-                                    <option value="X">X</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="inputName2" class="col-sm-2 col-form-label">Jurusan*</label>
-                            <div class="col-sm-10">
-                                <select class="form-control" name="jurusan" id="inputGroupSelect01">
-                                    <option value="{{$Kelas_User->jurusan}}" selected>{{$Kelas_User->jurusan}}</option>
-                                    @foreach($jurusan as $j)
-                                        <option value="{{$j->nama}}">{{$j->nama}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        @endif
-                        <div class="form-group row">
-                            @if($user->status == "Guru")
-                                <label for="inputName" class="col-sm-2 col-form-label">NIDN*</label>
-                            @elseif($user->status == "Siswa")
-                                <label for="inputName" class="col-sm-2 col-form-label">NISN*</label>
-                            @endif
-                            <div class="col-sm-10">
-                                <input type="number" class="form-control" id="inputName" name="nis" value="{{$user->nis}}" placeholder="Nomor Induk ..">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="inputName" class="col-sm-2 col-form-label">Telepon*</label>
-                            <div class="col-sm-10">
-                                <input type="number" class="form-control" id="inputName" name="telepon" value="{{$user->telepon}}" placeholder="Telepon">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="inputEmail" class="col-sm-2 col-form-label">Email*</label>
-                            <div class="col-sm-10">
-                                <input type="email" class="form-control" name="email"   value="{{$user->email}}"  id="inputEmail" placeholder="Email">
-                            </div>
-                        </div>                                           
-                        <style>
-                            .mb-3, .my-3 {
-                                margin-bottom: 0rem!important;
-                            }
-                        </style>
-                        <div class="form-group row">
-                            <label for="inputName" class="col-sm-2 col-form-label">Instagram</label>
-                            <div class="col-sm-10">
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text">instagram.com/</span>
-                                    <input type="text" class="form-control"name="ig"   value="{{$user->ig}}"  placeholder="username intagram">
+                        <div class="tab-pane active" id="settings">
+                            <form class="form-horizontal" method="POST" action="/akun-siswa/{{$user->id}}/update" enctype="multipart/form-data"> 
+                                @csrf
+                                <div class="form-group row">
+                                    <label for="inputName" class="col-sm-2 col-form-label">Nama*</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="inputName" name="name" value="{{$user->name}}" placeholder="Nama Lengkap">
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="inputName" class="col-sm-2 col-form-label">Twitter</label>
-                            <div class="col-sm-10">
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text">twitter.com/</span>
-                                    <input type="text" class="form-control" name="tw"  value="{{$user->tw}}"  placeholder="username twitter">
+                                <?php
+                                    $Jurusan = \App\Models\Kategori_Jurusan::all();
+                                    $Kelas_User = \App\Models\Kelas_User::all();
+                                    $id_kelas_user =0;
+                                    for ($i=0;$i<count($Kelas_User);$i++){
+                                        if($Kelas_User[$i]->id_siswa == $user->id){
+                                            $id_kelas_user = $Kelas_User[$i]->id;
+                                        }
+                                    }
+                                    if($id_kelas_user == 0 ){
+                                        $kelas = "Kosong";
+                                        $jurusan = "Kosong";
+                                    }else{
+                                        $Kelas_User = \App\Models\Kelas_User::find($id_kelas_user);
+                                        $kelas = $Kelas_User->kelas;
+                                        $jurusan = $Kelas_User->jurusan;
+                                    }
+                                    // dd($Kelas_User);
+                                ?>
+                                @if($user->status != "Guru")
+                                <div class="form-group row">
+                                    <label for="inputName2" class="col-sm-2 col-form-label">Kelas*</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" name="kelas" id="inputGroupSelect01">
+                                            <option value="{{$kelas}}" selected>{{$kelas}}</option>
+                                            <option value="XII">XII</option>
+                                            <option value="XI">XI</option>
+                                            <option value="X">X</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="inputName" class="col-sm-2 col-form-label">Facebook</label>
-                            <div class="col-sm-10">
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text">facebook.com/</span>
-                                    <input type="text" class="form-control" name="fb"  value="{{$user->fb}}"  placeholder="username facebook">
+                                <div class="form-group row">
+                                    <label for="inputName2" class="col-sm-2 col-form-label">Jurusan*</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" name="jurusan" id="inputGroupSelect01">
+                                            <option value="{{$jurusan}}" selected>{{$jurusan}}</option>
+                                            @foreach($Jurusan as $j)
+                                                <option value="{{$j->nama}}">{{$j->nama}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>                       
-                        <div class="form-group row">
-                            <label for="inputExperience" class="col-sm-2 col-form-label">Alamat*</label>
-                            <div class="col-sm-10">
-                                <textarea class="form-control" id="inputExperience" name="alamat"  placeholder="Alamat Lengkap Rumah">{{$user->alamat}}</textarea>
-                            </div>
+                                @endif
+                                <div class="form-group row">
+                                    @if($user->status == "Guru")
+                                        <label for="inputName" class="col-sm-2 col-form-label">NIDN*</label>
+                                    @elseif($user->status == "Siswa")
+                                        <label for="inputName" class="col-sm-2 col-form-label">NISN*</label>
+                                    @endif
+                                    <div class="col-sm-10">
+                                        <input type="number" class="form-control" id="inputName" name="nis" value="{{$user->nis}}" placeholder="Nomor Induk ..">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputName" class="col-sm-2 col-form-label">Telepon*</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" class="form-control" id="inputName" name="telepon" value="{{$user->telepon}}" placeholder="Telepon">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputEmail" class="col-sm-2 col-form-label">Email*</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control" name="email"   value="{{$user->email}}"  id="inputEmail" placeholder="Email">
+                                    </div>
+                                </div>                                           
+                                <style>
+                                    .mb-3, .my-3 {
+                                        margin-bottom: 0rem!important;
+                                    }
+                                </style>
+                                <div class="form-group row">
+                                    <label for="inputName" class="col-sm-2 col-form-label">Instagram</label>
+                                    <div class="col-sm-10">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text">instagram.com/</span>
+                                            <input type="text" class="form-control"name="ig"   value="{{$user->ig}}"  placeholder="username intagram">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputName" class="col-sm-2 col-form-label">Twitter</label>
+                                    <div class="col-sm-10">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text">twitter.com/</span>
+                                            <input type="text" class="form-control" name="tw"  value="{{$user->tw}}"  placeholder="username twitter">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputName" class="col-sm-2 col-form-label">Facebook</label>
+                                    <div class="col-sm-10">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text">facebook.com/</span>
+                                            <input type="text" class="form-control" name="fb"  value="{{$user->fb}}"  placeholder="username facebook">
+                                        </div>
+                                    </div>
+                                </div>                       
+                                <div class="form-group row">
+                                    <label for="inputExperience" class="col-sm-2 col-form-label">Alamat*</label>
+                                    <div class="col-sm-10">
+                                        <textarea class="form-control" id="inputExperience" name="alamat"  placeholder="Alamat Lengkap Rumah">{{$user->alamat}}</textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputExperience" class="col-sm-2 col-form-label">Foto</label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control form-control-sm" value="foto" name="foto" id="formFileSm" type="file">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group row">
+                                    <div class="col-md-6 col-sm-6">
+                                        <button type="submit" class="btn btn-primary" style="width:100%;margin-bottom:10px">
+                                            <i class="fas fa-save mr-1"></i>Simpan
+                                        </button>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-danger" style="width:100%;margin-bottom:10px" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                            <i class="fas fa-key mr-1"></i>
+                                            Perbarui Password
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                        <div class="form-group row">
-                            <label for="inputExperience" class="col-sm-2 col-form-label">Foto</label>
-                            <div class="col-sm-10">
-                                <input class="form-control form-control-sm" value="foto" name="foto" id="formFileSm" type="file">
-                            </div>
+                        <!-- /.tab-pane -->
                         </div>
-                        <div class="form-group row">
-                            <div class="col-md-12 col-sm-12">
-                                <button type="submit" class="btn btn-primary" style="width:100%;margin-bottom:10px">
-                                    <i class="fas fa-save mr-1"></i>Simpan
-                                </button>
-                            </div>
-                        </div>
-                        <div class="col-md-12 col-sm-12" >
-                            <hr>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-md-6 col-sm-6">
-                                <a href="" class="btn btn-outline-secondary delete-confirm" style="width:100%;margin-bottom:10px">
-                                    <i class="fas fa-trash mr-1"></i>
-                                    Hapus Akun
-                                </a>
-                            </div>
-                            <div class="col-md-6 col-sm-6">
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-danger" style="width:100%;margin-bottom:10px" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                    <i class="fas fa-key mr-1"></i>
-                                    Perbarui Password
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                        <!-- /.tab-content -->
+                    </div><!-- /.card-body -->
                 </div>
-                <!-- /.tab-pane -->
-                </div>
-                <!-- /.tab-content -->
-            </div><!-- /.card-body -->
-        </div>
+            @endif
         @endif
         <!-- /.nav-tabs-custom -->
     </div>

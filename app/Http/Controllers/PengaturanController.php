@@ -56,6 +56,8 @@ class PengaturanController extends Controller
     }
     public function hapus_akun(Request $request, $id)
     {
+        $user = \App\Models\User::find($id);   
+        dd($user);
         try{
             $user = \App\Models\User::find($id);       
             $user->delete($user);

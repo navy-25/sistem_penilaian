@@ -35,13 +35,13 @@ active
 @endsection
 
 @section('print')
-<a class="nav-link" title="Cetak data siswa">
+<!-- <a class="nav-link" title="Cetak data siswa">
     <i class="fas fa-file-archive"></i>
-</a>
+</a> -->
 @endsection
 
 @section('search')
-<form class="form-inline ml-3">
+<!-- <form class="form-inline ml-3">
     <div class="input-group input-group-sm">
         <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
         <div class="input-group-append">
@@ -50,7 +50,7 @@ active
             </button>
         </div>
     </div>
-</form>
+</form> -->
 @endsection
 
 @section('content')
@@ -86,18 +86,20 @@ active
                             </div>
                         @endif
                     @endif
-                    @if(Auth::user()->status != 'Siswa')
                     <div class="row mb-2">
                         <div class="col-sm-6">
+                            @if(Auth::user()->status != 'Siswa')
                             <button type="button"  class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#nilai_add">
                                 <i class="fas fa-marker mr-1"></i> Beri Nilai
                             </button>
+                            @endif
+                            @if(Auth::user()->status == 'Siswa')
                             <button type="button"  class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#upload_tugas">
                                 <i class="fas fa-file-word mr-1"></i> Upload Tugas
                             </button>
+                            @endif
                         </div>
                     </div>
-                    @endif
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -106,7 +108,7 @@ active
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-7">
                 <div class="card" style="margin:10px">                   
                     <div class="card-body table-responsive p-0">
                         <table class="table table-hover text-nowrap">
@@ -132,23 +134,27 @@ active
                                     ?>
                                     <tr>
                                         <td>{{$no++}}</td>
-                                        <td data-bs-toggle="modal" data-bs-target="#soal_add">{{$siswa->name}}</td>
+                                        <td>{{$siswa->name}}</td>
                                         <td>
                                             @foreach($File_Tugas_Siswa as $f)
                                             @if($k->id_siswa == $f->id_siswa)
-                                                    @if(Auth::user()->status == 'Siswa')
-                                                        {{$f->file}}
-                                                    @else
-                                                        <a target="_blank" href="{{$f->getFile()}}">{{$f->file}}</a>
-                                                    @endif
-                                                @endif
+                                            @if(Auth::user()->status == 'Siswa')
+                                            @if($k->id_siswa == Auth::user()->id)
+                                            <a target="_blank" href="{{$f->getFile()}}">{{$f->file}}</a>
+                                            @else
+                                            {{$f->file}}
+                                            @endif
+                                            @else
+                                            <a target="_blank" href="{{$f->getFile()}}">{{$f->file}}</a>
+                                            @endif
+                                            @endif
                                             @endforeach
                                         </td>
                                         <td>
                                             @foreach($Nilai_Tugas as $n)
-                                                @if($k->id_siswa == $n->id_siswa)
-                                                    {{$n->nilai}} / 100
-                                                @endif
+                                            @if($k->id_siswa == $n->id_siswa)
+                                            {{$n->nilai}} / 100
+                                            @endif
                                             @endforeach
                                         </td>
                                     </tr>
@@ -158,6 +164,48 @@ active
                         </table>
                     </div>
                     <!-- /.card-footer-->
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="card bg-light card-primary card-outline" style="margin:10px">   
+                    <div class="card-header text-muted border-bottom-0">
+                        <!-- 2 Hari lagi -->
+                    </div>
+                    <div class="card-body pt-0">
+                        <div class="row">
+                            <div class="col-7">
+                                <h2 class="lead"><b>{{$kelas->name}}</b></h2>
+                                <?php
+                                    $pembimbing = \App\Models\User::find($kelas->pembimbing);
+                                    $variabel_praktik = \App\Models\Variabel_Praktik::all();
+                                    $praktik = "Unknown";
+                                    for($i = 0 ; $i < count($variabel_praktik) ; $i++){
+                                        if($variabel_praktik[$i]->id_kelas == $kelas->id){
+                                            $vp = \App\Models\Variabel_Praktik::find($variabel_praktik[$i]->id);
+                                            $praktik = $vp->name;
+                                        }
+                                    }
+                                ?>
+                                <p class="text-muted text-sm">{{$pembimbing->name}}</p>
+                                <ul class="ml-4 mb-0 fa-ul text-muted">
+                                    <li class="small"><span class="fa-li"><i class="fas fa-sm fa-calendar-alt mr-1"></i></span> Hari &nbsp;&nbsp;&nbsp;&nbsp; : {{$kelas->hari}}</li>
+                                    <li class="small"><span class="fa-li"><i class="fas fa-sm fa-clock mr-1"></i></span> Pukul &nbsp;&nbsp;: {{$kelas->jam}}</li>
+                                </ul>
+                            </div>
+                            <div class="col-5 text-center">
+                                <img src="{{$pembimbing->getFoto()}}" alt="" class="img-circle img-fluid">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">                            
+                            <div class="col-4" style="padding:2px">
+                                <a href="/kelas/{{$kelas->id}}/{{$kelas->name}}/masuk-kelas" class="btn btn-sm btn-success" style="width:100%">
+                                    <i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp; Lihat Kelas
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -173,14 +221,19 @@ active
                     <div class="row">
                         <div class="col-8">
                             <div class="form-group">
-                                <label >Pilih Siswa*</label>
+                                <label >Pilih Siswa*</label>                                
                                 <select class="form-control" name="id_siswa"  id="inputGroupSelect01">
                                     <option selected>Pilih Siswa</option>
-                                    @foreach($user as $s)
-                                        @if($s->role != 'admin')
-                                            @if($s->status == 'Siswa')
-                                            <option value="{{$s->id}}">{{$s->name}}</option>
-                                            @endif
+                                    <?php
+                                        $kk = \App\Models\Kontributor_Kelas::all();
+                                        
+                                    ?>
+                                    @foreach($kk as $k)
+                                        @if($k->id_kelas == $kelas->id)
+                                            <?php
+                                                $user =  \App\Models\User::find($k->id_siswa);
+                                            ?>
+                                            <option value="{{$user->id}}">{{$user->name}}</option>
                                         @endif
                                     @endforeach
                                 </select>

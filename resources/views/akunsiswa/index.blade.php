@@ -35,19 +35,19 @@ active
 @endsection
 
 @section('print')
-<a class="nav-link" title="Cetak data siswa">
+<!-- <a class="nav-link" title="Cetak data siswa">
     <i class="fas fa-file-archive"></i>
-</a>
+</a> -->
 @endsection
 
 @section('search')
 <form class="form-inline ml-3">
     <div class="input-group input-group-sm">
-        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-        <div class="input-group-append">
-        <button class="btn btn-navbar" type="submit">
-            <i class="fas fa-search"></i>
-        </button>
+        <input class="form-control form-control-navbar" type="search" name="cari" placeholder="Search" aria-label="Search">
+            <div class="input-group-append">
+            <button class="btn btn-navbar" type="submit">
+                <i class="fas fa-search"></i>
+            </button>
         </div>
     </div>
 </form>
@@ -97,7 +97,7 @@ active
                 <table class="table table-hover text-nowrap">
                     <thead>
                         <tr>
-                            <th style="width:10px">ID</th>
+                            <th style="width:10px">No</th>
                             <th style="width:100px">Foto</th>
                             <th>Nama Lengkap</th>
                             @if(Auth::user()->status != 'Siswa')
@@ -106,6 +106,9 @@ active
                         </tr>
                     </thead>
                     <tbody>
+                        <?php
+                            $no = 1;
+                        ?>
                         @foreach($user as $x)
                         <?php
                             if($x->nis == Null){
@@ -113,11 +116,12 @@ active
                             }else{
                                 $nis = $x->nis;
                             }
+                            
                         ?>
                             @if($x->status != 'Admin')
                                 @if($x->id != Auth::user()->id)
                                 <tr>
-                                    <td style="width:10px">1</td>
+                                    <td style="width:10px">{{$no++}}</td>
                                     <td style="width:100px">
                                         <a href="{{$link_menu_2}}/{{$x->id}}">
                                             <img src="{{$x->getFoto()}}" width="70px" alt="nama_siswa">
@@ -149,11 +153,13 @@ active
                                         </a>
                                     </td>
                                     @if(Auth::user()->status != 'Siswa')
-                                    <td style="width:10px">
-                                        <a href="{{$link_menu_2}}/{{$x->id}}/destroy" title="Hapus Akun Siswa" class="btn btn-danger btn-sm delete-confirm">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
+                                        @if($x->status == 'Siswa' or Auth::user()->status == 'Admin' )
+                                        <td style="width:10px">
+                                            <a href="{{$link_menu_2}}/{{$x->id}}/destroy" title="Hapus Akun Siswa" class="btn btn-danger btn-sm delete-confirm">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </td>
+                                        @endif
                                     @endif
                                 </tr>
                                 @endif
@@ -162,15 +168,6 @@ active
                     </tbody>
                 </table>
             </div>
-            <!-- <div class="card-footer clearfix">
-                <ul class="pagination pagination-sm m-0 float-left">
-                <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">«</a></li>
-                <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" style="border-radius:100px;margin:2px;width:25px;color:grey" href="#">»</a></li>
-                </ul>
-            </div> -->
             <!-- /.card-footer-->
         </div>
         <!-- /.card -->

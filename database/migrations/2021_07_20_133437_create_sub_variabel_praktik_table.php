@@ -18,7 +18,7 @@ class CreateSubVariabelPraktikTable extends Migration
             $table->string('name')->nullable();
             $table->string('id_variabel_praktik')->nullable();
             $table->string('deskripsi')->nullable();
-            $table->string('kkm')->nullable();
+            // $table->string('kkm')->nullable();
             $table->timestamps();
         });
     }

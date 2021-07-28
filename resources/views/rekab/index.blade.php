@@ -1,4 +1,3 @@
-
 @extends('layouts.master')
 <!-- teks statis -->
 <?php
@@ -30,25 +29,6 @@ active
 {{$nama_menu_6}}
 @endsection
 
-@section('print')
-<a class="nav-link" title="Cetak data siswa">
-    <i class="fas fa-file-archive"></i>
-</a>
-@endsection
-
-@section('search')
-<form class="form-inline ml-3">
-    <div class="input-group input-group-sm">
-        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-        <div class="input-group-append">
-        <button class="btn btn-navbar" type="submit">
-            <i class="fas fa-search"></i>
-        </button>
-        </div>
-    </div>
-</form>
-@endsection
-
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header" style="padding-bottom:0px">
@@ -65,91 +45,6 @@ active
         </div><!-- /.container-fluid -->
     </section>
 
-    <!-- Main content -->
-    <section class="content">
-        <!-- Default box -->
-        <div class="card collapsed-card" style="margin:10px;margin-top:0px">
-            <div class="card-header">
-                <h3 class="card-title"><i class="fas fa-search" style="margin-right:10px;font-size:15px"></i>Filter Data</h3>
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                        <i class="fas fa-plus"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label style="font-weight: 500;">Pilih Kelas</label>
-                            <select class="form-control">
-                                <option selected>Semua Kelas</option>
-                                <option>X</option>
-                                <option>XI</option>
-                                <option>XII</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label style="font-weight: 500;">Pilih Jurusan</label>
-                            <select class="form-control">
-                                <option selected>Semua Jurusan</option>
-                                <option>Multimedia</option>
-                                <option>Sepeda Motor</option>
-                                <option>Akuntansi</option>
-                                <option>Perkantoran</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label style="font-weight: 500;">Pilih Modul</label>
-                            <select class="form-control">
-                                <option selected>Semua Modul</option>
-                                <option>Editing</option>
-                                <option>Fotografi</option>
-                                <option>Bongkar Mesin</option>
-                                <option>Buku Khas Kecil</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label style="font-weight: 500;">Pilih Nilai</label>
-                            <select class="form-control">
-                                <option selected>Semua Nilai</option>
-                                <option>A</option>
-                                <option>B</option>
-                                <option>C</option>
-                                <option>D</option>
-                                <option>E</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label style="font-weight: 500;">Pilih Status</label>
-                            <select class="form-control">
-                                <option selected>Semua Status</option>
-                                <option>Lulus</option>
-                                <option>Remedi</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <button type="button" class="btn btn-primary" style="margin-top:30px">
-                                <i class="fas fa-search mr-1"></i> Cari
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- /.card-footer-->
-        </div>
-        <!-- /.card -->
-    </section>
     <!-- /.content -->
     <section class="content">
         <div class="card" style="margin:10px;margin-top:0px">
@@ -157,74 +52,65 @@ active
                 <table class="table table-hover text-nowrap">
                     <thead>
                         <tr>
-                            <th style="width:10px">ID</th>
-                            <th style="width:40px">Foto</th>
-                            <th>Nama Lengkap</th>
-                            <th style="width:200px">Modul</th>
-                            <th style="width:200px">Tugas</th>
-                            <th style="width:600px">Nilai</th>
-                            <th style="width:10px">Opsi</th>
+                            <th style="width:10px">No</th>
+                            <th style="width:700px">Kelas</th>
+                            <th style="width:200px">Jumlah Siswa</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td style="width:10px">1</td>
-                            <td style="width:40px">
-                                <a href="/admin/akun-siswa/nama-siswa">
-                                    <img src="../../dist/img/user2-160x160.jpg" width="40px" alt="nama_siswa">
-                                </a>
-                            </td>
-                            <td>
-                                <a href="/admin/akun-siswa/nama-siswa" style="text-decoration:none;color:black">
-                                    Muhammad Nafi' Maula Hakim
-                                    <small>
-                                        <br>
-                                        XI Multimedia
-                                    </small>
-                                </a>
-                            </td>
-                            <td>
-                                <a href="http://localhost:8000/admin/kelas/nama-kelas/kelola" style="text-decoration:none;color:black">
-                                    <i class="fas fa-book mr-1"></i> Nama Modul
-                                </a>
-                            </td>
-                            <td>
-                                Tugas Review Materi
-                            </td>
-                            <td>
-                                <small style="background:green;padding:3px;color:white">
-                                    A (Lulus)
-                                </small> 
-                            </td>
-                            <td style="width:10px">
-                                <a href="" title="Hapus Akun Siswa" class="btn btn-danger btn-sm delete-confirm">
-                                    <i class="fas fa-trash"></i>
-                                </a>
-                            </td>
-                        </tr>
+                        <?php
+                            $no = 1;
+                        ?>
+                        @foreach($kelas as $k)
+                            @if(Auth::user()->status == "Admin")
+                            <tr>
+                                <td style="width:10px">{{$no++}}</td>
+                                <td>
+                                    <a href="/history/{{$k->id}}/{{$k->name}}" style="text-decoration:none;color:black">
+                                        {{$k->name}}
+                                    </a>
+                                </td>
+                                <td>
+                                    <?php
+                                        $KK = \App\Models\Kontributor_Kelas::all();
+                                        $jumlah_siswa = 0;
+                                        foreach ($KK as $kk){
+                                            if ($kk->id_kelas == $k->id){
+                                                $jumlah_siswa = $jumlah_siswa+1;
+                                            }
+                                        }
+                                    ?>
+                                    {{$jumlah_siswa}}
+                                </td>
+                            </tr>
+                            @elseif(Auth::user()->status == "Guru")
+                                @if($k->pembimbing == Auth::user()->id)
+                                <tr>
+                                    <td style="width:10px">{{$no++}}</td>
+                                    <td>
+                                        <a href="/history/{{$k->id}}/{{$k->name}}" style="text-decoration:none;color:black">
+                                            {{$k->name}}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <?php
+                                            $KK = \App\Models\Kontributor_Kelas::all();
+                                            $jumlah_siswa = 0;
+                                            foreach ($KK as $kk){
+                                                if ($kk->id_kelas == $k->id){
+                                                    $jumlah_siswa = $jumlah_siswa+1;
+                                                }
+                                            }
+                                        ?>
+                                        {{$jumlah_siswa}}
+                                    </td>
+                                </tr>
+                                @endif
+                            @endif
+                        @endforeach
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div>    
     </section>
-@endsection
-@section('script')
-<!-- Modal feedback -->
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script>
-    $('.delete-confirm').on('click', function (event) {
-        event.preventDefault();
-        const url = $(this).attr('href');
-        swal({
-            title: 'Hapus akun siswa ?',
-            text: 'Akun yang sudah dihapus tidak bisa di onlinekan kembali',
-            icon: 'warning',
-            buttons: ["Batalkan", "Hapus"],
-        }).then(function(value) {
-            if (value) {
-                window.location.href = url;
-            }
-        });
-    });
-</script>
 @endsection

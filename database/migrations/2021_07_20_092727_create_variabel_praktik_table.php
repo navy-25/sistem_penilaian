@@ -17,6 +17,7 @@ class CreateVariabelPraktikTable extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('id_kelas')->nullable();
+            $table->string('kkm')->nullable();
             $table->timestamps();
         });
     }

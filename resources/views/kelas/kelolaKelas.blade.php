@@ -36,7 +36,7 @@ active
 
 
 @section('search')
-<form class="form-inline ml-3">
+<!-- <form class="form-inline ml-3">
     <div class="input-group input-group-sm">
         <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
         <div class="input-group-append">
@@ -45,7 +45,7 @@ active
         </button>
         </div>
     </div>
-</form>
+</form> -->
 @endsection
 
 @section('content')
@@ -128,13 +128,13 @@ active
                                                 <a target="_blank" class="btn btn-info btn-sm" style="color:white;text-decoration:none;" href="{{$m->getFile()}}"><i class="fas fa-file-download mr-1"></i> {{$m->file}}</a> 
                                                 @endif
                                             </td>
+                                            @if(Auth::user()->status != 'Siswa')
                                             <td align="right">
-                                                @if(Auth::user()->status != 'Siswa')
                                                 <a href="{{$link_menu_3}}/{{$kelas->id}}/{{$kelas->name}}/masuk-kelas/{{$m->id}}/hapus-modul" title="Hapus Modul/Tugas" class="btn btn-danger btn-sm delete-confirm">
                                                     <i class="fas fa-trash"></i>
                                                 </a>
-                                                @endif
                                             </td>
+                                            @endif
                                         </tr>
                                         @endif
                                     @endforeach
@@ -154,15 +154,17 @@ active
                                         @if($v->id_kelas == $kelas->id)
                                         <tr>
                                             <td align="left">
-                                                <a style="text-decoration:none;color:black" href="/admin/kelas/nama-kelas/kelola/praktik">
+                                                <a style="text-decoration:none;color:black" href="/{{$v->id}}/{{$v->name}}">
                                                     {{$no++}}. {{$v->name}}
                                                 </a>
                                             </td>
+                                            @if(Auth::user()->status != 'Siswa')
                                             <td align="right">
                                                 <a href="/{{$v->id}}/{{$v->name}}" title="Lakukan Penilaian" class="btn btn-success btn-sm">
                                                     <i class="fas fa-play mr-1"></i>Mulai penilaian
                                                 </a>
                                             </td>
+                                            @endif
                                         </tr>
                                         @endif
                                     @endforeach
@@ -361,7 +363,6 @@ active
 @endsection
 
 @section('script')
-<!-- Modal feedback -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
     $('.delete-confirm').on('click', function (event) {
