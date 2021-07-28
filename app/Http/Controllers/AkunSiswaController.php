@@ -54,10 +54,10 @@ class AkunSiswaController extends Controller
         $user = \App\Models\User::find($id);
         return view('akunsiswa.read',compact('user'));
     }
-    public function destroy($id)
+    public function destroy($id_siswa)
     {
         try{
-            $user = \App\Models\User::find($id);       
+            $user = \App\Models\User::find($id_siswa);       
             $user->delete($user);
             return redirect('/akun-siswa/')->with(['success' => 'Akun berhasil di hapus selamanya !']);
         }catch (Exception $e){

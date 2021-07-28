@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 28 Jul 2021 pada 05.31
+-- Waktu pembuatan: 28 Jul 2021 pada 19.40
 -- Versi server: 10.4.17-MariaDB
 -- Versi PHP: 7.4.13
 
@@ -79,6 +79,13 @@ CREATE TABLE `kelas` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data untuk tabel `kelas`
+--
+
+INSERT INTO `kelas` (`id`, `name`, `pembimbing`, `status`, `hari`, `jam`, `created_at`, `updated_at`) VALUES
+(2, 'Kewirausahaan', '8', 'aktif', 'Senin', '07:00 - 09:00', '2021-07-28 08:35:05', '2021-07-28 08:35:05');
+
 -- --------------------------------------------------------
 
 --
@@ -93,6 +100,17 @@ CREATE TABLE `kelas_user` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `kelas_user`
+--
+
+INSERT INTO `kelas_user` (`id`, `kelas`, `jurusan`, `id_siswa`, `created_at`, `updated_at`) VALUES
+(4, 'X', 'Teknik Komputer Jaringan', '5', '2021-07-28 08:31:01', '2021-07-28 08:32:23'),
+(5, 'X', 'Teknik Komputer Jaringan', '6', '2021-07-28 08:31:17', '2021-07-28 08:32:51'),
+(6, 'X', 'Teknik Komputer Jaringan', '7', '2021-07-28 08:31:34', '2021-07-28 08:32:41'),
+(7, NULL, NULL, '8', '2021-07-28 08:33:07', '2021-07-28 08:33:21'),
+(8, NULL, NULL, '9', '2021-07-28 08:33:43', '2021-07-28 08:33:51');
 
 -- --------------------------------------------------------
 
@@ -109,6 +127,15 @@ CREATE TABLE `kontributor_kelas` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `kontributor_kelas`
+--
+
+INSERT INTO `kontributor_kelas` (`id`, `id_kelas`, `id_siswa`, `id_guru`, `remember_token`, `created_at`, `updated_at`) VALUES
+(3, '2', '6', '8', NULL, '2021-07-28 08:39:56', '2021-07-28 08:39:56'),
+(4, '2', '7', '8', NULL, '2021-07-28 08:40:01', '2021-07-28 08:40:01'),
+(5, '2', '5', '8', NULL, '2021-07-28 08:48:46', '2021-07-28 08:48:46');
 
 -- --------------------------------------------------------
 
@@ -158,6 +185,14 @@ CREATE TABLE `modul` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data untuk tabel `modul`
+--
+
+INSERT INTO `modul` (`id`, `name`, `id_kelas`, `jenis`, `file`, `created_at`, `updated_at`) VALUES
+(2, 'Digital Marketing', '2', 'Materi', 'Instagram Marketing.pdf', '2021-07-28 08:38:31', '2021-07-28 08:38:31'),
+(3, 'Membuat Online Shop Instagram', '2', 'Tugas', NULL, '2021-07-28 08:39:15', '2021-07-28 08:39:15');
+
 -- --------------------------------------------------------
 
 --
@@ -184,6 +219,23 @@ CREATE TABLE `sub_variabel_praktik` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `sub_variabel_praktik`
+--
+
+INSERT INTO `sub_variabel_praktik` (`id`, `name`, `id_variabel_praktik`, `deskripsi`, `created_at`, `updated_at`) VALUES
+(2, 'Analisis Kekuatan (Strength)', '1', NULL, '2021-07-28 08:43:19', '2021-07-28 08:43:19'),
+(3, 'Analisis Kelemahan (Weakness)', '1', NULL, '2021-07-28 08:43:30', '2021-07-28 08:43:30'),
+(4, 'Analisis Peluang (Oportunity)', '1', NULL, '2021-07-28 08:43:40', '2021-07-28 08:43:40'),
+(5, 'Analisis Ancaman (Threat)', '1', NULL, '2021-07-28 08:44:02', '2021-07-28 08:44:02'),
+(6, 'Menentukan Pasar', '1', NULL, '2021-07-28 08:44:12', '2021-07-28 08:44:12'),
+(7, 'Membuat mindmap penjualan', '1', NULL, '2021-07-28 08:44:21', '2021-07-28 08:44:21'),
+(8, 'Ploting Area iklan', '2', NULL, '2021-07-28 08:44:59', '2021-07-28 08:44:59'),
+(9, 'Pemilihan konten iklan', '2', NULL, '2021-07-28 08:45:10', '2021-07-28 08:45:10'),
+(10, 'Membuat promosi', '2', NULL, '2021-07-28 08:45:17', '2021-07-28 08:45:17'),
+(11, 'Caption', '2', NULL, '2021-07-28 08:45:21', '2021-07-28 08:45:21'),
+(12, 'Pemilihan Jam Upload', '2', NULL, '2021-07-28 08:45:28', '2021-07-28 08:45:28');
 
 -- --------------------------------------------------------
 
@@ -216,7 +268,12 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `foto`, `name`, `role`, `status`, `email`, `email_verified_at`, `nis`, `telepon`, `ig`, `fb`, `tw`, `alamat`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'IMG_5388_2 copy.jpg', 'admin', 'admin', 'Admin', 'admin123@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$mAD050Ns7BX0v6BAPBGEXulFsNtxhp/L274U50nJa72IWE7eVAjDS', NULL, '2021-07-27 20:23:27', '2021-07-27 20:30:15');
+(1, 'IMG_5388_2 copy.jpg', 'admin', 'admin', 'Admin', 'admin123@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$mAD050Ns7BX0v6BAPBGEXulFsNtxhp/L274U50nJa72IWE7eVAjDS', NULL, '2021-07-27 20:23:27', '2021-07-27 20:30:15'),
+(5, '201710370311032.jpg', 'Muhammad Nafi Maula Hakim', 'user', 'Siswa', 'nafimaulahakim123@gmail.com', NULL, '201710370311032', '082132521665', 'n_vi25', NULL, 'n_vi25', 'Perumahan Sarana Muara Indah Blok B Nomor 21, Jetis, Malang', '$2y$10$vqySYIklGGBVEOjH2uOFCOxMIrKwhUPbYKFI8kc.gcOozY326gpTe', NULL, '2021-07-28 08:31:01', '2021-07-28 08:32:23'),
+(6, '201710370311019.jpg', 'Widya Rizka Ulul Fadilah', 'user', 'Siswa', 'widyarizka88@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$D2lDOWkQyDRYiQOzsa3q0.cI.0zTl1I5tFkknsrfha3neGYjdfANa', NULL, '2021-07-28 08:31:17', '2021-07-28 08:31:17'),
+(7, '201710370311028.jpg', 'Rizqy Arifiantini', 'user', 'Siswa', 'arin123@gmail.com', NULL, '201710370311028', NULL, NULL, NULL, NULL, NULL, '$2y$10$NhazVbo.fKAA/mfTezCh1u2eY10FrQgyRGCeOEDFmf77jIpZNGtqO', NULL, '2021-07-28 08:31:34', '2021-07-28 08:32:41'),
+(8, 'Galih Wasis (1).jpg', 'Galih Wasis Wicaksono, S.Kom, M.Cs.', 'user', 'Guru', 'galih123@gmail.com', NULL, '2020173827', NULL, NULL, NULL, NULL, NULL, '$2y$10$LKzn48rV0nrHloD2FCWHc.WRayh8sVB6GzpT3dHNrgFvDGx2nRPPi', NULL, '2021-07-28 08:33:07', '2021-07-28 08:33:21'),
+(9, '861_10814100562.jpg', 'Ali Sofyan Kholimi, S.Kom., M.Kom', 'user', 'Guru', 'alisofyan123@gmail.com', NULL, '2020173123', NULL, NULL, NULL, NULL, NULL, '$2y$10$JBJ8JBsaR4y3UYnTS4rPWOg7.z4Dze8ARxGuNBBh00V02NHGD7fBS', NULL, '2021-07-28 08:33:43', '2021-07-28 08:33:51');
 
 -- --------------------------------------------------------
 
@@ -232,6 +289,14 @@ CREATE TABLE `variabel_praktik` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `variabel_praktik`
+--
+
+INSERT INTO `variabel_praktik` (`id`, `name`, `id_kelas`, `kkm`, `created_at`, `updated_at`) VALUES
+(1, 'Braindstorming Ide Produk', '2', '60', '2021-07-28 08:42:37', '2021-07-28 08:42:37'),
+(2, 'Instagram Ads', '2', '55', '2021-07-28 08:44:50', '2021-07-28 08:44:50');
 
 --
 -- Indexes for dumped tables
@@ -325,19 +390,19 @@ ALTER TABLE `kategori_jurusan`
 -- AUTO_INCREMENT untuk tabel `kelas`
 --
 ALTER TABLE `kelas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `kelas_user`
 --
 ALTER TABLE `kelas_user`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT untuk tabel `kontributor_kelas`
 --
 ALTER TABLE `kontributor_kelas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `migrations`
@@ -349,25 +414,25 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT untuk tabel `modul`
 --
 ALTER TABLE `modul`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `sub_variabel_praktik`
 --
 ALTER TABLE `sub_variabel_praktik`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT untuk tabel `variabel_praktik`
 --
 ALTER TABLE `variabel_praktik`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

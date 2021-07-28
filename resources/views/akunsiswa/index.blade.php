@@ -155,7 +155,7 @@ active
                                     @if(Auth::user()->status != 'Siswa')
                                         @if($x->status == 'Siswa' or Auth::user()->status == 'Admin' )
                                         <td style="width:10px">
-                                            <a href="{{$link_menu_2}}/{{$x->id}}/destroy" title="Hapus Akun Siswa" class="btn btn-danger btn-sm delete-confirm">
+                                            <a href="/akun-siswa/{{$x->id}}/hapus" title="Hapus Akun Siswa" class="btn btn-danger btn-sm delete-confirm">
                                                 <i class="fas fa-trash"></i>
                                             </a>
                                         </td>

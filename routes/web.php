@@ -34,8 +34,8 @@ Route::post('/pengaturan/{id}/update', [App\Http\Controllers\PengaturanControlle
 Route::post('/pengaturan/{id}/ganti-password', [App\Http\Controllers\PengaturanController::class, 'ganti_password']);
 Route::get('/pengaturan/{id}/hapus-akun', [App\Http\Controllers\PengaturanController::class, 'hapus_akun']);
 
-Route::group(['middleware'=>['auth','role:Admin,Guru']],function(){
-    Route::get('/akun-siswa/{id}/destroy', [App\Http\Controllers\AkunSiswaController::class, 'destroy']);
+// Route::group(['middleware'=>['auth','role:Admin,Guru']],function(){
+    Route::get('/akun-siswa/{id_siswa}/hapus', [App\Http\Controllers\AkunSiswaController::class, 'destroy']);
     Route::post('/akun-siswa/{id}/update', [App\Http\Controllers\AkunSiswaController::class, 'update']);
     Route::post('/akun-siswa/store', [App\Http\Controllers\AkunSiswaController::class, 'store']);
     
@@ -60,8 +60,8 @@ Route::group(['middleware'=>['auth','role:Admin,Guru']],function(){
     Route::get('/nilai/{id}/{name}/list_variabel', [App\Http\Controllers\NilaiController::class, 'variabelNilai']);
     Route::get('/nilai/{id}/{name}/{id_sub_var}/destroy', [App\Http\Controllers\NilaiController::class, 'destroy_sub_variabel']);
     Route::post('/nilai/{id}/{name}/store', [App\Http\Controllers\NilaiController::class, 'store_sub_variabel']);
-});
+// });
 
-Route::group(['middleware'=>['auth','role:Siswa']],function(){
+// Route::group(['middleware'=>['auth','role:Siswa']],function(){
     Route::post('/kelas/{id}/{name}/{id_tugas}/tugas/upload_tugas_siswa', [App\Http\Controllers\KelasController::class, 'upload_tugas_siswa']);
-});
+// });

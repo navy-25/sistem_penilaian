@@ -131,7 +131,7 @@ active
                                     <div class="row">
                                         @if(Auth::user()->status != 'Siswa')
                                         <div class="col-2">
-                                            <a href="{{$link_menu_3}}/{{$x->id}}/destroy" class="btn btn-sm bg-danger">
+                                            <a href="{{$link_menu_3}}/{{$x->id}}/destroy" class="btn btn-sm bg-danger delete-confirm">
                                                 <i class="fas fa-trash"></i>
                                             </a>
                                         </div>
@@ -249,7 +249,7 @@ active
     </div>
 </div>
 @endsection
-<!-- 
+
 @section('script')
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
@@ -268,4 +268,4 @@ active
         });
     });
 </script>
-@endsection -->
+@endsection
