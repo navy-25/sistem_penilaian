@@ -112,45 +112,47 @@ active
                                 ?>
                                 @foreach($Nilai_Praktik as $k)
                                     @if($k->id_kelas == $kelas->id)
-                                    <?php
-                                        $siswa = \App\Models\User::find($k->id_siswa);
-                                        $nilai = explode(",",$k->nilai);
-                                        $nilai_total = 0;
-                                        foreach($nilai as $n){
-                                            $nilai_total = $nilai_total+$n;
-                                        }
-                                        
-                                        $sub_variabel_praktik =  \App\Models\Sub_Variabel_Praktik::all();
-                                        $count = 0;
-                                        for ($i = 0 ; $i < count($sub_variabel_praktik); $i++){
-                                            if ($sub_variabel_praktik[$i]->id_variabel_praktik == $k->id_variabel_praktek){
-                                                $count = $count + 1;
+                                        @if($k->id_variabel_praktek == $variabel_praktik->id)
+                                        <?php
+                                            $siswa = \App\Models\User::find($k->id_siswa);
+                                            $nilai = explode(",",$k->nilai);
+                                            $nilai_total = 0;
+                                            foreach($nilai as $n){
+                                                $nilai_total = $nilai_total+$n;
                                             }
-                                        }
-                                        $avg = round($nilai_total/$count * 10,2);
-                                        if($avg >= $variabel_praktik->kkm){
-                                            $status = "Lulus";
-                                        }else{
-                                            $status = "Remidi";
-                                        }
-                                    ?>
-                                    <tr>
-                                        <td>{{$no++}}</td>
-                                        <td>
-                                            <a href="/{{$variabel_praktik->id}}/{{$variabel_praktik->name}}/{{$k->id}}" style="text-decoration:none;color:black" title="Lihat Nilai">
-                                                {{$siswa->name}}
-                                            </a>
-                                        </td>
-                                        <td>{{$avg}} / 100</td>
-                                        <td>{{$status}}</td>
-                                        @if(Auth::user()->status != 'Siswa')
-                                        <td>
-                                            <a href="/{{$variabel_praktik->id}}/{{$variabel_praktik->name}}/{{$k->id}}/destroy" title="Hapus Akun Siswa" class="btn btn-danger btn-sm delete-confirm">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
-                                        </td>
+                                            
+                                            $sub_variabel_praktik =  \App\Models\Sub_Variabel_Praktik::all();
+                                            $count = 0;
+                                            for ($i = 0 ; $i < count($sub_variabel_praktik); $i++){
+                                                if ($sub_variabel_praktik[$i]->id_variabel_praktik == $k->id_variabel_praktek){
+                                                    $count = $count + 1;
+                                                }
+                                            }
+                                            $avg = round($nilai_total/$count * 10,2);
+                                            if($avg >= $variabel_praktik->kkm){
+                                                $status = "Lulus";
+                                            }else{
+                                                $status = "Remidi";
+                                            }
+                                        ?>
+                                        <tr>
+                                            <td>{{$no++}}</td>
+                                            <td>
+                                                <a href="/kelas/{{$kelas->id}}/{{$kelas->name}}/masuk-kelas/{{$variabel_praktik->id}}/{{$variabel_praktik->name}}/{{$k->id}}" style="text-decoration:none;color:black" title="Lihat Nilai">
+                                                    {{$siswa->name}}
+                                                </a>
+                                            </td>
+                                            <td>{{$avg}} / 100</td>
+                                            <td>{{$status}}</td>
+                                            @if(Auth::user()->status != 'Siswa')
+                                            <td>
+                                                <a href="/kelas/{{$kelas->id}}/{{$kelas->name}}/masuk-kelas/{{$variabel_praktik->id}}/{{$variabel_praktik->name}}/{{$k->id}}/destroy" title="Hapus Akun Siswa" class="btn btn-danger btn-sm delete-confirm">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            </td>
+                                            @endif
+                                        </tr>
                                         @endif
-                                    </tr>
                                     @endif
                                 @endforeach
                             </tbody>
@@ -215,7 +217,7 @@ active
                 $praktik = \App\Models\Variabel_Praktik::find($id_praktik);
                 $label = 1;
             ?>
-            <form class="form" method="POST" action="/{{$praktik->id}}/{{$praktik->name}}/store"> 
+            <form class="form" method="POST" action="/kelas/{{$kelas->id}}/{{$kelas->name}}/masuk-kelas/{{$praktik->id}}/{{$praktik->name}}/store"> 
                 @csrf
                 <div class="modal-body">
                     <?php

@@ -164,7 +164,8 @@ class KelasController extends Controller
     {
         $kelas = \App\Models\Kelas::find($id);  
         $user = \App\Models\User::all();  
-        return view('kelas.uploadTugas',compact('kelas','user','id_tugas'));
+        $tugas = \App\Models\Modul::find($id_tugas);  
+        return view('kelas.uploadTugas',compact('kelas','user','id_tugas','tugas'));
     }
     public function beri_nilai_tugas(Request $request,$id,$nama,$id_tugas)
     {
@@ -273,7 +274,7 @@ class KelasController extends Controller
     
     // =============================================================================
     // penilaian praktik
-    public function kelolaPraktik($id_praktik,$name_praktik)
+    public function kelolaPraktik($id,$name,$id_praktik,$name_praktik)
     {
         $sub_variabel_praktik =  \App\Models\Sub_Variabel_Praktik::all(); 
         $variabel_praktik =  \App\Models\Variabel_Praktik::find($id_praktik);
@@ -289,7 +290,7 @@ class KelasController extends Controller
         $kelas = \App\Models\Kelas::find($variabel_praktik->id_kelas); 
         return view('kelas.penilaian',compact('kelas','id_praktik','variabel_praktik','sub_variabel_praktik','siswa','id_siswa'));
     }
-    public function store_nilai_praktik(Request $request ,$id_praktik,$name_praktik)
+    public function store_nilai_praktik(Request $request ,$id,$name,$id_praktik,$name_praktik)
     {
         if($request->id_siswa == 0){
             return redirect($id_praktik.'/'.$name_praktik)->with(['gagal' => 'Pilih siswa terlebih dahulu']);
@@ -372,19 +373,19 @@ class KelasController extends Controller
             'vid_2' => $request->vid_2,
             'catatan' => $request->catatan,
         ]);
-        return redirect($id_praktik.'/'.$name_praktik)->with(['success' => 'Berhasil memberikan nilai dan feedback']);
+        return redirect('kelas/'.$id.'/'.$name.'/masuk-kelas/'.$id_praktik.'/'.$name_praktik)->with(['success' => 'Berhasil memberikan nilai dan feedback']);
     }
-    public function destroy_nilai_praktik(Request $request, $id,$name_praktik,$id_nilai)
+    public function destroy_nilai_praktik(Request $request, $id,$name,$id_praktik,$name_praktik,$id_nilai)
     {
         try{
             $Nilai_Praktik = \App\Models\Nilai_Praktik::find($id_nilai);      
             $Nilai_Praktik->delete($Nilai_Praktik);
-            return redirect($id.'/'.$name_praktik)->with(['success' => 'Berhasil di hapus']);
+            return redirect('kelas/'.$id.'/'.$name.'/masuk-kelas/'.$id_praktik.'/'.$name_praktik)->with(['success' => 'Berhasil di hapus']);
         }catch (Exception $e){
-            return redirect($id.'/'.$name_praktik)->with(['gagal' => 'Gagal dihapus']);
+            return redirect('kelas/'.$id.'/'.$name.'/masuk-kelas/'.$id_praktik.'/'.$name_praktik)->with(['gagal' => 'Gagal dihapus']);
         }
     }
-    public function updateNilai($id_praktik,$name_praktik,$id_nilai)
+    public function updateNilai($id,$name,$id_praktik,$name_praktik,$id_nilai)
     {
         $sub_variabel_praktik =  \App\Models\Sub_Variabel_Praktik::all(); 
         $variabel_praktik =  \App\Models\Variabel_Praktik::find($id_praktik);

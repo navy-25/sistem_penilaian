@@ -36,16 +36,7 @@ active
 
 
 @section('search')
-<!-- <form class="form-inline ml-3">
-    <div class="input-group input-group-sm">
-        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-        <div class="input-group-append">
-        <button class="btn btn-navbar" type="submit">
-            <i class="fas fa-search"></i>
-        </button>
-        </div>
-    </div>
-</form> -->
+
 @endsection
 
 @section('content')
@@ -154,13 +145,13 @@ active
                                         @if($v->id_kelas == $kelas->id)
                                         <tr>
                                             <td align="left">
-                                                <a style="text-decoration:none;color:black" href="/{{$v->id}}/{{$v->name}}">
+                                                <a style="text-decoration:none;color:black" href="/kelas/{{$kelas->id}}/{{$kelas->name}}/masuk-kelas/{{$v->id}}/{{$v->name}}">
                                                     {{$no++}}. {{$v->name}}
                                                 </a>
                                             </td>
                                             @if(Auth::user()->status != 'Siswa')
                                             <td align="right">
-                                                <a href="/{{$v->id}}/{{$v->name}}" title="Lakukan Penilaian" class="btn btn-success btn-sm">
+                                                <a href="/kelas/{{$kelas->id}}/{{$kelas->name}}/masuk-kelas/{{$v->id}}/{{$v->name}}" title="Lakukan Penilaian" class="btn btn-success btn-sm">
                                                     <i class="fas fa-play mr-1"></i>Mulai penilaian
                                                 </a>
                                             </td>

@@ -41,16 +41,7 @@ active
 @endsection
 
 @section('search')
-<!-- <form class="form-inline ml-3">
-    <div class="input-group input-group-sm">
-        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-        <div class="input-group-append">
-            <button class="btn btn-navbar" type="submit">
-                <i class="fas fa-search"></i>
-            </button>
-        </div>
-    </div>
-</form> -->
+
 @endsection
 
 @section('content')
@@ -124,6 +115,7 @@ active
                                 <?php
                                     $kontributor = \App\Models\Kontributor_Kelas::all();
                                     $no = 1;
+                                    // dd($tugas);
                                 ?>
                                 @foreach($kontributor as $k)
                                     @if($k->id_kelas == $kelas->id)
@@ -137,24 +129,26 @@ active
                                         <td>{{$siswa->name}}</td>
                                         <td>
                                             @foreach($File_Tugas_Siswa as $f)
-                                            @if($k->id_siswa == $f->id_siswa)
-                                            @if(Auth::user()->status == 'Siswa')
-                                            @if($k->id_siswa == Auth::user()->id)
-                                            <a target="_blank" href="{{$f->getFile()}}">{{$f->file}}</a>
-                                            @else
-                                            {{$f->file}}
-                                            @endif
-                                            @else
-                                            <a target="_blank" href="{{$f->getFile()}}">{{$f->file}}</a>
-                                            @endif
-                                            @endif
+                                                @if($k->id_siswa == $f->id_siswa)
+                                                    @if($tugas->id == $f->id_tugas)
+                                                        @if(Auth::user()->id == $f->id_siswa || Auth::user()->status == 'Guru')
+                                                            <a target="_blank" href="{{$f->getFile()}}">{{$f->file}}</a>
+                                                        @else
+                                                            {{$f->file}}
+                                                        @endif
+                                                    @else
+                                                        <?php $status_tugas = null;?>
+                                                    @endif
+                                                @endif
                                             @endforeach
                                         </td>
                                         <td>
                                             @foreach($Nilai_Tugas as $n)
-                                            @if($k->id_siswa == $n->id_siswa)
-                                            {{$n->nilai}} / 100
-                                            @endif
+                                                @if($k->id_siswa == $n->id_siswa)
+                                                    @if($tugas->id == $n->id_tugas)
+                                                        {{$n->nilai}} / 100
+                                                    @endif
+                                                @endif
                                             @endforeach
                                         </td>
                                     </tr>

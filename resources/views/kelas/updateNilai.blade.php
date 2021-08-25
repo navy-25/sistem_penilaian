@@ -88,6 +88,8 @@ active
                                     $no=1;
                                     $nilai = explode(",",$Nilai_Praktik->nilai);
                                     $index = 0;
+                                    // dd($id_praktik,$sub_variabel_praktik);
+                                    // dd($Nilai_Praktik);
                                 ?>
                                 @foreach($sub_variabel_praktik as $s)
                                     @if($s->id_variabel_praktik == $id_praktik)
@@ -95,13 +97,11 @@ active
                                         <td>{{$no++}}</td>
                                         <td>{{$s->name}}</td>
                                         <td>
-                                            {{$nilai[$index]}}0 / 100
+                                            {{$nilai[$index]}} 0 / 100
                                         </td>
                                     </tr>
                                     @endif
-                                    <?php
-                                        $index++;
-                                    ?>
+                                    <?php $index++;?>
                                 @endforeach
                             </tbody>
                         </table>

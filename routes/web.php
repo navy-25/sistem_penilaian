@@ -27,8 +27,8 @@ Route::get('/akun-siswa/{id}', [App\Http\Controllers\AkunSiswaController::class,
 Route::get('/kelas', [App\Http\Controllers\KelasController::class, 'index']);
 Route::get('/kelas/{id}/{name}/{id_tugas}/tugas', [App\Http\Controllers\KelasController::class, 'kelola_tugas']);
 Route::get('/kelas/{id}/{name}/masuk-kelas', [App\Http\Controllers\KelasController::class, 'kelolaKelas']);
-Route::get('/{id_praktik}/{name_praktik}', [App\Http\Controllers\KelasController::class, 'kelolaPraktik']);
-Route::get('/{id_praktik}/{name_praktik}/{id_nilai}', [App\Http\Controllers\KelasController::class, 'updateNilai']);
+Route::get('/kelas/{id}/{name}/masuk-kelas/{id_praktik}/{name_praktik}', [App\Http\Controllers\KelasController::class, 'kelolaPraktik']);
+Route::get('/kelas/{id}/{name}/masuk-kelas/{id_praktik}/{name_praktik}/{id_nilai}', [App\Http\Controllers\KelasController::class, 'updateNilai']);
 Route::get('/pengaturan', [App\Http\Controllers\PengaturanController::class, 'index']);
 Route::post('/pengaturan/{id}/update', [App\Http\Controllers\PengaturanController::class, 'update']);
 Route::post('/pengaturan/{id}/ganti-password', [App\Http\Controllers\PengaturanController::class, 'ganti_password']);
@@ -44,15 +44,16 @@ Route::get('/pengaturan/{id}/hapus-akun', [App\Http\Controllers\PengaturanContro
     Route::get('/kelas/{id}/{name}', [App\Http\Controllers\KelasController::class, 'edit']);
     
     Route::post('/kelas/{id}/{name}/{id_tugas}/tugas/beri_nilai', [App\Http\Controllers\KelasController::class, 'beri_nilai_tugas']);
+
     Route::post('/kelas/{id}/{name}/masuk-kelas/upload-modul', [App\Http\Controllers\KelasController::class, 'tambah_modul']);
     Route::post('/kelas/{id}/{name}/masuk-kelas/upload-tugas', [App\Http\Controllers\KelasController::class, 'tambah_tugas']);
     Route::get('/kelas/{id}/{name}/masuk-kelas/{id_modul}/hapus-modul', [App\Http\Controllers\KelasController::class, 'destroy_modul']);
     Route::post('/kelas/{id}/{name}/masuk-kelas/tambah-kontributor', [App\Http\Controllers\KelasController::class, 'tambah_kontributor']);
     Route::get('/kelas/{id}/{name}/masuk-kelas/hapus-kontributor', [App\Http\Controllers\KelasController::class, 'hapus_kontributor']);
     Route::post('/kelas/{id}/update', [App\Http\Controllers\KelasController::class, 'update']);
-    Route::post('/{id}/{name_praktik}/store', [App\Http\Controllers\KelasController::class, 'store_nilai_praktik']);
-    Route::get('/{id}/{name_praktik}/{id_nilai}/destroy', [App\Http\Controllers\KelasController::class, 'destroy_nilai_praktik']);
-    Route::get('/{id_praktik}/{name_praktik}/feedback', [App\Http\Controllers\KelasController::class, 'feedbackPraktik']);
+    Route::post('/kelas/{id}/{name}/masuk-kelas/{id_praktik}/{name_praktik}/store', [App\Http\Controllers\KelasController::class, 'store_nilai_praktik']);
+    Route::get('/kelas/{id}/{name}/masuk-kelas/{id_praktik}/{name_praktik}/{id_nilai}/destroy', [App\Http\Controllers\KelasController::class, 'destroy_nilai_praktik']);
+    Route::get('/kelas/{id}/{name}/masuk-kelas/{id_praktik}/{name_praktik}/feedback', [App\Http\Controllers\KelasController::class, 'feedbackPraktik']);
     
     Route::get('/nilai', [App\Http\Controllers\NilaiController::class, 'index']);
     Route::post('/nilai/store', [App\Http\Controllers\NilaiController::class, 'store']);
